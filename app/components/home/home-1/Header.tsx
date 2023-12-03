@@ -2,6 +2,26 @@ import Link from "next/link";
 import MainMenu from "../../common/MainMenu";
 import Image from "next/image";
 
+const menuItems = [
+  {
+    label: "Home",
+    path: "/",
+  },
+  {
+    label: "Emojis",
+    subMenu: [
+      {
+        label: "Emoji-1",
+        path: "/emoji-1",
+      },
+    ],
+  },
+  {
+    label: "Logos",
+    path: "/logos",
+  },
+];
+
 const Header = () => {
   return (
     <header className="header-nav menu_style_home_one transparent main-menu">
@@ -38,7 +58,7 @@ const Header = () => {
             className="ace-responsive-menu text-end"
             data-menu-style="horizontal"
           >
-            <MainMenu />
+            <MainMenu items={menuItems} />
             <li className="add_listing">
               <Link href="/add-listings">+ Add Listing</Link>
             </li>

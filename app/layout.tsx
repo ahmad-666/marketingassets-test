@@ -27,6 +27,26 @@ export default function RootLayout({ children }) {
     });
   }, []);
 
+  const menuItems = [
+    {
+      label: "Home",
+      path: "/",
+    },
+    {
+      label: "Emojis",
+      subMenu: [
+        {
+          label: "Emoji-1",
+          path: "/emoji-1",
+        },
+      ],
+    },
+    {
+      label: "Logos",
+      path: "/logos",
+    },
+  ];
+
   return (
     <html lang="en">
       <body className={inter.className} cz-shortcut-listen="false">
@@ -41,7 +61,7 @@ export default function RootLayout({ children }) {
           </div>
           <HeaderTop />
           <Header />
-          <MobileMenu />
+          <MobileMenu items={menuItems} />
           <Hero />
           {children}
           <Footer />
