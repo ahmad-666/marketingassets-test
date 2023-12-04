@@ -1,6 +1,6 @@
 import EmojisList from "@/app/components/listing/EmojisList";
-import axios from "@/app/utils/axios";
-import type { Emoji, EmojiResponse } from "@/app/types/Emoji";
+import type { Emoji } from "@/app/types/Emoji";
+import { getEmojis } from "@/app/services/emoji";
 
 type PageProps = {
   params: {
@@ -11,12 +11,7 @@ export default async function Page({ params: { emojiId } }: PageProps) {
   //from pages components,... other places in client-side send req to localhost:3000/api , from /api folder get those requests and connect to db and return response
   const emojis: Emoji[] = [];
   try {
-    const { data } = await axios.get<EmojiResponse[]>(`/emojis/${emojiId}`, {
-      params: {
-        page: 1,
-        pageSize: 8,
-      },
-    });
+    const data = await getEmojis({ emojiCategory: emojiId });
     data.forEach((emoji) => {
       emojis.push({
         id: emoji.id,
