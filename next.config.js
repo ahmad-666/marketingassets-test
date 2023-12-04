@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    distDir: 'dist'
+  distDir: "dist",
+  experimental: {
+    serverComponentsExternalPackages: ["sequelize"],
+  },
 };
 
 module.exports = nextConfig;

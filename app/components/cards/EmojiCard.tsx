@@ -1,26 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import "./baseCard.scss";
+import "./emojiCard.scss";
+import type { Emoji } from "@/app/types/Emoji";
 
-type BaseCardProps = {
-  id: string;
-  name: string;
-  imgSrc: string;
-  score: number;
-  usersScore: number;
-  category: string;
-};
+type EmojiCardProps = Emoji & React.ComponentProps<"div">;
 
-export default function BaseCard({
+export default function EmojiCard({
   id,
   name,
   imgSrc,
   score,
   usersScore,
   category,
-}: BaseCardProps) {
+  className = "",
+  ...rest
+}: EmojiCardProps) {
   return (
-    <div className="base-card">
+    <div {...rest} className={`emoji-card ${className}`}>
       <div className="car-listing">
         <div className="thumb">
           <div className="tag blue">{category}</div>

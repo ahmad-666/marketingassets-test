@@ -16,6 +16,7 @@
     "chart.js": "^4.3.0",
     "eslint": "8.41.0",
     "eslint-config-next": "^13.5.4",
+    "mysql2": "^3.6.5",
     "next": "^13.5.4",
     "photoswipe": "^5.3.7",
     "react": "^18.2.0",
@@ -29,6 +30,7 @@
     "react-pro-sidebar": "^1.0.0",
     "react-tabs": "^6.0.1",
     "sass": "^1.62.1",
+    "sequelize": "^6.35.1",
     "styled-components": "^6.0.0-rc.1",
     "swiper": "^9.2.4"
   },
