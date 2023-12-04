@@ -4,11 +4,18 @@ import { dbConnect } from "@/app/helper";
 export const dynamic = "force-dynamic"; //prevent static route
 export async function GET(request: NextRequest, { params }) {
   const { emojiId } = params;
+  const urlQueries = request.nextUrl.searchParams;
+  const page = +urlQueries.get("page") || 1;
+  const pageSize = +urlQueries.get("pageSize") || 8;
   const db = await dbConnect();
-  //console.log(db);
-  const data = await db.Emoji.findAll();
-  console.log(data);
-  return Response.json({});
+  const data = await db.Emoji.findAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    where: {
+      parent: emojiId,
+    },
+  });
+  return Response.json(data, { status: 200 });
 }
 
 //export const dynamic = "force-dynamic"; //prevent static route
@@ -24,5 +31,8 @@ export async function GET(request: NextRequest, { params }) {
 //   });
 //   const data = await res.json();
 
-//   return Response.json({ data });
+//   return Response.json(data,{status,statusText,headers});
+//   Response.redirect()
+//   Response.error()
+//   new Response("error",{status:400})
 // }

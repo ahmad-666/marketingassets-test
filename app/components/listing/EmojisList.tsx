@@ -1,3 +1,5 @@
+"use client";
+
 import EmojiCard from "@/app/components/cards/EmojiCard";
 import type { Emoji } from "@/app/types/Emoji";
 
@@ -26,7 +28,7 @@ export default function EmojisList({ title, items }: EmojisListProps) {
                   key={item.id}
                   id={item.id}
                   name={item.name}
-                  imgSrc={item.imgSrc}
+                  emoji={item.emoji}
                   score={item.score}
                   usersScore={item.usersScore}
                   category={item.category}

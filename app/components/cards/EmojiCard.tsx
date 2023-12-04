@@ -1,14 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import "./emojiCard.scss";
 import type { Emoji } from "@/app/types/Emoji";
 
-type EmojiCardProps = Emoji & React.ComponentProps<"div">;
+type EmojiCardProps = Emoji & Omit<React.ComponentProps<"div">, "id">;
 
 export default function EmojiCard({
   id,
   name,
-  imgSrc,
+  emoji,
   score,
   usersScore,
   category,
@@ -20,17 +19,7 @@ export default function EmojiCard({
       <div className="car-listing">
         <div className="thumb">
           <div className="tag blue">{category}</div>
-          <Image
-            width={300}
-            height={300}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            src={imgSrc}
-            alt={`${name}-${category}`}
-          />
+          <div className="emoji-container">{emoji}</div>
         </div>
         <div className="details">
           <div className="wrapper">
