@@ -1,0 +1,69 @@
+name: Deploy Marketing Assets test Version
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  build:
+    name: Marketing Assets CI
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        node_version:
+          - 20.x
+        architecture:
+          - x64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+          check-latest: false
+          architecture: ${{ matrix.architecture }}
+
+      - name: Install dependencies
+        run: yarn
+
+      # - name: Setup env file
+      #   run: |
+      #     touch .env.production
+      #     echo NEXT_PUBLIC_NODE_ENV=development >> .env.production
+
+      - name: Build app
+        run: yarn build
+
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
+          security: loose
+          timeout: 600000
+          server-dir: public_html/test/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.husky/**
+            **/src/**
+            **/styles/**
+            **/.editorconfig
+            **/.env
+            **/.eslintcache
+            **/.eslintrc.json
+            **/.prettierrc.js
+            **/CHANGELOG.md
+            **/commitlint.config.js
+            **/tsconfig.json
