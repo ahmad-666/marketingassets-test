@@ -57,7 +57,8 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.husky/**
-            **/src/**
+            **/app/**
+            **/data/**
             **/styles/**
             **/.editorconfig
             **/.env
@@ -66,4 +67,6 @@ jobs:
             **/.prettierrc.js
             **/CHANGELOG.md
             **/commitlint.config.js
+            **/jsconfig.json
             **/tsconfig.json
+            **/yarn.lock
