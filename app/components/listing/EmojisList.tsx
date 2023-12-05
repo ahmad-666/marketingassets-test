@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useParams } from "next/navigation";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import EmojiCard from "@/app/components/cards/EmojiCard";
@@ -10,10 +11,20 @@ import type { Emoji } from "@/app/types/Emoji";
 type EmojisListProps = {
   title: string;
   items: Emoji[];
+  totalItems?: number;
+  pageSize?: number;
 };
 
-export default function EmojisList({ title, items }: EmojisListProps) {
+export default function EmojisList({
+  title,
+  items = [],
+  totalItems = 0,
+  pageSize = 8,
+}: EmojisListProps) {
   const { emojiId } = useParams();
+  const totalPages = useMemo(() => {
+    return Math.ceil(totalItems / pageSize);
+  }, [pageSize, totalItems]);
   const {
     isFetching,
     data: pages,
@@ -24,21 +35,23 @@ export default function EmojisList({ title, items }: EmojisListProps) {
     refetchOnMount: false,
     queryKey: ["get-emojis", emojiId],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+      const currentPage = lastPageParam.page;
+      if (currentPage === totalPages) return null; //no next-page
       return {
-        page: lastPageParam.page + 1,
+        page: currentPage + 1,
       };
     },
     initialPageParam: {
       page: 1,
     },
     queryFn: async ({ pageParam }) => {
-      const data = await getEmojis({
+      const { items } = await getEmojis({
         emojiCategory: emojiId as string,
         page: pageParam.page || 1,
-        pageSize: 8,
+        pageSize,
       });
       const newEmojis: Emoji[] = [];
-      data.forEach((emoji) => {
+      items.forEach((emoji) => {
         newEmojis.push({
           id: emoji.id,
           category: emoji.parent,

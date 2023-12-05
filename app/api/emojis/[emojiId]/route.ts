@@ -8,14 +8,22 @@ export async function GET(request: NextRequest, { params }) {
   const page = +urlQueries.get("page") || 1;
   const pageSize = +urlQueries.get("pageSize") || 8;
   const db = await dbConnect();
-  const data = await db.Emoji.findAll({
+  const { count, rows } = await db.Emoji.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where: {
       parent: emojiId,
     },
   });
-  return Response.json(data, { status: 200 });
+  return Response.json(
+    {
+      items: rows,
+      meta: {
+        totalCount: count,
+      },
+    },
+    { status: 200 }
+  );
 }
 
 //export const dynamic = "force-dynamic"; //prevent static route

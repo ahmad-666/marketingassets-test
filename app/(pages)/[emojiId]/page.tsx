@@ -7,11 +7,17 @@ type PageProps = {
     emojiId: string;
   };
 };
+const pageSize = 8;
 export default async function Page({ params: { emojiId } }: PageProps) {
   //from pages components,... other places in client-side send req to localhost:3000/api , from /api folder get those requests and connect to db and return response
   const emojis: Emoji[] = [];
-  const data = await getEmojis({ emojiCategory: emojiId });
-  data.forEach((emoji) => {
+  const { items, meta } = await getEmojis({
+    emojiCategory: emojiId,
+    page: 1,
+    pageSize,
+  });
+  const totalEmojis = meta.totalCount;
+  items.forEach((emoji) => {
     emojis.push({
       id: emoji.id,
       category: emoji.parent,
@@ -26,6 +32,8 @@ export default async function Page({ params: { emojiId } }: PageProps) {
       <EmojisList
         title={`List of All ${emojiId.replace(/-/g, " ")}`}
         items={emojis}
+        totalItems={totalEmojis}
+        pageSize={pageSize}
       />
     </div>
   );

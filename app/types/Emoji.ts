@@ -21,3 +21,9 @@ export type EmojiResponse = {
   url: string;
   score: number;
 };
+export type GetEmojisResponse = {
+  items: EmojiResponse[];
+  meta: {
+    totalCount: number;
+  };
+};

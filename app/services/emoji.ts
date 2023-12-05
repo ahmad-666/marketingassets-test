@@ -1,5 +1,5 @@
 import axios from "@/app/utils/axios";
-import type { EmojiResponse } from "@/app/types/Emoji";
+import type { GetEmojisResponse } from "@/app/types/Emoji";
 
 type GetEmojis = {
   emojiCategory: string;
@@ -11,7 +11,7 @@ export const getEmojis = async ({
   page = 1,
   pageSize = 8,
 }: GetEmojis) => {
-  const { data } = await axios.get<EmojiResponse[]>(
+  const { data } = await axios.get<GetEmojisResponse>(
     `/emojis/${emojiCategory}`,
     {
       params: {
