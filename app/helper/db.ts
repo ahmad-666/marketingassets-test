@@ -6,11 +6,13 @@ type DB = {
   initialized: boolean;
   initialize: () => Promise<void>;
   Emoji: any;
+  Company: any;
 };
 export const db: DB = {
   initialized: false,
   initialize,
   Emoji: null,
+  Company: null,
 };
 
 async function initialize() {
@@ -31,6 +33,7 @@ async function initialize() {
     dialect: "mysql",
   });
   db.Emoji = emojiModel(sequelize);
+  db.Company = companyModel(sequelize);
   //sync all models with database
   await sequelize.sync({ alter: true });
   db.initialized = true;
@@ -40,17 +43,17 @@ async function initialize() {
 // sequelize models with schema definitions
 function emojiModel(sequelize) {
   const attributes = {
-    parent: { type: DataTypes.STRING, allowNull: true },
-    emoji: { type: DataTypes.STRING, allowNull: true },
-    text: { type: DataTypes.STRING, allowNull: true },
-    description: { type: DataTypes.STRING, allowNull: true },
-    response: { type: DataTypes.STRING, allowNull: true },
-    mean: { type: DataTypes.STRING, allowNull: true },
-    marketing: { type: DataTypes.STRING, allowNull: true },
-    url: { type: DataTypes.STRING, allowNull: true },
-    emoji_list: { type: DataTypes.STRING, allowNull: true },
-    aliases: { type: DataTypes.STRING, allowNull: true },
-    internal_links: { type: DataTypes.STRING, allowNull: false },
+    parent: { type: DataTypes.TEXT, allowNull: true },
+    emoji: { type: DataTypes.TEXT, allowNull: true },
+    text: { type: DataTypes.TEXT, allowNull: true },
+    description: { type: DataTypes.TEXT, allowNull: true },
+    response: { type: DataTypes.TEXT, allowNull: true },
+    mean: { type: DataTypes.TEXT, allowNull: true },
+    marketing: { type: DataTypes.TEXT, allowNull: true },
+    url: { type: DataTypes.TEXT, allowNull: true },
+    emoji_list: { type: DataTypes.TEXT, allowNull: true },
+    aliases: { type: DataTypes.TEXT, allowNull: true },
+    internal_links: { type: DataTypes.TEXT, allowNull: false },
     score: { type: DataTypes.INTEGER, allowNull: true },
     //id: { type: DataTypes.BIGINT, allowNull: false }, //sequelize automatically add it as primary key
   };
@@ -63,4 +66,20 @@ function emojiModel(sequelize) {
   //     },
   //   };
   return sequelize.define("emoji", attributes, {});
+}
+function companyModel(sequelize) {
+  const attributes = {
+    name: { type: DataTypes.STRING, allowNull: false },
+    overview: { type: DataTypes.TEXT, allowNull: true },
+    country: { type: DataTypes.STRING, allowNull: false },
+    domain: { type: DataTypes.STRING, allowNull: false },
+    linkedin: { type: DataTypes.STRING, allowNull: false },
+    twitter: { type: DataTypes.STRING, allowNull: false },
+    facebook: { type: DataTypes.STRING, allowNull: false },
+    size: { type: DataTypes.STRING, allowNull: false },
+    founded: { type: DataTypes.INTEGER, allowNull: false },
+    industry: { type: DataTypes.STRING, allowNull: false },
+    followers_count: { type: DataTypes.INTEGER, allowNull: false },
+  };
+  return sequelize.define("company", attributes, {});
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "./emojiCard.scss";
+import "./emojiCard.style.scss";
 import type { Emoji } from "@/app/types/Emoji";
 
 type EmojiCardProps = Emoji & Omit<React.ComponentProps<"div">, "id">;
