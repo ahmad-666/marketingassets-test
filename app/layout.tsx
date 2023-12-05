@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import ReactQuery from "@/app/providers/ReactQuery";
 import HeaderTop from "@/app/components/home/home-1/HeaderTop";
 import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import Header from "@/app/components/home/home-1/Header";
@@ -50,23 +51,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} cz-shortcut-listen="false">
-        <div className="wrapper ovh">
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex={-1}
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
-          >
-            <HeaderSidebar />
+        <ReactQuery>
+          <div className="wrapper ovh">
+            <div
+              className="offcanvas offcanvas-end"
+              tabIndex={-1}
+              id="offcanvasRight"
+              aria-labelledby="offcanvasRightLabel"
+            >
+              <HeaderSidebar />
+            </div>
+            <HeaderTop />
+            <Header />
+            <MobileMenu items={menuItems} />
+            <Hero />
+            {children}
+            <Footer />
           </div>
-          <HeaderTop />
-          <Header />
-          <MobileMenu items={menuItems} />
-          <Hero />
-          {children}
-          <Footer />
-        </div>
-        <ScrollToTop />
+          <ScrollToTop />
+        </ReactQuery>
       </body>
     </html>
   );
