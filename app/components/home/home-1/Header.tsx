@@ -1,28 +1,13 @@
 import Link from "next/link";
 import MainMenu from "../../common/MainMenu";
 import Image from "next/image";
+import type { Item, NestedItem } from "@/app/types/Menu";
 
-const menuItems = [
-  {
-    label: "Home",
-    path: "/",
-  },
-  {
-    label: "Emojis",
-    subMenu: [
-      {
-        label: "Emoji-1",
-        path: "/emoji-1",
-      },
-    ],
-  },
-  {
-    label: "Logos",
-    path: "/logos",
-  },
-];
+type HeaderProps = {
+  menuItems: (Item | NestedItem)[];
+};
 
-const Header = () => {
+const Header = ({ menuItems }: HeaderProps) => {
   return (
     <header className="header-nav menu_style_home_one transparent main-menu">
       {/* Ace Responsive Menu */}

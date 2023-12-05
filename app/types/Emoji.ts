@@ -27,3 +27,10 @@ export type GetEmojisResponse = {
     totalCount: number;
   };
 };
+export type EmojiCategory = {
+  category: string;
+  text: string;
+};
+export type GetEmojiCategoryResponse = {
+  items: EmojiCategory[];
+};

@@ -1,5 +1,8 @@
 import axios from "@/app/utils/axios";
-import type { GetEmojisResponse } from "@/app/types/Emoji";
+import type {
+  GetEmojiCategoryResponse,
+  GetEmojisResponse,
+} from "@/app/types/Emoji";
 
 type GetEmojis = {
   emojiCategory: string;
@@ -19,6 +22,12 @@ export const getEmojis = async ({
         pageSize,
       },
     }
+  );
+  return data;
+};
+export const getEmojiCategories = async () => {
+  const { data } = await axios.get<GetEmojiCategoryResponse>(
+    "/emojis/categories"
   );
   return data;
 };

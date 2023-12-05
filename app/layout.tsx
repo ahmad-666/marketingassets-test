@@ -1,7 +1,5 @@
-"use client";
-
-import { useEffect } from "react";
 import ReactQuery from "@/app/providers/ReactQuery";
+import ClientLibraries from "@/app/components/ClientLibraries";
 import HeaderTop from "@/app/components/home/home-1/HeaderTop";
 import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import Header from "@/app/components/home/home-1/Header";
@@ -10,37 +8,28 @@ import Hero from "@/app/components/home/home-1/Hero";
 import Footer from "@/app/components/common/Footer";
 import ScrollToTop from "./components/common/ScrollTop";
 import { Inter } from "next/font/google";
-import Aos from "aos";
-import "aos/dist/aos.css";
+import { getEmojiCategories } from "@/app/services/emoji";
+import type { Item, NestedItem } from "./types/Menu";
 import "../public/scss/main.scss";
 import "../public/scss/global.scss";
 
-if (typeof window !== "undefined") {
-  import("bootstrap");
-}
-
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }) {
-  useEffect(() => {
-    Aos.init({
-      duration: 1200,
-    });
-  }, []);
+export default async function RootLayout({ children }) {
+  const { items: emojiCategoriesResponse } = await getEmojiCategories();
+  const emojisCategories = emojiCategoriesResponse.map((cat) => ({
+    label: cat.text,
+    path: `/${cat.category}`,
+  }));
 
-  const menuItems = [
+  const menuItems: (Item | NestedItem)[] = [
     {
       label: "Home",
       path: "/",
     },
     {
       label: "Emojis",
-      subMenu: [
-        {
-          label: "Emoji-1",
-          path: "/emoji-1",
-        },
-      ],
+      subMenu: emojisCategories,
     },
     {
       label: "Logos",
@@ -51,6 +40,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} cz-shortcut-listen="false">
+        <ClientLibraries />
         <ReactQuery>
           <div className="wrapper ovh">
             <div
@@ -62,8 +52,8 @@ export default function RootLayout({ children }) {
               <HeaderSidebar />
             </div>
             <HeaderTop />
-            <Header />
-            <MobileMenu items={menuItems} />
+            <Header menuItems={menuItems} />
+            <MobileMenu menuItems={menuItems} />
             <Hero />
             {children}
             <Footer />

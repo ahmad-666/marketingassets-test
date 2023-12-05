@@ -13,9 +13,9 @@ import {
 import type { Item, NestedItem } from "@/app/types/Menu";
 
 type MobileMenuProps = {
-  items?: (Item | NestedItem)[];
+  menuItems?: (Item | NestedItem)[];
 };
-const MobileMenu = ({ items = [] }: MobileMenuProps) => {
+const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
   const path = usePathname();
 
   const socialLinks = [
@@ -132,7 +132,7 @@ const MobileMenu = ({ items = [] }: MobileMenuProps) => {
               className="my-custom-class"
             >
               <Menu>
-                {items.map((item, index) => {
+                {menuItems.map((item, index) => {
                   const isSingle = (item as Item).path;
                   if (isSingle) {
                     const newItem = item as Item;
