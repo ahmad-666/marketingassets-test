@@ -35,7 +35,7 @@ async function initialize() {
   db.Emoji = emojiModel(sequelize);
   db.Company = companyModel(sequelize);
   //sync all models with database
-  await sequelize.sync({ alter: true });
+  await sequelize.sync({ alter: false });
   db.initialized = true;
   //init models and add them to the exported db object
 }

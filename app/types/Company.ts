@@ -18,16 +18,20 @@ export type CompanyResponse = {
   industry: string;
   followers_count: number;
 };
-export type GetCompanyResponse = {
+export type GetCompaniesResponse = {
   items: CompanyResponse[];
   meta: {
     totalCount: number;
   };
 };
-export type CompanyCategory = {
-  category: string;
+export type Industry = {
+  id: string;
+  name: string;
+};
+export type IndustryResponse = {
+  industry: string;
   text: string;
 };
-export type GetCompanyCategoryResponse = {
-  items: CompanyCategory[];
+export type GetIndustriesResponse = {
+  items: IndustryResponse[];
 };
