@@ -4,7 +4,7 @@ import { getCompanies } from "@/app/services/company";
 
 type PageProps = {};
 const pageSize = 8;
-// export const dynamic = "force-dynamic"; //ssr
+export const dynamic = "force-dynamic"; //ssr
 export default async function Page({}: PageProps) {
   const companies: Company[] = [];
   const { items, meta } = await getCompanies({

@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { dbConnect } from "@/app/helper";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   const urlQueries = request.nextUrl.searchParams;
   const page = +urlQueries.get("page") || 1;

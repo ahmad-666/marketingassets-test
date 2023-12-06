@@ -14,7 +14,7 @@ import "../public/scss/main.scss";
 import "../public/scss/global.scss";
 
 const inter = Inter({ subsets: ["latin"] });
-// export const dynamic = "force-dynamic"; //ssr
+export const dynamic = "force-dynamic"; //ssr
 export default async function RootLayout({ children }) {
   const { items: emojiCategoriesResponse } = await getEmojiCategories();
   const emojisCategories = emojiCategoriesResponse.map((cat) => ({
