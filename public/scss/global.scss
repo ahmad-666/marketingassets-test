@@ -2,3 +2,19 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+.emoji-card,
+.company-card,
+.industry-card {
+  .listing_footer {
+    display: flex;
+    justify-content: center;
+    .submit-action {
+      padding: 8px;
+      color: white;
+      border-radius: 0.5rem;
+      background-color: #1947e2;
+      text-align: center;
+    }
+  }
+}

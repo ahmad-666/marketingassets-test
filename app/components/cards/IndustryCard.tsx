@@ -18,7 +18,9 @@ export default function IndustryCard({
             <h6 className="title text-center fs-5 lh-base">{name}</h6>
           </div>
           <div className="listing_footer">
-            <Link href={`/industries/${id}`}>View Collection</Link>
+            <Link href={`/industries/${id}`} className="submit-action">
+              View Collection
+            </Link>
           </div>
         </div>
       </div>

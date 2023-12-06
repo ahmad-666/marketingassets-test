@@ -37,7 +37,9 @@ export default function EmojiCard({
             </div>
           </div>
           <div className="listing_footer">
-            <Link href={`/emoji/${id}`}>Use {name}</Link>
+            <Link href={`/emoji/${id}`} className="submit-action">
+              Use {name}
+            </Link>
           </div>
         </div>
       </div>
