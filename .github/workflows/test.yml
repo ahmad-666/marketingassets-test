@@ -41,7 +41,7 @@ jobs:
           echo DB_PORT = 3306 >> .env.production
           echo DB_USERNAME = marketingasset >> .env.production
           echo DB_PASSWORD = HrDK94hB6Qzy1jnM >> .env.production
-          echo NEXT_PUBLIC_BASE_URL = https://test.companyurlfinder.com/api >> .env.production
+          echo NEXT_PUBLIC_BASE_URL = http://localhost:3000/api >> .env.production
 
       - name: Build app
         run: yarn build
