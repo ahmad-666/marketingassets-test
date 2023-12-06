@@ -1,5 +1,8 @@
 import axios from "@/app/utils/axios";
-import type { GetCompanyResponse } from "@/app/types/Company";
+import type {
+  GetCompanyResponse,
+  GetCompanyCategoryResponse,
+} from "@/app/types/Company";
 
 type GetCompanies = {
   page?: number;
@@ -15,5 +18,11 @@ export const getCompanies = async ({
       pageSize,
     },
   });
+  return data;
+};
+export const getCategories = async () => {
+  const { data } = await axios.get<GetCompanyCategoryResponse>(
+    "/companies/categories"
+  );
   return data;
 };

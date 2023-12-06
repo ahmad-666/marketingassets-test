@@ -24,3 +24,10 @@ export type GetCompanyResponse = {
     totalCount: number;
   };
 };
+export type CompanyCategory = {
+  category: string;
+  text: string;
+};
+export type GetCompanyCategoryResponse = {
+  items: CompanyCategory[];
+};
