@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { dbConnect } from "@/app/helper";
+import { textTransform } from "@/app/utils/textTransform";
 
 export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
@@ -11,10 +12,7 @@ export async function GET(request: NextRequest) {
     {
       items: categories.map((cat) => ({
         category: cat.DISTINCT,
-        text: cat.DISTINCT.replace(/-/g, " ")
-          .split(" ")
-          .map((word) => `${word[0].toUpperCase()}${word.substr(1)}`)
-          .join(" "),
+        text: textTransform(cat.DISTINCT),
       })),
     },
     { status: 200 }

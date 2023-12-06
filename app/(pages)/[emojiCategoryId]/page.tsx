@@ -4,15 +4,15 @@ import { getEmojis } from "@/app/services/emoji";
 
 type PageProps = {
   params: {
-    emojiId: string;
+    emojiCategoryId: string;
   };
 };
 const pageSize = 8;
-export default async function Page({ params: { emojiId } }: PageProps) {
+export default async function Page({ params: { emojiCategoryId } }: PageProps) {
   //from pages components,... other places in client-side send req to localhost:3000/api , from /api folder get those requests and connect to db and return response
   const emojis: Emoji[] = [];
   const { items, meta } = await getEmojis({
-    emojiCategory: emojiId,
+    emojiCategory: emojiCategoryId,
     page: 1,
     pageSize,
   });
@@ -30,7 +30,7 @@ export default async function Page({ params: { emojiId } }: PageProps) {
   return (
     <div>
       <EmojisList
-        title={`List of All ${emojiId.replace(/-/g, " ")}`}
+        title={`List of All ${emojiCategoryId.replace(/-/g, " ")}`}
         items={emojis}
         totalItems={totalEmojis}
         pageSize={pageSize}

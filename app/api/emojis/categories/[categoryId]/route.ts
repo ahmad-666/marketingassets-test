@@ -3,7 +3,7 @@ import { dbConnect } from "@/app/helper";
 
 export const dynamic = "force-dynamic"; //prevent static route
 export async function GET(request: NextRequest, { params }) {
-  const { emojiId } = params;
+  const { categoryId } = params;
   const urlQueries = request.nextUrl.searchParams;
   const page = +urlQueries.get("page") || 1;
   const pageSize = +urlQueries.get("pageSize") || 8;
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, { params }) {
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where: {
-      parent: emojiId,
+      parent: categoryId,
     },
   });
   return Response.json(
@@ -30,8 +30,8 @@ export async function GET(request: NextRequest, { params }) {
 //export const revalidate = 1000
 // export async function GET(request: NextRequest, { params }) {
 //access to this route via sending GET request to http://localhost:3000/api/emojis/something
-//request.method, request.url, request.body, request.nextUrl.href,request.nextUrl.searchParams,request.nextUrl.searchParams.get("name"),request.nextUrl.pathname,params.emojiId
-//   const { emojiId } = params;
+//request.method, request.url, request.body, request.nextUrl.href,request.nextUrl.searchParams,request.nextUrl.searchParams.get("name"),request.nextUrl.pathname,params.categoryId
+//   const { categoryId } = params;
 //   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
 //     headers: {
 //       "Content-Type": "application/json",
