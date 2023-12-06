@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/app/helper";
 
-export const dynamic = "force-dynamic"; //prevent static route
+export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest, { params }) {
   const { categoryId } = params;
   const urlQueries = request.nextUrl.searchParams;
