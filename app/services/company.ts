@@ -5,15 +5,18 @@ import type {
 } from "@/app/types/Company";
 
 type GetCompanies = {
+  industry?: string;
   page?: number;
   pageSize?: number;
 };
 export const getCompanies = async ({
+  industry,
   page = 1,
   pageSize = 8,
 }: GetCompanies) => {
   const { data } = await axios.get<GetCompaniesResponse>("/companies", {
     params: {
+      industry,
       page,
       pageSize,
     },

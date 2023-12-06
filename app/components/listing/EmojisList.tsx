@@ -77,11 +77,11 @@ export default function EmojisList({
         </div>
         <div className="row">
           <div className="col-lg-12" data-aos-delay="100" data-aos="fade-up">
-            <div className="row">
+            <div className="row align-items-stretch">
               {pages.pages.map((page) =>
                 page.map((emoji) => (
                   <EmojiCard
-                    className="col-sm-6 col-xl-3"
+                    className="col-sm-6 col-xl-3 p10"
                     key={emoji.id}
                     id={emoji.id}
                     name={emoji.name}

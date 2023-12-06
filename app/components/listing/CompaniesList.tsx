@@ -12,6 +12,7 @@ type CompanyListProps = {
   items: Company[];
   totalItems?: number;
   pageSize?: number;
+  industry?: string;
   className?: string;
 };
 
@@ -20,6 +21,7 @@ export default function CompaniesList({
   items = [],
   totalItems = 0,
   pageSize = 8,
+  industry,
   className = "",
 }: CompanyListProps) {
   const totalPages = useMemo(() => {
@@ -33,7 +35,7 @@ export default function CompaniesList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-companies"],
+    queryKey: ["get-companies", industry],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
@@ -48,6 +50,7 @@ export default function CompaniesList({
       const { items } = await getCompanies({
         page: pageParam.page || 1,
         pageSize,
+        industry,
       });
       const newCompanies: Company[] = [];
       items.forEach((company) => {
@@ -67,11 +70,15 @@ export default function CompaniesList({
       <div className="main-title">
         <h3>{title}</h3>
       </div>
-      <div className="row" data-aos-delay="100" data-aos="fade-up">
+      <div
+        className="row align-items-stretch"
+        data-aos-delay="100"
+        data-aos="fade-up"
+      >
         {pages.pages.map((page) =>
           page.map((company) => (
             <CompanyCard
-              className="col-sm-6 col-xl-3"
+              className="col-sm-6 col-xl-3 p10"
               key={company.id}
               id={company.id}
               name={company.name}

@@ -12,10 +12,12 @@ export default function IndustryCard({
 }: IndustryCardProps) {
   return (
     <div {...rest} className={`industry-card ${className}`}>
-      <div className="car-listing">
+      <div className="car-listing h-100">
         <div className="details">
           <div className="wrapper">
-            <h6 className="title text-center fs-5 lh-base">{name}</h6>
+            <h6 className="title text-center fs-5 lh-base text-break">
+              {name}
+            </h6>
           </div>
           <div className="listing_footer">
             <Link href={`/industries/${id}`} className="submit-action">

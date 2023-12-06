@@ -16,7 +16,7 @@ export default function EmojiCard({
 }: EmojiCardProps) {
   return (
     <div {...rest} className={`emoji-card ${className}`}>
-      <div className="car-listing">
+      <div className="car-listing h-100">
         <div className="thumb">
           <div className="tag blue">{category}</div>
           <div className="emoji-container">{emoji}</div>

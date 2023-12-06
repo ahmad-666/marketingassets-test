@@ -15,7 +15,7 @@ export default function CompanyCard({
 }: CompanyCardProps) {
   return (
     <div {...rest} className={`company-card ${className}`}>
-      <div className="car-listing">
+      <div className="car-listing h-100">
         <div className="thumb">
           <div className="tag blue">{category}</div>
           <div className="img-container d-flex justify-content-center align-items-center">
