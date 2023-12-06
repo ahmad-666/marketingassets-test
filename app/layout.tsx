@@ -16,11 +16,11 @@ import "../public/scss/global.scss";
 const inter = Inter({ subsets: ["latin"] });
 export const dynamic = "force-dynamic"; //ssr
 export default async function RootLayout({ children }) {
-  // const { items: emojiCategoriesResponse } = await getEmojiCategories();
-  // const emojisCategories = emojiCategoriesResponse.map((cat) => ({
-  //   label: cat.text,
-  //   path: `/${cat.category}`,
-  // }));
+  const { items: emojiCategoriesResponse } = await getEmojiCategories();
+  const emojisCategories = emojiCategoriesResponse.map((cat) => ({
+    label: cat.text,
+    path: `/${cat.category}`,
+  }));
 
   const menuItems: (Item | NestedItem)[] = [
     {
@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
     },
     {
       label: "Emojis",
-      subMenu: [],
+      subMenu: emojisCategories,
     },
     {
       label: "Logos",
