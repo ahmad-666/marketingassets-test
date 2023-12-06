@@ -16,7 +16,7 @@
 // import Partner from "@/app/components/common/Partner";
 // import Counter from "@/app/components/home/home-1/Counter";
 
-export const dynamic = "force-dynamic"; //ssr
+// export const dynamic = "force-dynamic"; //ssr
 export const metadata = {
   title: "Home-1 || Voiture - Automotive & Car Dealer NextJS Template",
   description: `Voiture - Automotive & Car Dealer NextJS Template. `,

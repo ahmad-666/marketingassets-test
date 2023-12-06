@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/app/helper";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest, { params }) {
   const { categoryId } = params;
   const urlQueries = request.nextUrl.searchParams;
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest, { params }) {
   );
 }
 
-//export const dynamic = "force-dynamic"; //prevent static route
+//// export const dynamic = "force-dynamic"; //prevent static route
 //export const revalidate = 1000
 // export async function GET(request: NextRequest, { params }) {
 //access to this route via sending GET request to http://localhost:3000/api/emojis/something

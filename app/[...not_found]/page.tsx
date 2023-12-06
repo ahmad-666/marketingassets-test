@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "404 || Voiture - Automotive & Car Dealer NextJS Template",
 };
-export const dynamic = "force-dynamic"; //ssr
+// export const dynamic = "force-dynamic"; //ssr
 const NotFound = () => {
   return (
     <div className="wrapper">
