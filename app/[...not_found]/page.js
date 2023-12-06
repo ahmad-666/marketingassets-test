@@ -1,9 +1,3 @@
-import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "../components/common/DefaultHeader";
-import HeaderSidebar from "../components/common/HeaderSidebar";
-import HeaderTop from "../components/common/HeaderTop";
-import MobileMenu from "../components/common/MobileMenu";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,29 +7,6 @@ export const metadata = {
 const NotFound = () => {
   return (
     <div className="wrapper">
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
-      {/* header top */}
-      <HeaderTop />
-      {/* End header top */}
-
-      {/* Main Header Nav */}
-      <DefaultHeader />
-      {/* End Main Header Nav */}
-
-      {/* Main Header Nav For Mobile */}
-      <MobileMenu />
-      {/* End Main Header Nav For Mobile */}
-
-      {/* Error Page */}
       <section className="our-error bgc-f9">
         <div className="container">
           <div className="row">
@@ -55,26 +26,7 @@ const NotFound = () => {
           </div>
         </div>
       </section>
-      {/* End Error Page */}
-
-      {/* Our Footer */}
-      <Footer />
-      {/* End Our Footer */}
-
-      {/* Modal */}
-      <div
-        className="sign_up_modal modal fade"
-        id="logInModal"
-        data-backdrop="static"
-        data-keyboard="false"
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        <LoginSignupModal />
-      </div>
-      {/* End Modal */}
     </div>
-    // End wrapper
   );
 };
 
