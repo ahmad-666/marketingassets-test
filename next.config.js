@@ -8,7 +8,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "companyurlfinder.com", //or '**.amazonaws.com'
+        hostname: "companyurlfinder.com",
+        pathname: "**",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "api.companyurlfinder.com",
         pathname: "**",
         port: "",
       },

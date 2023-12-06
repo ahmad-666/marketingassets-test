@@ -12,6 +12,7 @@ type CompanyListProps = {
   items: Company[];
   totalItems?: number;
   pageSize?: number;
+  className?: string;
 };
 
 export default function CompaniesList({
@@ -19,6 +20,7 @@ export default function CompaniesList({
   items = [],
   totalItems = 0,
   pageSize = 8,
+  className = "",
 }: CompanyListProps) {
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
@@ -53,8 +55,7 @@ export default function CompaniesList({
           id: company.id,
           category: company.industry,
           name: company.name,
-          imgSrc:
-            "https://companyurlfinder.com/marketing/assets/img/logos/amazon.com.png.pagespeed.ce.A3e8VyaHlv.png",
+          imgSrc: `https://api.companyurlfinder.com/logo/${company.domain}`,
         });
       });
       return newCompanies;
@@ -62,54 +63,40 @@ export default function CompaniesList({
   });
 
   return (
-    <section>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="main-title text-center">
-              <h2>{title}</h2>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-12" data-aos-delay="100" data-aos="fade-up">
-            <div className="row">
-              {pages.pages.map((page) =>
-                page.map((company) => (
-                  <CompanyCard
-                    className="col-sm-6 col-xl-3"
-                    key={company.id}
-                    id={company.id}
-                    name={company.name}
-                    category={company.category}
-                    imgSrc={company.imgSrc}
-                  />
-                ))
-              )}
-            </div>
-          </div>
-        </div>
-        {isFetching && <SpinnerLoader className="mt10" />}
-        {hasNextPage && (
-          <div className="row mt20">
-            <div className="col-lg-12">
-              <div className="text-center">
-                <button
-                  className="btn more_listing"
-                  onClick={() => {
-                    fetchNextPage();
-                  }}
-                >
-                  Show More
-                  <span className="icon">
-                    <span className="fas fa-plus" />
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
+    <div className={`${className}`}>
+      <div className="main-title">
+        <h3>{title}</h3>
+      </div>
+      <div className="row" data-aos-delay="100" data-aos="fade-up">
+        {pages.pages.map((page) =>
+          page.map((company) => (
+            <CompanyCard
+              className="col-sm-6 col-xl-3"
+              key={company.id}
+              id={company.id}
+              name={company.name}
+              category={company.category}
+              imgSrc={company.imgSrc}
+            />
+          ))
         )}
       </div>
-    </section>
+      {isFetching && <SpinnerLoader className="mt10" />}
+      {hasNextPage && (
+        <div className="text-center">
+          <button
+            className="btn more_listing"
+            onClick={() => {
+              fetchNextPage();
+            }}
+          >
+            Show More
+            <span className="icon">
+              <span className="fas fa-plus" />
+            </span>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

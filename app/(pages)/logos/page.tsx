@@ -16,18 +16,32 @@ export default async function Page({}: PageProps) {
       id: company.id,
       category: company.industry,
       name: company.name,
-      imgSrc:
-        "https://companyurlfinder.com/marketing/assets/img/logos/amazon.com.png.pagespeed.ce.A3e8VyaHlv.png",
+      imgSrc: `https://api.companyurlfinder.com/logo/${company.domain}`,
     });
   });
   return (
     <div>
-      <CompaniesList
-        title="Company Logo Repository: Download Logos or Integrate via API"
-        items={companies}
-        totalItems={totalCompanies}
-        pageSize={pageSize}
-      />
+      <section className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="main-title text-center">
+              <h2>
+                Company Logo Repository: Download Logos or Integrate via API
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="row mt40">
+          <div className="col-lg-12">
+            <CompaniesList
+              title="Browse Companies"
+              items={companies}
+              totalItems={totalCompanies}
+              pageSize={pageSize}
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
