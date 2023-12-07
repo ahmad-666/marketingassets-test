@@ -2,12 +2,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Item = {
+export type Item = {
   text: string;
   link: string;
 };
 
-type BreadCrumbProps = {
+export type BreadCrumbProps = {
   items: Item[];
   className?: string;
 };
@@ -15,8 +15,8 @@ type BreadCrumbProps = {
 const BreadCrumb = ({ items = [], className = "" }: BreadCrumbProps) => {
   const pathname = usePathname();
   return (
-    <div className={`${className}`}>
-      <ol className="breadcrumb float-start">
+    <div className={`breadcrumb_content style2 ${className}`}>
+      <ol className="breadcrumb">
         {items.map((item) => (
           <li
             key={item.link}

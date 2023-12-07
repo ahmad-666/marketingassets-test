@@ -1,4 +1,9 @@
 import { getCompany } from "@/app/services/company";
+import BreadCrumb, {
+  type Item as BreadcrumbItem,
+} from "@/app/components/common/BreadCrumb";
+import DetailsSection from "@/app/components/details/DetailsSection";
+
 type PageProps = {
   params: {
     logoId: string;
@@ -12,12 +17,33 @@ export const dynamic = "force-dynamic";
 const Page = async ({ params: { logoId } }: PageProps) => {
   const company = await getCompany({ companyId: logoId });
 
+  const breadcrumbItems: BreadcrumbItem[] = [
+    {
+      text: "Home",
+      link: "/",
+    },
+    {
+      text: company.industry,
+      link: `/industries/${company.industry}`,
+    },
+    {
+      text: company.name,
+      link: `/logos/${company.domain}`,
+    },
+  ];
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <div className="container">
-          <div className="row mb30">
-            <div className="col"></div>
+          <div className="row">
+            <div className="col">
+              <BreadCrumb items={breadcrumbItems} />
+              <DetailsSection
+                className="mt30"
+                name={company.name}
+                industry={company.industry}
+              />
+            </div>
           </div>
           {/* <div className="row">
             <div className="col-lg-8 col-xl-8">
