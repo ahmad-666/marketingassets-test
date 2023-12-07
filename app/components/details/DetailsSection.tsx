@@ -17,10 +17,15 @@ export default function DetailsSection({
         <div className="car_single_content_wrapper">
           <ul className="car_info mb20-md">
             <li className="list-inline-item">
-              <Link href={`/industries/${industry}`}>{industry}</Link>
+              <Link
+                href={`/industries/${industry}`}
+                className="text-capitalize"
+              >
+                {industry} Industry
+              </Link>
             </li>
           </ul>
-          <h2 className="title">{name}</h2>
+          <h2 className="title text-capitalize">{name}</h2>
         </div>
       </div>
     </div>

@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.0.0",
+    "@iconify/react": "^4.1.1",
     "@types/node": "20.10.2",
     "@types/react": "18.2.41",
     "eslint-plugin-jsx-a11y": "6.5.1",

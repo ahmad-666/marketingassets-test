@@ -1,8 +1,18 @@
-import { getCompany } from "@/app/services/company";
+import { getCompanies, getCompany } from "@/app/services/company";
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/app/components/common/BreadCrumb";
 import DetailsSection from "@/app/components/details/DetailsSection";
+import ImageGallery from "@/app/components/details/ImageGallery";
+import ContactInformation, {
+  type Item as ContactItem,
+} from "@/app/components/details/ContactInformation";
+import Descriptions from "@/app/components/details/Descriptions";
+import DownloadSection from "@/app/components/details/DownloadSection";
+import EmbedCompanyLogo from "@/app/components/details/EmbedCompanyLogo";
+import UsefulLinks from "@/app/components/details/UsefulLinks";
+import RelatedItems from "@/app/components/details/RelatedItems";
+import { Company } from "@/app/types/Company";
 
 type PageProps = {
   params: {
@@ -14,9 +24,22 @@ export const metadata = {
     "Listing Single V1 || Voiture - Automotive & Car Dealer NextJS Template",
 };
 export const dynamic = "force-dynamic";
+const relatedPageSize = 12;
 const Page = async ({ params: { logoId } }: PageProps) => {
   const company = await getCompany({ companyId: logoId });
-
+  const { items: relatedCompaniesServer } = await getCompanies({
+    page: 1,
+    pageSize: relatedPageSize,
+    industry: company.industry,
+  });
+  const relatedCompanies: Company[] = relatedCompaniesServer
+    .filter((company) => company.domain !== logoId)
+    .map((company) => ({
+      id: company.id,
+      name: company.name,
+      category: company.industry,
+      imgSrc: `https://companyurlfinder.com/marketing/assets/img/logos/${company.domain}.png`,
+    }));
   const breadcrumbItems: BreadcrumbItem[] = [
     {
       text: "Home",
@@ -31,6 +54,55 @@ const Page = async ({ params: { logoId } }: PageProps) => {
       link: `/logos/${company.domain}`,
     },
   ];
+  const contactItems: ContactItem[] = [
+    {
+      icon: "mdi:web",
+      title: "Website",
+      value: company.domain,
+      link: `https://${company.domain}`,
+      type: "link",
+    },
+    {
+      icon: "mdi:linkedin",
+      title: "LinkedIn",
+      value: company.linkedin,
+      link: `https://${company.linkedin}`,
+      type: "link",
+    },
+    {
+      icon: "mdi:twitter",
+      title: "Twitter",
+      value: company.twitter,
+      link: `https://${company.twitter}`,
+      type: "link",
+    },
+    {
+      icon: "mdi:facebook",
+      title: "Facebook",
+      value: company.facebook,
+      link: `https://${company.facebook}`,
+      type: "link",
+    },
+    {
+      icon: "mdi:account-group",
+      title: "# Employees",
+      value: company.size,
+      type: "text",
+    },
+    {
+      icon: "mdi:calendar",
+      title: "Founded",
+      value: company.founded,
+      type: "text",
+    },
+    {
+      icon: "mdi:account-plus",
+      title: "# LinkedIn Followers",
+      value: company.followers_count,
+      type: "text",
+    },
+  ];
+  const companyImg = `https://companyurlfinder.com/marketing/assets/img/logos/${company.domain}.png`;
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
@@ -45,70 +117,31 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               />
             </div>
           </div>
-          {/* <div className="row">
+          <div className="row mt40">
             <div className="col-lg-8 col-xl-8">
-              <img />
+              <ImageGallery name={company.name} imgSrc={companyImg} />
               <div className="opening_hour_widgets p30 mt30">
-                <div className="wrapper">
-                  <h4 className="title">Overview</h4>
-                </div>
+                <ContactInformation name={company.name} items={contactItems} />
               </div>
               <div className="listing_single_description mt30">
-                <h4 className="mb30">
-                  Description
-                  <span className="float-end body-color fz13">ID #9535</span>
-                </h4>
+                <Descriptions desc={company.overview} />
               </div>
             </div>
             <div className="col-lg-4 col-xl-4">
-              <div className="offer_btns">
-                <div className="text-end">
-                  <button className="btn btn-thm ofr_btn1 btn-block mt0 mb20">
-                    <span className="flaticon-coin mr10 fz18 vam" />
-                    Make an Offer Price
-                  </button>
-                  <button className="btn ofr_btn2 btn-block mt0 mb20">
-                    <span className="flaticon-profit-report mr10 fz18 vam" />
-                    View VIN Report
-                  </button>
-                </div>
-              </div>
-              <div className="sidebar_seller_contact">
-                <h4 className="mb30">Contact Seller</h4>
-              </div>
+              <DownloadSection name={company.name} imgSrc={companyImg} />
+              <EmbedCompanyLogo className="mt30" />
+              <UsefulLinks className="mt30" />
             </div>
-          </div> */}
+          </div>
+          <div className="row mt40">
+            <RelatedItems
+              industry={company.industry}
+              items={relatedCompanies}
+              pageSize={relatedPageSize}
+            />
+          </div>
         </div>
       </section>
-      {/* <section className="car-for-rent bb1">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="main-title text-center text-md-start mb10-520">
-                <h2 className="title">Releated Best Car</h2>
-              </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="text-center text-md-end mb30-520">
-                <Link href="/page-list-v1" className="more_listing">
-                  Show All Cars
-                  <span className="icon">
-                    <span className="fas fa-plus" />
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-12">
-            <div
-              className="home1_popular_listing home3_style"
-              data-aos-delay="100"
-            >
-              <div className="listing_item_4grid_slider nav_none"></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 };

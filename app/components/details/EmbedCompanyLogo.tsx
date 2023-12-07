@@ -1,10 +1,14 @@
 import Link from "next/link";
 
-type EmbedCompanyLogoProps = {};
+type EmbedCompanyLogoProps = {
+  className?: string;
+};
 
-export default function EmbedCompanyLogo({}: EmbedCompanyLogoProps) {
+export default function EmbedCompanyLogo({
+  className = "",
+}: EmbedCompanyLogoProps) {
   return (
-    <div>
+    <div className={`${className}`}>
       <div className="sidebar_seller_contact">
         <h4 className="mb30">Embed Company Logos</h4>
         <p className="text-center">

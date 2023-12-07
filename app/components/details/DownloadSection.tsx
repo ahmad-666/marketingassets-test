@@ -1,4 +1,6 @@
-import { useCallback } from "react";
+"use client";
+
+import Icon from "@/app/components/common/Icon";
 
 type DownloadSectionProps = {
   name: string;
@@ -11,22 +13,17 @@ export default function DownloadSection({
   imgSrc,
   className = "",
 }: DownloadSectionProps) {
-  const downloadHandler = useCallback(() => {
-    const a = document.createElement("a");
-    a.href = imgSrc;
-    a.download = name;
-    a.click();
-    a.remove();
-  }, [name, imgSrc]);
   return (
     <div className={`${className}`}>
-      <button
-        className="btn btn-thm ofr_btn1 btn-block mt0 mb20"
-        onClick={downloadHandler}
+      <a
+        target="_blank"
+        href={imgSrc}
+        download
+        className="btn btn-thm ofr_btn1 btn-block mt0 mb20 text-capitalize"
       >
-        <span className="flaticon-download mr10 fz18 vam" />
+        <Icon icon="mdi:download" size="sm" className="mr5" />
         {`Download ${name} Logo in PNG Format`}
-      </button>
+      </a>
     </div>
   );
 }

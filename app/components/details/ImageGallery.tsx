@@ -17,9 +17,10 @@ export default function ImageGallery({
         <Image
           src={imgSrc}
           alt={name}
-          width={500}
-          height={500}
+          width={600}
+          height={600}
           style={{
+            width: "auto",
             height: "250px",
           }}
         />

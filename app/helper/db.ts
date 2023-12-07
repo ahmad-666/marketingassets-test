@@ -31,6 +31,7 @@ async function initialize() {
     host: DB_HOST,
     port: +DB_PORT,
     dialect: "mysql",
+    logging: false,
   });
   db.Emoji = emojiModel(sequelize);
   db.Company = companyModel(sequelize);
@@ -83,3 +84,8 @@ function companyModel(sequelize) {
   };
   return sequelize.define("company", attributes, {});
 }
+
+//MySQL VARCHAR(255) --> Sequelize STRING
+//MySQL TEXT --> Sequelize TEXT
+//MySQL BIGINT --> Sequelize BIGINT
+//MySQL INTEGER --> Sequelize INTEGER
