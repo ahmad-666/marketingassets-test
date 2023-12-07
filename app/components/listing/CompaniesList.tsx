@@ -13,6 +13,7 @@ type CompanyListProps = {
   totalItems?: number;
   pageSize?: number;
   industry?: string;
+  showMore?: boolean;
   className?: string;
 };
 
@@ -22,6 +23,7 @@ export default function CompaniesList({
   totalItems = 0,
   pageSize = 8,
   industry,
+  showMore = true,
   className = "",
 }: CompanyListProps) {
   const totalPages = useMemo(() => {
@@ -89,7 +91,7 @@ export default function CompaniesList({
         )}
       </div>
       {isFetching && <SpinnerLoader className="mt10" />}
-      {hasNextPage && (
+      {showMore && hasNextPage && (
         <div className="text-center">
           <button
             className="btn more_listing"
