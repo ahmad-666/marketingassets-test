@@ -1,6 +1,7 @@
 import axios from "@/app/utils/axios";
 import type {
   GetCompaniesResponse,
+  GetCompanyResponse,
   GetIndustriesResponse,
 } from "@/app/types/Company";
 
@@ -8,6 +9,9 @@ type GetCompanies = {
   industry?: string;
   page?: number;
   pageSize?: number;
+};
+type GetCompany = {
+  companyId: string;
 };
 export const getCompanies = async ({
   industry,
@@ -21,6 +25,12 @@ export const getCompanies = async ({
       pageSize,
     },
   });
+  return data;
+};
+export const getCompany = async ({ companyId }: GetCompany) => {
+  const { data } = await axios.get<GetCompanyResponse>(
+    `/companies/${companyId}`
+  );
   return data;
 };
 export const getIndustries = async () => {

@@ -24,6 +24,7 @@ export type GetCompaniesResponse = {
     totalCount: number;
   };
 };
+export type GetCompanyResponse = CompanyResponse;
 export type Industry = {
   id: string;
   name: string;

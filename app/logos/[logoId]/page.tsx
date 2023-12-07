@@ -1,9 +1,17 @@
+import { getCompany } from "@/app/services/company";
+type PageProps = {
+  params: {
+    logoId: string;
+  };
+};
 export const metadata = {
   title:
     "Listing Single V1 || Voiture - Automotive & Car Dealer NextJS Template",
 };
 export const dynamic = "force-dynamic";
-const Page = () => {
+const Page = async ({ params: { logoId } }: PageProps) => {
+  const company = await getCompany({ companyId: logoId });
+
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
