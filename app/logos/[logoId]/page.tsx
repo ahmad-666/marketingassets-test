@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export const metadata = {
   title:
     "Listing Single V1 || Voiture - Automotive & Car Dealer NextJS Template",
@@ -11,74 +9,23 @@ const Page = () => {
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <div className="container">
           <div className="row mb30">
-            <div className="col-lg-7 col-xl-8">
-              <div className="single_page_heading_content">
-                <div className="car_single_content_wrapper">
-                  <ul className="car_info mb20-md">
-                    <li className="list-inline-item">
-                      <a href="#">BRAND NEW - IN STOCK</a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#">
-                        <span className="flaticon-clock-1 vam" />1 years ago
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#">
-                        <span className="flaticon-eye vam" />
-                        13102
-                      </a>
-                    </li>
-                  </ul>
-                  <h2 className="title">Volvo XC 90</h2>
-                  <p className="para">
-                    2.0h T8 11.6kWh Polestar Engineered Auto AWD (s/s) 5dr
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-xl-4">
-              <div className="single_page_heading_content text-start text-lg-end">
-                <div className="share_content">{/* <ShareMeta /> */}</div>
-                <div className="price_content">
-                  <div className="price mt60 mb10 mt10-md">
-                    <h3>
-                      <small className="mr15">
-                        <del>$92,480</del>
-                      </small>
-                      $89,480
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* End col-lg-5 */}
+            <div className="col"></div>
           </div>
-          {/* End .row */}
-
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-8 col-xl-8">
               <img />
-
               <div className="opening_hour_widgets p30 mt30">
                 <div className="wrapper">
                   <h4 className="title">Overview</h4>
-                  {/* <Overview /> */}
                 </div>
               </div>
-              {/* End opening_hour_widgets */}
-
               <div className="listing_single_description mt30">
                 <h4 className="mb30">
-                  Description{" "}
+                  Description
                   <span className="float-end body-color fz13">ID #9535</span>
                 </h4>
-                {/* <Descriptions /> */}
               </div>
-              {/* End car descriptions */}
             </div>
-            {/* End .col-xl-8 */}
-
             <div className="col-lg-4 col-xl-4">
               <div className="offer_btns">
                 <div className="text-end">
@@ -92,22 +39,14 @@ const Page = () => {
                   </button>
                 </div>
               </div>
-              {/* End offer_btn
-               */}
               <div className="sidebar_seller_contact">
-                {/* <SellerDetail />
                 <h4 className="mb30">Contact Seller</h4>
-                <ContactSeller /> */}
               </div>
-
-              {/* End .col-xl-4 */}
             </div>
-          </div>
-          {/* End .row */}
+          </div> */}
         </div>
-        {/* End .container */}
       </section>
-      <section className="car-for-rent bb1">
+      {/* <section className="car-for-rent bb1">
         <div className="container">
           <div className="row">
             <div className="col-sm-6">
@@ -135,7 +74,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
