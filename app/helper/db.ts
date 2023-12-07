@@ -66,7 +66,9 @@ function emojiModel(sequelize) {
   //       withHash: { attributes: {} },
   //     },
   //   };
-  return sequelize.define("emoji", attributes, {});
+  return sequelize.define("emoji", attributes, {
+    timestamps: false,
+  });
 }
 function companyModel(sequelize) {
   const attributes = {
@@ -82,7 +84,9 @@ function companyModel(sequelize) {
     industry: { type: DataTypes.STRING, allowNull: false },
     followers_count: { type: DataTypes.INTEGER, allowNull: false },
   };
-  return sequelize.define("company", attributes, {});
+  return sequelize.define("company", attributes, {
+    timestamps: false,
+  });
 }
 
 //MySQL VARCHAR(255) --> Sequelize STRING
