@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { dbConnect } from "@/app/helper";
-import { textTransform } from "@/app/utils/textTransform";
+import { textNormalize } from "@/app/utils/textTransform";
 
 export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     {
       items: categories.map((cat) => ({
         category: cat.DISTINCT,
-        text: textTransform(cat.DISTINCT),
+        text: textNormalize(cat.DISTINCT),
       })),
     },
     { status: 200 }

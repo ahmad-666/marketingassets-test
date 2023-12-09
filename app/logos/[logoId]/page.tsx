@@ -38,7 +38,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
       id: company.id,
       name: company.name,
       category: company.industry,
-      imgSrc: `https://companyurlfinder.com/marketing/assets/img/logos/${company.domain}.png`,
+      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}`,
     }));
   const breadcrumbItems: BreadcrumbItem[] = [
     {
@@ -102,7 +102,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
       type: "text",
     },
   ];
-  const companyImg = `https://companyurlfinder.com/marketing/assets/img/logos/${company.domain}.png`;
+  const companyImg = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}`;
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">

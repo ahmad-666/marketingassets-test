@@ -1,7 +1,7 @@
 import CompaniesList from "@/app/components/listing/CompaniesList";
 import type { Company } from "@/app/types/Company";
 import { getCompanies } from "@/app/services/company";
-import { textTransform } from "@/app/utils/textTransform";
+import { textNormalize } from "@/app/utils/textTransform";
 
 type PageProps = {
   params: {
@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic"; //ssr
 export default async function Page({ params: { industryId } }: PageProps) {
   const decodedIndustry = decodeURIComponent(industryId);
   const companies: Company[] = [];
-  const industryText = textTransform(decodedIndustry);
+  const industryText = textNormalize(decodedIndustry);
   const { items: companiesResponse, meta: companiesMeta } = await getCompanies({
     industry: decodedIndustry,
     page: 1,
@@ -25,7 +25,7 @@ export default async function Page({ params: { industryId } }: PageProps) {
       id: company.id,
       category: company.industry,
       name: company.name,
-      imgSrc: `https://api.companyurlfinder.com/logo/${company.domain}`,
+      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logo/${company.domain}`,
     });
   });
   return (

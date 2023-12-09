@@ -34,3 +34,4 @@ export type EmojiCategory = {
 export type GetEmojiCategoryResponse = {
   items: EmojiCategory[];
 };
+export type GetEmojiResponse = EmojiResponse;
