@@ -14,6 +14,8 @@ import UsefulLinks from "@/app/components/details/UsefulLinks";
 import RelatedItems from "@/app/components/details/RelatedItems";
 import { textNormalize } from "@/app/utils/textTransform";
 import type { Emoji } from "@/app/types/Emoji";
+import { Faq } from "@/app/types/common";
+import CopySection from "@/app/components/details/CopySection";
 
 type PageProps = {
   params: {
@@ -62,6 +64,24 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
     },
   ];
   const emojiImgSrc = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}`;
+  const faqs: Faq[] = [
+    {
+      question: `What is ${emoji.text} ${emoji.emoji} emoji?`,
+      answer: emoji.description,
+    },
+    {
+      question: `What does ${emoji.text} ${emoji.emoji} emoji mean?`,
+      answer: emoji.mean,
+    },
+    {
+      question: `What does ${emoji.text} ${emoji.emoji} emoji mean in marketing?`,
+      answer: emoji.marketing,
+    },
+    {
+      question: `How do you respond to ${emoji.text} ${emoji.emoji} emoji?`,
+      answer: emoji.response,
+    },
+  ];
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
@@ -82,18 +102,20 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
           <div className="row mt30">
             <div className="col-lg-8 col-xl-8">
               <EmojiGallery emoji={emoji.emoji} />
-              {/* <div className="opening_hour_widgets p30 mt30">
-                <ContactInformation name={company.name} items={contactItems} />
-              </div> */}
-              {/* <div className="listing_single_description mt30">
-                <Descriptions desc={company.overview} />
-              </div> */}
+              {faqs.map((faq) => (
+                <Descriptions
+                  key={faq.question}
+                  className="listing_single_description mt30"
+                  title={faq.question}
+                  desc={faq.answer}
+                />
+              ))}
             </div>
-            {/* <div className="col-lg-4 col-xl-4">
-              <DownloadSection name={company.name} imgSrc={companyImg} />
+            <div className="col-lg-4 col-xl-4">
+              <CopySection value={emoji.emoji} />
               <EmbedCompanyLogo className="mt30" />
               <UsefulLinks className="mt30" />
-            </div> */}
+            </div>
           </div>
           {/* <div className="row mt30">
             <RelatedItems

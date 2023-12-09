@@ -4,25 +4,27 @@ import Icon from "@/app/components/common/Icon";
 
 type DownloadSectionProps = {
   name: string;
-  imgSrc: string;
+  src: string;
+  text: string;
   className?: string;
 };
 
 export default function DownloadSection({
   name,
-  imgSrc,
+  src,
+  text,
   className = "",
 }: DownloadSectionProps) {
   return (
     <div className={`${className}`}>
       <a
         target="_blank"
-        href={imgSrc}
+        href={src}
         download
         className="btn btn-thm ofr_btn1 btn-block text-capitalize"
       >
         <Icon icon="mdi:download" size="sm" className="mr5" />
-        {`Download ${name} Logo in PNG Format`}
+        {text}
       </a>
     </div>
   );
