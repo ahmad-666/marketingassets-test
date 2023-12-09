@@ -1,25 +1,22 @@
 import axios from "@/app/utils/axios";
 import type {
-  GetEmojiCategoryResponse,
-  GetEmojisResponse,
+  GetEmojiArg,
+  GetEmojisArgs,
   GetEmojiResponse,
+  GetEmojisResponse,
+  GetEmojiCategoriesResponse,
 } from "@/app/types/Emoji";
 
-type GetEmojis = {
-  urls?: string[];
-  category?: string;
-  page?: number;
-  pageSize?: number;
-};
-type GetEmoji = {
-  emojiId: string;
+export const getEmoji = async ({ emojiId }: GetEmojiArg) => {
+  const { data } = await axios.get<GetEmojiResponse>(`/emojis/${emojiId}`);
+  return data;
 };
 export const getEmojis = async ({
   urls,
   category,
   page = 1,
-  pageSize = 8,
-}: GetEmojis) => {
+  pageSize,
+}: GetEmojisArgs) => {
   const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
     params: {
       urls: urls?.join(","),
@@ -31,12 +28,8 @@ export const getEmojis = async ({
   return data;
 };
 export const getEmojiCategories = async () => {
-  const { data } = await axios.get<GetEmojiCategoryResponse>(
+  const { data } = await axios.get<GetEmojiCategoriesResponse>(
     "/emojis/categories"
   );
-  return data;
-};
-export const getEmoji = async ({ emojiId }: GetEmoji) => {
-  const { data } = await axios.get<GetEmojiResponse>(`/emojis/${emojiId}`);
   return data;
 };

@@ -1,23 +1,18 @@
 import { getEmoji, getEmojis } from "@/app/services/emoji";
-import BreadCrumb, {
-  type Item as BreadcrumbItem,
-} from "@/app/components/common/BreadCrumb";
 import DetailsSection from "@/app/components/details/DetailsSection";
 import EmojiGallery from "@/app/components/details/EmojiGallery";
-import ContactInformation, {
-  type Item as ContactItem,
-} from "@/app/components/details/ContactInformation";
 import Descriptions from "@/app/components/details/Descriptions";
-import DownloadSection from "@/app/components/details/DownloadSection";
 import EmbedCompanyLogo from "@/app/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/app/components/details/UsefulLinks";
-import RelatedItems from "@/app/components/details/RelatedItems";
-import { textNormalize } from "@/app/utils/textTransform";
-import type { Emoji } from "@/app/types/Emoji";
-import { Faq, Tag } from "@/app/types/common";
 import CopySection from "@/app/components/details/CopySection";
 import SimilarTags from "@/app/components/details/SimilarTags";
 import EmojisList from "@/app/components/listing/EmojisList";
+import { textNormalize } from "@/app/utils/textTransform";
+import type { Emoji } from "@/app/types/Emoji";
+import type { Faq, Tag } from "@/app/types/Common";
+import BreadCrumb, {
+  type Item as BreadcrumbItem,
+} from "@/app/components/common/BreadCrumb";
 
 type PageProps = {
   params: {
@@ -29,28 +24,26 @@ export const metadata = {
     "Listing Single V1 || Voiture - Automotive & Car Dealer NextJS Template",
 };
 export const dynamic = "force-dynamic";
-const relatedPageSize = 12;
 const Page = async ({ params: { emojiId } }: PageProps) => {
   const emoji = await getEmoji({ emojiId });
   const { items: relatedEmojisServer } = await getEmojis({
     urls: emoji.emoji_list,
     page: 1,
-    pageSize: relatedPageSize,
   });
   const category = {
     value: emoji.parent,
     text: textNormalize(emoji.parent),
   };
-  const relatedEmojis: Emoji[] = relatedEmojisServer
-    .filter((emoji) => emoji.url !== emojiId)
-    .map((emoji) => ({
-      id: emoji.id,
-      name: emoji.text,
-      emoji: emoji.emoji,
-      category: category.value,
-      score: 5,
-      usersScore: emoji.score,
-    }));
+
+  const relatedEmojis: Emoji[] = relatedEmojisServer.map((emoji) => ({
+    id: emoji.url,
+    name: emoji.text,
+    emoji: emoji.emoji,
+    categoryValue: category.value,
+    categoryText: category.text,
+    score: 5,
+    usersScore: emoji.score,
+  }));
   const breadcrumbItems: BreadcrumbItem[] = [
     {
       text: "Home",

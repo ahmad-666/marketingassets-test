@@ -2,7 +2,9 @@ import Link from "next/link";
 import "./emojiCard.style.scss";
 import type { Emoji } from "@/app/types/Emoji";
 
-type EmojiCardProps = Emoji & Omit<React.ComponentProps<"div">, "id">;
+type EmojiCardProps = Emoji & {
+  className?: string;
+};
 
 export default function EmojiCard({
   id,
@@ -10,15 +12,15 @@ export default function EmojiCard({
   emoji,
   score,
   usersScore,
-  category,
+  categoryValue,
+  categoryText,
   className = "",
-  ...rest
 }: EmojiCardProps) {
   return (
-    <div {...rest} className={`emoji-card ${className}`}>
+    <div className={`emoji-card ${className}`}>
       <div className="car-listing h-100">
         <div className="thumb">
-          <div className="tag blue">{category}</div>
+          <div className="tag blue">{categoryText}</div>
           <div className="emoji-container">{emoji}</div>
         </div>
         <div className="details">
@@ -28,7 +30,9 @@ export default function EmojiCard({
               <ul className="mb0">
                 {[...Array(5)].map((_, index) => (
                   <li key={index} className="list-inline-item">
-                    <i className="fa fa-star" />
+                    <a href="#">
+                      <i className="fa fa-star" />
+                    </a>
                   </li>
                 ))}
                 <li className="list-inline-item">{score}</li>
@@ -37,7 +41,7 @@ export default function EmojiCard({
             </div>
           </div>
           <div className="listing_footer">
-            <Link href={`/emoji/${id}`} className="submit-action">
+            <Link href={`/emojis/${id}`} className="submit-action">
               Use {name}
             </Link>
           </div>

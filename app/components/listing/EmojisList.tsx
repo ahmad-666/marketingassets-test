@@ -6,6 +6,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import EmojiCard from "@/app/components/cards/EmojiCard";
 import SpinnerLoader from "@/app/components/Loaders/SpinnerLoader";
 import { getEmojis } from "@/app/services/emoji";
+import { textNormalize } from "@/app/utils/textTransform";
 import type { Emoji } from "@/app/types/Emoji";
 
 type EmojisListProps = {
@@ -25,7 +26,7 @@ export default function EmojisList({
   showMore = true,
   className = "",
 }: EmojisListProps) {
-  const { emojiCategoryId } = useParams();
+  const { emojiCategoryId, emojiId } = useParams();
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -37,7 +38,7 @@ export default function EmojisList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId],
+    queryKey: ["get-emojis", emojiCategoryId, emojiId],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
@@ -57,8 +58,9 @@ export default function EmojisList({
       const newEmojis: Emoji[] = [];
       items.forEach((emoji) => {
         newEmojis.push({
-          id: emoji.id,
-          category: emoji.parent,
+          id: emoji.url,
+          categoryValue: emoji.parent,
+          categoryText: textNormalize(emoji.parent),
           name: emoji.text,
           emoji: emoji.emoji,
           score: 5,
@@ -92,7 +94,8 @@ export default function EmojisList({
                     emoji={emoji.emoji}
                     score={emoji.score}
                     usersScore={emoji.usersScore}
-                    category={emoji.category}
+                    categoryValue={emoji.categoryValue}
+                    categoryText={emoji.categoryText}
                   />
                 ))
               )}

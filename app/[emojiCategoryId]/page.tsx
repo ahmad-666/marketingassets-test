@@ -1,6 +1,7 @@
 import EmojisList from "@/app/components/listing/EmojisList";
-import type { Emoji } from "@/app/types/Emoji";
 import { getEmojis } from "@/app/services/emoji";
+import { textNormalize } from "../utils/textTransform";
+import type { Emoji } from "@/app/types/Emoji";
 
 type PageProps = {
   params: {
@@ -20,8 +21,9 @@ export default async function Page({ params: { emojiCategoryId } }: PageProps) {
   const totalEmojis = meta.totalCount;
   items.forEach((emoji) => {
     emojis.push({
-      id: emoji.id,
-      category: emoji.parent,
+      id: emoji.url,
+      categoryValue: emoji.parent,
+      categoryText: textNormalize(emoji.parent),
       name: emoji.text,
       emoji: emoji.emoji,
       score: 5,

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { dbConnect } from "@/app/helper";
 import type { GetEmojisFilters } from "@/app/types/Emoji";
 
@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
   );
 }
 
+//import { NextRequest, NextResponse } from "next/server";
 // export const dynamic = "force-dynamic"; //prevent static route
 //export const revalidate = 1000
 // export async function GET(request: NextRequest, { params }) {

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Tag } from "@/app/types/common";
+import { Tag } from "@/app/types/Common";
 import Link from "next/link";
 
 type SimilarTagsProps = {

@@ -1,11 +1,23 @@
+//client-side types
 export type Emoji = {
-  id: number;
+  id: string;
   name: string;
   emoji: string;
   score: number;
   usersScore: number;
-  category: string;
+  categoryValue: string;
+  categoryText: string;
 };
+export type GetEmojiArg = {
+  emojiId: string;
+};
+export type GetEmojisArgs = {
+  urls?: string[];
+  category?: string;
+  page?: number;
+  pageSize?: number;
+};
+//server-side types
 export type EmojiResponse = {
   aliases: string[];
   description: string;
@@ -21,21 +33,21 @@ export type EmojiResponse = {
   url: string;
   score: number;
 };
+export type EmojiCategoryResponse = {
+  category: string;
+  text: string;
+};
+export type GetEmojisFilters = {
+  parent?: string | string[];
+  url?: string | string[];
+};
+export type GetEmojiResponse = EmojiResponse;
 export type GetEmojisResponse = {
   items: EmojiResponse[];
   meta: {
     totalCount: number;
   };
 };
-export type EmojiCategory = {
-  category: string;
-  text: string;
-};
-export type GetEmojiCategoryResponse = {
-  items: EmojiCategory[];
-};
-export type GetEmojiResponse = EmojiResponse;
-export type GetEmojisFilters = {
-  parent?: string | string[];
-  url?: string | string[];
+export type GetEmojiCategoriesResponse = {
+  items: EmojiCategoryResponse[];
 };
