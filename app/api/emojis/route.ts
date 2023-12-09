@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/app/helper";
+import type { GetEmojisFilters } from "@/app/types/Emoji";
 
 export const dynamic = "force-dynamic";
-export async function GET(request: NextRequest, { params }) {
-  const { categoryId } = params;
+export async function GET(request: NextRequest) {
   const urlQueries = request.nextUrl.searchParams;
+  const urls = urlQueries.get("urls");
+  const category = urlQueries.get("category");
   const page = +urlQueries.get("page") || 1;
-  const pageSize = +urlQueries.get("pageSize") || 8;
+  const pageSize = +urlQueries.get("pageSize") || null;
   const db = await dbConnect();
+  const where: GetEmojisFilters = {};
+  if (urls) where.url = urls.split(",");
+  if (category) where.parent = category;
   const { count, rows } = await db.Emoji.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
-    where: {
-      parent: categoryId,
-    },
+    where,
   });
   return Response.json(
     {

@@ -13,7 +13,7 @@ export default async function Page({ params: { emojiCategoryId } }: PageProps) {
   //from pages components,... other places in client-side send req to localhost:3000/api , from /api folder get those requests and connect to db and return response
   const emojis: Emoji[] = [];
   const { items, meta } = await getEmojis({
-    emojiCategory: emojiCategoryId,
+    category: emojiCategoryId,
     page: 1,
     pageSize,
   });

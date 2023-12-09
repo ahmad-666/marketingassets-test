@@ -35,3 +35,7 @@ export type GetEmojiCategoryResponse = {
   items: EmojiCategory[];
 };
 export type GetEmojiResponse = EmojiResponse;
+export type GetEmojisFilters = {
+  parent?: string | string[];
+  url?: string | string[];
+};

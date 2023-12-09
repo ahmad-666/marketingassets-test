@@ -6,7 +6,8 @@ import type {
 } from "@/app/types/Emoji";
 
 type GetEmojis = {
-  emojiCategory: string;
+  urls?: string[];
+  category?: string;
   page?: number;
   pageSize?: number;
 };
@@ -14,19 +15,19 @@ type GetEmoji = {
   emojiId: string;
 };
 export const getEmojis = async ({
-  emojiCategory,
+  urls,
+  category,
   page = 1,
   pageSize = 8,
 }: GetEmojis) => {
-  const { data } = await axios.get<GetEmojisResponse>(
-    `/emojis/categories/${emojiCategory}`,
-    {
-      params: {
-        page,
-        pageSize,
-      },
-    }
-  );
+  const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
+    params: {
+      urls: urls?.join(","),
+      category,
+      page,
+      pageSize,
+    },
+  });
   return data;
 };
 export const getEmojiCategories = async () => {

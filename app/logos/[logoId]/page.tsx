@@ -38,7 +38,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
       id: company.id,
       name: company.name,
       category: company.industry,
-      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}`,
+      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
     }));
   const breadcrumbItems: BreadcrumbItem[] = [
     {
@@ -102,7 +102,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
       type: "text",
     },
   ];
-  const companyImg = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}`;
+  const companyImg = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`;
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
@@ -112,8 +112,9 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               <BreadCrumb items={breadcrumbItems} />
               <DetailsSection
                 className="mt30"
+                category={company.industry}
+                categoryLink={`/${company.industry}`}
                 name={company.name}
-                industry={company.industry}
               />
             </div>
           </div>
@@ -123,12 +124,18 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               <div className="opening_hour_widgets p30 mt30">
                 <ContactInformation name={company.name} items={contactItems} />
               </div>
-              <div className="listing_single_description mt30">
-                <Descriptions desc={company.overview} />
-              </div>
+              <Descriptions
+                className="mt30"
+                title="Description"
+                desc={company.overview}
+              />
             </div>
             <div className="col-lg-4 col-xl-4">
-              <DownloadSection name={company.name} imgSrc={companyImg} />
+              <DownloadSection
+                name={company.name}
+                src={companyImg}
+                text={`Download ${company.name} Logo in PNG Format`}
+              />
               <EmbedCompanyLogo className="mt30" />
               <UsefulLinks className="mt30" />
             </div>

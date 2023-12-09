@@ -13,6 +13,8 @@ type EmojisListProps = {
   items: Emoji[];
   totalItems?: number;
   pageSize?: number;
+  showMore?: boolean;
+  className?: string;
 };
 
 export default function EmojisList({
@@ -20,6 +22,8 @@ export default function EmojisList({
   items = [],
   totalItems = 0,
   pageSize = 8,
+  showMore = true,
+  className = "",
 }: EmojisListProps) {
   const { emojiCategoryId } = useParams();
   const totalPages = useMemo(() => {
@@ -46,7 +50,7 @@ export default function EmojisList({
     },
     queryFn: async ({ pageParam }) => {
       const { items } = await getEmojis({
-        emojiCategory: emojiCategoryId as string,
+        category: emojiCategoryId as string,
         page: pageParam.page || 1,
         pageSize,
       });
@@ -66,7 +70,7 @@ export default function EmojisList({
   });
 
   return (
-    <section>
+    <section className={`${className}`}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
@@ -96,7 +100,7 @@ export default function EmojisList({
           </div>
         </div>
         {isFetching && <SpinnerLoader className="mt10" />}
-        {hasNextPage && (
+        {showMore && hasNextPage && (
           <div className="row mt20">
             <div className="col-lg-12">
               <div className="text-center">

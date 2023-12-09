@@ -5,10 +5,16 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest, { params }) {
   const { emojiId } = params;
   const db = await dbConnect();
-  const emoji = await db.Emoji.findOne({
+  const { dataValues: emoji } = await db.Emoji.findOne({
     where: {
       url: emojiId,
     },
   });
-  return Response.json(emoji, { status: 200 });
+  return Response.json(
+    {
+      ...emoji,
+      emoji_list: JSON.parse(emoji.emoji_list.replace(/'/g, '"')),
+    },
+    { status: 200 }
+  );
 }

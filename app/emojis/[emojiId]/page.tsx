@@ -14,8 +14,10 @@ import UsefulLinks from "@/app/components/details/UsefulLinks";
 import RelatedItems from "@/app/components/details/RelatedItems";
 import { textNormalize } from "@/app/utils/textTransform";
 import type { Emoji } from "@/app/types/Emoji";
-import { Faq } from "@/app/types/common";
+import { Faq, Tag } from "@/app/types/common";
 import CopySection from "@/app/components/details/CopySection";
+import SimilarTags from "@/app/components/details/SimilarTags";
+import EmojisList from "@/app/components/listing/EmojisList";
 
 type PageProps = {
   params: {
@@ -31,9 +33,9 @@ const relatedPageSize = 12;
 const Page = async ({ params: { emojiId } }: PageProps) => {
   const emoji = await getEmoji({ emojiId });
   const { items: relatedEmojisServer } = await getEmojis({
+    urls: emoji.emoji_list,
     page: 1,
     pageSize: relatedPageSize,
-    emojiCategory: emoji.parent,
   });
   const category = {
     value: emoji.parent,
@@ -63,7 +65,6 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
       link: `/emojis/${emoji.url}`,
     },
   ];
-  const emojiImgSrc = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}`;
   const faqs: Faq[] = [
     {
       question: `What is ${emoji.text} ${emoji.emoji} emoji?`,
@@ -82,6 +83,11 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
       answer: emoji.response,
     },
   ];
+  const tags: Tag[] = emoji.emoji_list.map((emoji) => ({
+    text: textNormalize(emoji),
+    route: `/emojis/${emoji}`,
+  }));
+
   return (
     <div className="wrapper">
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
@@ -105,11 +111,16 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
               {faqs.map((faq) => (
                 <Descriptions
                   key={faq.question}
-                  className="listing_single_description mt30"
+                  className="mt30"
                   title={faq.question}
                   desc={faq.answer}
                 />
               ))}
+              <SimilarTags
+                className="mt30"
+                title="Similar Emojis"
+                tags={tags}
+              />
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />
@@ -117,13 +128,12 @@ const Page = async ({ params: { emojiId } }: PageProps) => {
               <UsefulLinks className="mt30" />
             </div>
           </div>
-          {/* <div className="row mt30">
-            <RelatedItems
-              industry={company.industry}
-              items={relatedCompanies}
-              pageSize={relatedPageSize}
-            />
-          </div>  */}
+          <EmojisList
+            className="row mt30"
+            title="Related Emojis"
+            items={relatedEmojis}
+            showMore={false}
+          />
         </div>
       </section>
     </div>

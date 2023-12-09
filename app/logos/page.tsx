@@ -20,7 +20,7 @@ export default async function Page({}: PageProps) {
       id: company.id,
       category: company.industry,
       name: company.name,
-      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logo/${company.domain}`,
+      imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
     });
   });
   industriesResponse.forEach((industry) => {

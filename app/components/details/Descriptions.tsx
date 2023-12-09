@@ -6,9 +6,9 @@ type DescriptionProps = {
 
 const Descriptions = ({ title, desc, className = "" }: DescriptionProps) => {
   return (
-    <div className={`${className}`}>
-      <h4 className="mb30">{title}</h4>
-      <div>{desc}</div>
+    <div className={`listing_single_description ${className}`}>
+      <h4>{title}</h4>
+      <div className="mt30">{desc}</div>
     </div>
   );
 };
