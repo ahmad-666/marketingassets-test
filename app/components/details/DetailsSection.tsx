@@ -15,7 +15,7 @@ export default function DetailsSection({
     <div className={`${className}`}>
       <div className="single_page_heading_content">
         <div className="car_single_content_wrapper">
-          <ul className="car_info mb20-md">
+          <ul className="car_info">
             <li className="list-inline-item">
               <Link
                 href={`/industries/${industry}`}

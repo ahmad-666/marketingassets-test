@@ -69,43 +69,43 @@ export default function CompaniesList({
 
   return (
     <div className={`${className}`}>
-      <div className="main-title">
-        <h3>{title}</h3>
-      </div>
-      <div
-        className="row align-items-stretch"
-        data-aos-delay="100"
-        data-aos="fade-up"
-      >
-        {pages.pages.map((page) =>
-          page.map((company) => (
-            <CompanyCard
-              className="col-sm-6 col-xl-3 p10"
-              key={company.id}
-              id={company.id}
-              name={company.name}
-              category={company.category}
-              imgSrc={company.imgSrc}
-            />
-          ))
+      <h3>{title}</h3>
+      <div className="mt30">
+        <div
+          className="row align-items-stretch"
+          data-aos-delay="100"
+          data-aos="fade-up"
+        >
+          {pages.pages.map((page) =>
+            page.map((company) => (
+              <CompanyCard
+                className="col-sm-6 col-xl-3 p10"
+                key={company.id}
+                id={company.id}
+                name={company.name}
+                category={company.category}
+                imgSrc={company.imgSrc}
+              />
+            ))
+          )}
+        </div>
+        {isFetching && <SpinnerLoader className="mt10" />}
+        {showMore && hasNextPage && (
+          <div className="mt10 text-center">
+            <button
+              className="btn more_listing"
+              onClick={() => {
+                fetchNextPage();
+              }}
+            >
+              Show More
+              <span className="icon">
+                <span className="fas fa-plus" />
+              </span>
+            </button>
+          </div>
         )}
       </div>
-      {isFetching && <SpinnerLoader className="mt10" />}
-      {showMore && hasNextPage && (
-        <div className="text-center">
-          <button
-            className="btn more_listing"
-            onClick={() => {
-              fetchNextPage();
-            }}
-          >
-            Show More
-            <span className="icon">
-              <span className="fas fa-plus" />
-            </span>
-          </button>
-        </div>
-      )}
     </div>
   );
 }

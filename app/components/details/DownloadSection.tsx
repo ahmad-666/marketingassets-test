@@ -19,7 +19,7 @@ export default function DownloadSection({
         target="_blank"
         href={imgSrc}
         download
-        className="btn btn-thm ofr_btn1 btn-block mt0 mb20 text-capitalize"
+        className="btn btn-thm ofr_btn1 btn-block text-capitalize"
       >
         <Icon icon="mdi:download" size="sm" className="mr5" />
         {`Download ${name} Logo in PNG Format`}

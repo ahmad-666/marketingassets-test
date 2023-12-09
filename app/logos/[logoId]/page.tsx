@@ -117,7 +117,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               />
             </div>
           </div>
-          <div className="row mt40">
+          <div className="row mt30">
             <div className="col-lg-8 col-xl-8">
               <ImageGallery name={company.name} imgSrc={companyImg} />
               <div className="opening_hour_widgets p30 mt30">
@@ -133,7 +133,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               <UsefulLinks className="mt30" />
             </div>
           </div>
-          <div className="row mt40">
+          <div className="row mt30">
             <RelatedItems
               industry={company.industry}
               items={relatedCompanies}

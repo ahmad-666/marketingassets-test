@@ -75,10 +75,15 @@ export default function UsefulLinks({ className }: UsefulLinksProps) {
   return (
     <div className={`${className}`}>
       <div>
-        <div className="sidebar_seller_contact">
-          {items.map((item) => (
-            <div key={item.link}>
-              <Link href={item.link}>{item.text}</Link>
+        <div className="sidebar_seller_contact p30 mb0">
+          {items.map((item, i) => (
+            <div key={item.link} className="text-center fs-6">
+              <Link href={item.link} target="_blank" className="color-gray">
+                {item.text}
+              </Link>
+              {i < items.length - 1 && (
+                <hr className="w-100 h-auto border-top-1 border-solid border-gray my10" />
+              )}
             </div>
           ))}
         </div>
