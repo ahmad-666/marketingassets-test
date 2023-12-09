@@ -1,12 +1,11 @@
 import CompaniesList from "@/app/components/listing/CompaniesList";
 import IndustriesList from "@/app/components/listing/IndustryList";
-import type { Company, Industry } from "@/app/types/Company";
 import { getCompanies, getIndustries } from "@/app/services/company";
+import type { Company, Industry } from "@/app/types/Company";
 
-type PageProps = {};
 const pageSize = 8;
 export const dynamic = "force-dynamic"; //ssr
-export default async function Page({}: PageProps) {
+export default async function Page() {
   const companies: Company[] = [];
   const industries: Industry[] = [];
   const { items: companiesResponse, meta: companiesMeta } = await getCompanies({
@@ -17,7 +16,7 @@ export default async function Page({}: PageProps) {
   const totalCompanies = companiesMeta.totalCount;
   companiesResponse.forEach((company) => {
     companies.push({
-      id: company.id,
+      id: company.domain,
       category: company.industry,
       name: company.name,
       imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,

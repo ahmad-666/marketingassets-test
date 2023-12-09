@@ -1,7 +1,7 @@
 import CompaniesList from "@/app/components/listing/CompaniesList";
-import type { Company } from "@/app/types/Company";
 import { getCompanies } from "@/app/services/company";
 import { textNormalize } from "@/app/utils/textTransform";
+import type { Company } from "@/app/types/Company";
 
 type PageProps = {
   params: {
@@ -22,8 +22,8 @@ export default async function Page({ params: { industryId } }: PageProps) {
   const totalCompanies = companiesMeta.totalCount;
   companiesResponse.forEach((company) => {
     companies.push({
-      id: company.id,
-      category: company.industry,
+      id: company.domain,
+      category: company.industry, 
       name: company.name,
       imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
     });
@@ -47,7 +47,6 @@ export default async function Page({ params: { industryId } }: PageProps) {
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
-              industry={decodedIndustry}
             />
           </div>
         </div>

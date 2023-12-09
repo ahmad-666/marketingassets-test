@@ -1,18 +1,18 @@
 import { getCompanies, getCompany } from "@/app/services/company";
-import BreadCrumb, {
-  type Item as BreadcrumbItem,
-} from "@/app/components/common/BreadCrumb";
 import DetailsSection from "@/app/components/details/DetailsSection";
 import ImageGallery from "@/app/components/details/ImageGallery";
-import ContactInformation, {
-  type Item as ContactItem,
-} from "@/app/components/details/ContactInformation";
 import Descriptions from "@/app/components/details/Descriptions";
 import DownloadSection from "@/app/components/details/DownloadSection";
 import EmbedCompanyLogo from "@/app/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/app/components/details/UsefulLinks";
-import RelatedItems from "@/app/components/details/RelatedItems";
-import { Company } from "@/app/types/Company";
+import CompaniesList from "@/app/components/listing/CompaniesList";
+import type { Company } from "@/app/types/Company";
+import ContactInformation, {
+  type Item as ContactItem,
+} from "@/app/components/details/ContactInformation";
+import BreadCrumb, {
+  type Item as BreadcrumbItem,
+} from "@/app/components/common/BreadCrumb";
 
 type PageProps = {
   params: {
@@ -35,7 +35,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
   const relatedCompanies: Company[] = relatedCompaniesServer
     .filter((company) => company.domain !== logoId)
     .map((company) => ({
-      id: company.id,
+      id: company.domain,
       name: company.name,
       category: company.industry,
       imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
@@ -113,7 +113,7 @@ const Page = async ({ params: { logoId } }: PageProps) => {
               <DetailsSection
                 className="mt30"
                 category={company.industry}
-                categoryLink={`/${company.industry}`}
+                categoryLink={`/industries/${company.industry}`}
                 name={company.name}
               />
             </div>
@@ -141,10 +141,10 @@ const Page = async ({ params: { logoId } }: PageProps) => {
             </div>
           </div>
           <div className="row mt30">
-            <RelatedItems
-              industry={company.industry}
+            <CompaniesList
+              title="Related Companies"
               items={relatedCompanies}
-              pageSize={relatedPageSize}
+              showMore={false}
             />
           </div>
         </div>

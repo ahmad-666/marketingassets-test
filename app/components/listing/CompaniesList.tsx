@@ -6,13 +6,13 @@ import CompanyCard from "@/app/components/cards/CompanyCard";
 import SpinnerLoader from "@/app/components/Loaders/SpinnerLoader";
 import { getCompanies } from "@/app/services/company";
 import type { Company } from "@/app/types/Company";
+import { useParams } from "next/navigation";
 
 type CompanyListProps = {
   title: string;
   items: Company[];
   totalItems?: number;
   pageSize?: number;
-  industry?: string;
   showMore?: boolean;
   className?: string;
 };
@@ -22,10 +22,10 @@ export default function CompaniesList({
   items = [],
   totalItems = 0,
   pageSize = 8,
-  industry,
   showMore = true,
   className = "",
 }: CompanyListProps) {
+  const { logoId, industryId } = useParams();
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -37,7 +37,7 @@ export default function CompaniesList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-companies", industry],
+    queryKey: ["get-companies", logoId, industryId],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
@@ -52,12 +52,14 @@ export default function CompaniesList({
       const { items } = await getCompanies({
         page: pageParam.page || 1,
         pageSize,
-        industry,
+        industry: industryId
+          ? decodeURIComponent(industryId as string)
+          : undefined,
       });
       const newCompanies: Company[] = [];
       items.forEach((company) => {
         newCompanies.push({
-          id: company.id,
+          id: company.domain,
           category: company.industry,
           name: company.name,
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,

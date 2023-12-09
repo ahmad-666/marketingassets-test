@@ -1,9 +1,23 @@
+//client-side types
 export type Company = {
-  id: number;
+  id: string;
   name: string;
   imgSrc: string;
   category: string;
 };
+export type Industry = {
+  id: string;
+  name: string;
+};
+export type GetCompanyArgs = {
+  companyId: string;
+};
+export type GetCompaniesArgs = {
+  industry?: string;
+  page?: number;
+  pageSize?: number;
+};
+//server-side types
 export type CompanyResponse = {
   id: number;
   name: string;
@@ -18,16 +32,12 @@ export type CompanyResponse = {
   industry: string;
   followers_count: number;
 };
+export type GetCompanyResponse = CompanyResponse;
 export type GetCompaniesResponse = {
   items: CompanyResponse[];
   meta: {
     totalCount: number;
   };
-};
-export type GetCompanyResponse = CompanyResponse;
-export type Industry = {
-  id: string;
-  name: string;
 };
 export type IndustryResponse = {
   industry: string;
@@ -35,4 +45,7 @@ export type IndustryResponse = {
 };
 export type GetIndustriesResponse = {
   items: IndustryResponse[];
+};
+export type GetCompaniesFilters = {
+  industry?: string;
 };

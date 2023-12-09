@@ -3,21 +3,15 @@ import type {
   GetCompaniesResponse,
   GetCompanyResponse,
   GetIndustriesResponse,
+  GetCompaniesArgs,
+  GetCompanyArgs,
 } from "@/app/types/Company";
 
-type GetCompanies = {
-  industry?: string;
-  page?: number;
-  pageSize?: number;
-};
-type GetCompany = {
-  companyId: string;
-};
 export const getCompanies = async ({
   industry,
   page = 1,
-  pageSize = 8,
-}: GetCompanies) => {
+  pageSize,
+}: GetCompaniesArgs) => {
   const { data } = await axios.get<GetCompaniesResponse>("/companies", {
     params: {
       industry,
@@ -27,7 +21,7 @@ export const getCompanies = async ({
   });
   return data;
 };
-export const getCompany = async ({ companyId }: GetCompany) => {
+export const getCompany = async ({ companyId }: GetCompanyArgs) => {
   const { data } = await axios.get<GetCompanyResponse>(
     `/companies/${companyId}`
   );

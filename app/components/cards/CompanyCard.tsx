@@ -3,7 +3,9 @@ import Image from "next/image";
 import "./companyCard.style.scss";
 import type { Company } from "@/app/types/Company";
 
-type CompanyCardProps = Company & Omit<React.ComponentProps<"div">, "id">;
+type CompanyCardProps = Company & {
+  className?: string;
+};
 
 export default function CompanyCard({
   id,
@@ -11,10 +13,9 @@ export default function CompanyCard({
   imgSrc,
   category,
   className = "",
-  ...rest
 }: CompanyCardProps) {
   return (
-    <div {...rest} className={`company-card ${className}`}>
+    <div className={`company-card ${className}`}>
       <div className="car-listing h-100">
         <div className="thumb">
           <div className="tag blue">{category}</div>
