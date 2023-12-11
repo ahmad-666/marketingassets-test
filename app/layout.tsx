@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
     },
     {
       label: "Emojis",
-      subMenu: emojisCategories,
+      subMenu: [],
     },
     {
       label: "Logos",
