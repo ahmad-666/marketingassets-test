@@ -33,5 +33,5 @@ export async function getCategories() {
   const categories = await Emoji.aggregate("parent", "DISTINCT", {
     plain: false,
   });
-  return categories;
+  return categories as { DISTINCT: string }[];
 }
