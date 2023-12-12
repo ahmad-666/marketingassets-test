@@ -65,6 +65,8 @@ jobs:
             **/.husky/**
             **/data/**
             **/styles/**
+            **/pages/**
+            **/src/**
             **/.editorconfig
             **/.env
             **/.eslintcache
