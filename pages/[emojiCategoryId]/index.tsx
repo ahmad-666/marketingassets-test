@@ -1,9 +1,9 @@
+import { useRouter } from "next/router";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Emoji } from "@/src/types/Emoji";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
 
 type PageProps = {
   emojis: Emoji[];
@@ -35,10 +35,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     },
   };
 };
-export default async function Page({
-  emojis = [],
-  totalEmojis = 0,
-}: PageProps) {
+export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
   const router = useRouter();
   const emojiCategoryId = router.query.emojiCategoryId as string;
   return (

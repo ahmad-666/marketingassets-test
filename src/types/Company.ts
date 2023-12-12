@@ -4,6 +4,14 @@ export type Company = {
   name: string;
   imgSrc: string;
   category: string;
+  overview?: string;
+  country?: string;
+  linkedin?: string;
+  twitter?: string;
+  facebook?: string;
+  size?: string;
+  founded?: number;
+  followers?: number;
 };
 export type Industry = {
   id: string;

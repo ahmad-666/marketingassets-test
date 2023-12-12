@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { getEmoji, getEmojis } from "@/src/services/emoji";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import EmojiGallery from "@/src/components/details/EmojiGallery";
@@ -8,13 +9,12 @@ import CopySection from "@/src/components/details/CopySection";
 import SimilarTags from "@/src/components/details/SimilarTags";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { textNormalize } from "@/src/utils/textTransform";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Emoji } from "@/src/types/Emoji";
 import type { Faq, Tag } from "@/src/types/Common";
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
-import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useMemo } from "react";
 
 type PageProps = {
   emoji: Emoji;
