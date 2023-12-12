@@ -3,15 +3,15 @@ import type {
   GetCompaniesResponse,
   GetCompanyResponse,
   GetIndustriesResponse,
-  GetCompaniesArgs,
-  GetCompanyArgs,
+  CompanyFilters,
+  CompaniesFilters,
 } from "@/src/types/Company";
 
 export const getCompanies = async ({
   industry,
   page = 1,
   pageSize,
-}: GetCompaniesArgs) => {
+}: CompaniesFilters) => {
   const { data } = await axios.get<GetCompaniesResponse>("/companies", {
     params: {
       industry,
@@ -21,7 +21,7 @@ export const getCompanies = async ({
   });
   return data;
 };
-export const getCompany = async ({ companyId }: GetCompanyArgs) => {
+export const getCompany = async ({ companyId }: CompanyFilters) => {
   const { data } = await axios.get<GetCompanyResponse>(
     `/companies/${companyId}`
   );

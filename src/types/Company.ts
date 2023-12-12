@@ -17,10 +17,10 @@ export type Industry = {
   id: string;
   name: string;
 };
-export type GetCompanyArgs = {
+export type CompanyFilters = {
   companyId: string;
 };
-export type GetCompaniesArgs = {
+export type CompaniesFilters = {
   industry?: string;
   page?: number;
   pageSize?: number;
@@ -40,7 +40,10 @@ export type CompanyResponse = {
   industry: string;
   followers_count: number;
 };
-export type GetCompaniesFilters = {
+export type CompanyDbFilters = {
+  domain: string;
+};
+export type CompaniesDbFilters = {
   industry?: string;
 };
 export type GetCompanyResponse = CompanyResponse;

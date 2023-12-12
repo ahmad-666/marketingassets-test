@@ -13,10 +13,10 @@ export type Emoji = {
   response?: string;
   relatedEmojis?: string[];
 };
-export type GetEmojiArgs = {
+export type EmojiFilters = {
   emojiId: string;
 };
-export type GetEmojisArgs = {
+export type EmojisFilters = {
   urls?: string[];
   category?: string;
   page?: number;
@@ -42,7 +42,10 @@ export type EmojiCategoryResponse = {
   category: string;
   text: string;
 };
-export type GetEmojisFilters = {
+export type EmojiDbFilters = {
+  url: string;
+};
+export type EmojisDbFilters = {
   parent?: string | string[];
   url?: string | string[];
 };
