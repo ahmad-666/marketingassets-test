@@ -30,7 +30,7 @@ export default function CompanyCard({
             <h6 className="title">{name}</h6>
           </div>
           <div className="listing_footer">
-            <Link href={`/logos/${id}`} className="submit-action">
+            <Link href={`/logo/${id}`} className="submit-action">
               Download {name} logo
             </Link>
           </div>
