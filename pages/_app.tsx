@@ -5,6 +5,11 @@ import App, {
 } from "next/app";
 import Layout from "@/src/components/layout";
 import type { MenuItems } from "@/src/types/Common";
+import "aos/dist/aos.css";
+// import "swiper/css";
+// import "swiper/css/navigation";
+import "@/public/scss/main.scss";
+import "@/public/scss/global.scss";
 
 type AppOwnProps = { menuItems: MenuItems };
 export default function MyApp({
