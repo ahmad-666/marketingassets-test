@@ -157,6 +157,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
             className="row mt30"
             title="Related Emojis"
             items={relatedEmojis}
+            emojiList={emoji.relatedEmojis}
             showMore={false}
           />
         </div>

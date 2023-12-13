@@ -12,6 +12,7 @@ type EmojisListProps = {
   items: Emoji[];
   totalItems?: number;
   pageSize?: number;
+  emojiList: string[];
   showMore?: boolean;
   className?: string;
 };
@@ -22,6 +23,7 @@ export default function EmojisList({
   totalItems = 0,
   pageSize = 8,
   showMore = true,
+  emojiList = [],
   className = "",
 }: EmojisListProps) {
   const router = useRouter();
@@ -51,6 +53,7 @@ export default function EmojisList({
     queryFn: async ({ pageParam }) => {
       const { items } = await getEmojis({
         category: emojiCategoryId as string,
+        urls: emojiList,
         page: pageParam.page || 1,
         pageSize,
       });
