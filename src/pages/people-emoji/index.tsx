@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { emojiCategoryId } = context.params;
+    const emojiCategoryId = 'people-emoji';
     const { items: emojis, meta } = await getEmojis({
       category: emojiCategoryId as string,
       page: 1,
@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 };
 export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
   const router = useRouter();
-  const emojiCategoryId = router.query.emojiCategoryId as string;
+  const emojiCategoryId = 'people-emoji';
   return (
     <div>
       <EmojisList
