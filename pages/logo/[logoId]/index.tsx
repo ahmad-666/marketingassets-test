@@ -25,39 +25,43 @@ const relatedPageSize = 12;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
-  const { logoId } = context.params;
-  const company = await getCompany({ companyId: logoId as string });
-  const { items: relatedCompanies } = await getCompanies({
-    page: 1,
-    pageSize: relatedPageSize,
-    industry: company.industry,
-  });
-  return {
-    props: {
-      company: {
-        id: company.domain,
-        name: company.name,
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-        category: company.industry,
-        country: company.country,
-        facebook: company.facebook,
-        twitter: company.twitter,
-        linkedin: company.linkedin,
-        overview: company.overview,
-        size: company.size,
-        followers: company.followers_count,
-        founded: company.founded,
-      },
-      relatedCompanies: relatedCompanies
-        .filter((company) => company.domain !== logoId)
-        .map((company) => ({
+  try {
+    const { logoId } = context.params;
+    const company = await getCompany({ companyId: logoId as string });
+    const { items: relatedCompanies } = await getCompanies({
+      page: 1,
+      pageSize: relatedPageSize,
+      industry: company.industry,
+    });
+    return {
+      props: {
+        company: {
           id: company.domain,
           name: company.name,
-          category: company.industry,
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-        })),
-    },
-  };
+          category: company.industry,
+          country: company.country,
+          facebook: company.facebook,
+          twitter: company.twitter,
+          linkedin: company.linkedin,
+          overview: company.overview,
+          size: company.size,
+          followers: company.followers_count,
+          founded: company.founded,
+        },
+        relatedCompanies: relatedCompanies
+          .filter((company) => company.domain !== logoId)
+          .map((company) => ({
+            id: company.domain,
+            name: company.name,
+            category: company.industry,
+            imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
+          })),
+      },
+    };
+  } catch (err) {
+    return { notFound: true };
+  }
 };
 const Page = ({ company, relatedCompanies = [] }: PageProps) => {
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
@@ -68,7 +72,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
       },
       {
         text: company.category,
-        link: `/industries/${company.category}`,
+        link: `/industry/${company.category}`,
       },
       {
         text: company.name,
@@ -146,7 +150,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
               <DetailsSection
                 className="mt30"
                 category={company.category}
-                categoryLink={`/industries/${company.category}`}
+                categoryLink={`/industry/${company.category}`}
                 name={company.name}
               />
             </div>

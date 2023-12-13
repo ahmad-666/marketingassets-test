@@ -13,26 +13,30 @@ type PageProps = {
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
-  const { items: companies, meta: companiesMeta } = await getCompanies({
-    page: 1,
-    pageSize,
-  });
-  const { items: industries } = await getIndustries();
-  return {
-    props: {
-      companies: companies.map((company) => ({
-        id: company.domain,
-        category: company.industry,
-        name: company.name,
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-      })),
-      totalCompanies: companiesMeta.totalCount,
-      industries: industries.map((industry) => ({
-        id: industry.industry,
-        name: industry.text,
-      })),
-    },
-  };
+  try {
+    const { items: companies, meta: companiesMeta } = await getCompanies({
+      page: 1,
+      pageSize,
+    });
+    const { items: industries } = await getIndustries();
+    return {
+      props: {
+        companies: companies.map((company) => ({
+          id: company.domain,
+          category: company.industry,
+          name: company.name,
+          imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
+        })),
+        totalCompanies: companiesMeta.totalCount,
+        industries: industries.map((industry) => ({
+          id: industry.industry,
+          name: industry.text,
+        })),
+      },
+    };
+  } catch (err) {
+    return { notFound: true };
+  }
 };
 export default function Page({
   companies = [],

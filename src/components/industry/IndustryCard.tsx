@@ -20,7 +20,7 @@ export default function IndustryCard({
             </h6>
           </div>
           <div className="listing_footer">
-            <Link href={`/industries/${id}`} className="submit-action">
+            <Link href={`/industry/${id}`} className="submit-action">
               View Collection
             </Link>
           </div>

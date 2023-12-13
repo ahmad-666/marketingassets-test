@@ -24,40 +24,43 @@ type PageProps = {
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
-  const { emojiId } = context.params;
-  const emoji = await getEmoji({ emojiId: emojiId as string });
-
-  const { items: relatedEmojis } = await getEmojis({
-    urls: emoji.emoji_list,
-    page: 1,
-  });
-  return {
-    props: {
-      emoji: {
-        id: emoji.url,
-        emoji: emoji.emoji,
-        name: emoji.text,
-        categoryText: textNormalize(emoji.parent),
-        categoryValue: emoji.parent,
-        score: 5,
-        usersScore: emoji.score,
-        description: emoji.description,
-        marketing: emoji.marketing,
-        mean: emoji.mean,
-        response: emoji.response,
-        relatedEmojis: emoji.emoji_list,
+  try {
+    const { emojiId } = context.params;
+    const emoji = await getEmoji({ emojiId: emojiId as string });
+    const { items: relatedEmojis } = await getEmojis({
+      urls: emoji.emoji_list,
+      page: 1,
+    });
+    return {
+      props: {
+        emoji: {
+          id: emoji.url,
+          emoji: emoji.emoji,
+          name: emoji.text,
+          categoryText: textNormalize(emoji.parent),
+          categoryValue: emoji.parent,
+          score: 5,
+          usersScore: emoji.score,
+          description: emoji.description,
+          marketing: emoji.marketing,
+          mean: emoji.mean,
+          response: emoji.response,
+          relatedEmojis: emoji.emoji_list,
+        },
+        relatedEmojis: relatedEmojis.map((emoji) => ({
+          id: emoji.url,
+          name: emoji.text,
+          emoji: emoji.emoji,
+          categoryValue: emoji.parent,
+          categoryText: textNormalize(emoji.parent),
+          score: 5,
+          usersScore: emoji.score,
+        })),
       },
-      relatedEmojis: relatedEmojis.map((emoji) => ({
-        id: emoji.url,
-        name: emoji.text,
-        emoji: emoji.emoji,
-        categoryValue: emoji.parent,
-        categoryText: textNormalize(emoji.parent),
-        score: 5,
-        usersScore: emoji.score,
-      })),
-    },
-  };
+    };
+  } catch (err) {
+    return { notFound: true };
+  }
 };
 export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {

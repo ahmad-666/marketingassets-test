@@ -9,6 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
   try {
     const { companyId } = req.query;
     const company = await getCompany({ companyId: companyId as string });
+    if (!company) return res.status(404).json({ message: "company not found" });
     return res.status(200).json(company);
   } catch (err) {
     return res.status(500).json({ message: err.message });

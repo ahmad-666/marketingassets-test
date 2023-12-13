@@ -14,27 +14,31 @@ const pageSize = 8;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
-  const { emojiCategoryId } = context.params;
-  const { items: emojis, meta } = await getEmojis({
-    category: emojiCategoryId as string,
-    page: 1,
-    pageSize,
-  });
-  if (!emojis || !emojis.length) return { notFound: true };
-  return {
-    props: {
-      emojis: emojis.map((emoji) => ({
-        id: emoji.url,
-        categoryValue: emoji.parent,
-        categoryText: textNormalize(emoji.parent),
-        name: emoji.text,
-        emoji: emoji.emoji,
-        score: 5,
-        usersScore: emoji.score,
-      })),
-      totalEmojis: meta.totalCount,
-    },
-  };
+  try {
+    const { emojiCategoryId } = context.params;
+    const { items: emojis, meta } = await getEmojis({
+      category: emojiCategoryId as string,
+      page: 1,
+      pageSize,
+    });
+    if (!emojis || !emojis.length) return { notFound: true };
+    return {
+      props: {
+        emojis: emojis.map((emoji) => ({
+          id: emoji.url,
+          categoryValue: emoji.parent,
+          categoryText: textNormalize(emoji.parent),
+          name: emoji.text,
+          emoji: emoji.emoji,
+          score: 5,
+          usersScore: emoji.score,
+        })),
+        totalEmojis: meta.totalCount,
+      },
+    };
+  } catch (err) {
+    return { notFound: true };
+  }
 };
 export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
   const router = useRouter();

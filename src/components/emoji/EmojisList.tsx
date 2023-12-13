@@ -37,7 +37,7 @@ export default function EmojisList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, emojiId],
+    queryKey: ["get-emojis", emojiCategoryId, emojiId, pageSize],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
