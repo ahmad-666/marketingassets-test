@@ -2,9 +2,23 @@ import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
 
 const createCompaniesModel = () => {
-  class Companies extends Model {}
+  class Companies extends Model {
+    declare id: number;
+    declare name: string;
+    declare overview: string;
+    declare country: string;
+    declare domain: string;
+    declare linkedin: string;
+    declare twitter: string;
+    declare facebook: string;
+    declare size: string;
+    declare founded: number;
+    declare industry: string;
+    declare followers_count: number;
+  }
   Companies.init(
     {
+      id: { type: DataTypes.BIGINT, allowNull: false, primaryKey: true },
       name: { type: DataTypes.STRING, allowNull: false },
       overview: { type: DataTypes.TEXT, allowNull: true },
       country: { type: DataTypes.STRING, allowNull: false },
@@ -20,6 +34,7 @@ const createCompaniesModel = () => {
     {
       sequelize: connection,
       modelName: "companies",
+      timestamps: false,
     }
   );
 

@@ -1,5 +1,4 @@
 import { Company } from "@/src/db/models";
-import { textNormalize } from "@/src/utils/textTransform";
 import type {
   CompaniesFilters,
   CompanyFilters,
@@ -17,8 +16,8 @@ export async function getCompany({ companyId }: CompanyFilters) {
   return company;
 }
 export async function getCompanies({
-  page,
-  pageSize,
+  page = 1,
+  pageSize = 8,
   industry,
 }: CompaniesFilters) {
   let where: CompaniesDbFilters = {};
@@ -34,5 +33,8 @@ export async function getIndustries() {
   const industries = await Company.aggregate("industry", "DISTINCT", {
     plain: false,
   });
-  return industries;
+  type Industry = {
+    DISTINCT: string;
+  };
+  return industries as Industry[];
 }

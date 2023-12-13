@@ -16,8 +16,8 @@ export async function getEmoji({ emojiId }: EmojiFilters) {
 export async function getEmojis({
   category,
   urls,
-  page,
-  pageSize,
+  page = 1,
+  pageSize = 8,
 }: EmojisFilters) {
   let where: EmojisDbFilters = {};
   if (urls) where.url = urls;

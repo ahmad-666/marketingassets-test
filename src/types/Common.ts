@@ -15,3 +15,6 @@ export type Tag = {
   text: string;
   route: string;
 };
+export type ServerError = {
+  message: string;
+};
