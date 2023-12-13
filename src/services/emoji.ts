@@ -15,11 +15,11 @@ export const getEmojis = async ({
   urls,
   category,
   page = 1,
-  pageSize = null,
+  pageSize,
 }: EmojisFilters) => {
   const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
     params: {
-      urls: urls?.join(","),
+      urls: urls?.join(",") || undefined,
       category,
       page,
       pageSize,

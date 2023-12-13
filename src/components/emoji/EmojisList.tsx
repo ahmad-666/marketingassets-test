@@ -52,7 +52,7 @@ export default function EmojisList({
     },
     queryFn: async ({ pageParam }) => {
       const { items } = await getEmojis({
-        category: emojiCategoryId as string,
+        category: (emojiCategoryId as string) || undefined,
         urls: emojiList,
         page: pageParam.page || 1,
         pageSize,

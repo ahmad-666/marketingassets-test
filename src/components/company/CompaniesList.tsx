@@ -12,6 +12,7 @@ type CompanyListProps = {
   totalItems?: number;
   pageSize?: number;
   showMore?: boolean;
+  targetIndustry?: string;
   className?: string;
 };
 
@@ -21,10 +22,11 @@ export default function CompaniesList({
   totalItems = 0,
   pageSize = 8,
   showMore = true,
+  targetIndustry,
   className = "",
 }: CompanyListProps) {
   const router = useRouter();
-  const { logoId, industryId } = router.query;
+  const { logoId } = router.query;
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -36,7 +38,7 @@ export default function CompaniesList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-companies", logoId, industryId, pageSize],
+    queryKey: ["get-companies", logoId, targetIndustry, pageSize],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
@@ -51,8 +53,8 @@ export default function CompaniesList({
       const { items } = await getCompanies({
         page: pageParam.page || 1,
         pageSize,
-        industry: industryId
-          ? decodeURIComponent(industryId as string)
+        industry: targetIndustry
+          ? decodeURIComponent(targetIndustry as string)
           : undefined,
       });
       const newCompanies: Company[] = [];

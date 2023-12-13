@@ -66,6 +66,7 @@ export default function Page({
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
+              targetIndustry={industryId as string}
             />
           </div>
         </div>
