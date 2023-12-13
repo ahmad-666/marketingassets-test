@@ -69,7 +69,6 @@ export default function EmojisList({
       return newEmojis;
     },
   });
-
   return (
     <section className={`${className}`}>
       <div className="container">

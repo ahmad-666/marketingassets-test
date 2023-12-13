@@ -10,7 +10,7 @@ import type {
 export const getCompanies = async ({
   industry,
   page = 1,
-  pageSize,
+  pageSize = null,
 }: CompaniesFilters) => {
   const { data } = await axios.get<GetCompaniesResponse>("/companies", {
     params: {

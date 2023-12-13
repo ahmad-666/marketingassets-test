@@ -72,7 +72,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
       },
       {
         text: company.name,
-        link: `/logos/${company.id}`,
+        link: `/logo/${company.id}`,
       },
     ];
   }, [company.category, company.id, company.name]);

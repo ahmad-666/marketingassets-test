@@ -15,7 +15,7 @@ export const getEmojis = async ({
   urls,
   category,
   page = 1,
-  pageSize,
+  pageSize = null,
 }: EmojisFilters) => {
   const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
     params: {

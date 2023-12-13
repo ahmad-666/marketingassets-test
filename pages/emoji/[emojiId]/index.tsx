@@ -26,11 +26,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 ) => {
   const { emojiId } = context.params;
   const emoji = await getEmoji({ emojiId: emojiId as string });
+
   const { items: relatedEmojis } = await getEmojis({
     urls: emoji.emoji_list,
     page: 1,
   });
-
   return {
     props: {
       emoji: {
@@ -72,7 +72,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
       },
       {
         text: emoji.emoji,
-        link: `/emojis/${emoji.id}`,
+        link: `/emoji/${emoji.id}`,
       },
     ];
   }, [emoji.categoryText, emoji.categoryValue, emoji.emoji, emoji.id]);
