@@ -11,6 +11,10 @@ type PageProps = {
 };
 const pageSize = 8;
 
+export const config = {
+  runtime: 'nodejs'
+}
+
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
