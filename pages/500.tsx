@@ -1,9 +1,9 @@
 import ErrorHandler from "@/src/components/common/ErrorHandler";
 
-export default function Custom404() {
+export default function Custom500() {
   return (
     <div>
-      <ErrorHandler code={404} message="Page Not Found!!!" />
+      <ErrorHandler code={500} message="Internal Error!!!" />
     </div>
   );
 }

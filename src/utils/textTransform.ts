@@ -6,3 +6,7 @@ export const urlNormalize = (str: string) => {
 export const textNormalize = (url: string) => {
   return url.replace(/-/g, " ");
 };
+//get string and convert it to valid value that we can use JSON.parse on it
+export const jsonNormalize = (str: string) => {
+  return str.replace(/'/g, '"').replace(/\\/g, " ");
+};

@@ -17,14 +17,14 @@ export async function getEmojis({
   category,
   urls,
   page = 1,
-  pageSize = 8,
+  pageSize,
 }: EmojisFilters) {
   let where: EmojisDbFilters = {};
   if (urls) where.url = urls;
   if (category) where.parent = category;
   const { count, rows } = await Emoji.findAndCountAll({
     offset: (page - 1) * pageSize,
-    limit: pageSize,
+    limit: pageSize || null,
     where,
   });
   return { count, rows };

@@ -1,4 +1,5 @@
 import { getEmojis } from "@/src/services/db/emoji";
+import { jsonNormalize } from "@/src/utils/textTransform";
 import type { GetEmojisResponse } from "@/src/types/Emoji";
 import type { ServerError } from "@/src/types/Common";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -17,8 +18,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     return res.status(200).json({
       items: rows.map((emoji) => ({
         ...emoji.dataValues,
-        aliases: JSON.parse(emoji.aliases.replace(/'/g, '"')),
-        emoji_list: JSON.parse(emoji.emoji_list.replace(/'/g, '"')),
+        aliases: JSON.parse(jsonNormalize(emoji.aliases)),
+        emoji_list: JSON.parse(jsonNormalize(emoji.emoji_list)),
       })),
       meta: { totalCount: count },
     });

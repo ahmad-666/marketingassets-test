@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 // import "swiper/css/navigation";
 import "@/public/scss/main.scss";
 import "@/public/scss/global.scss";
+import { getEmojiCategories } from "@/src/services/emoji";
 
 type AppOwnProps = { menuItems: MenuItems };
 export default function MyApp({
@@ -28,6 +29,26 @@ MyApp.getInitialProps = async (
   context: AppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
   const ctx = await App.getInitialProps(context);
+  const { items } = await getEmojiCategories();
 
-  return { ...ctx, menuItems: [] };
+  return {
+    ...ctx,
+    menuItems: [
+      {
+        label: "Home",
+        path: "/",
+      },
+      {
+        label: "Emojis",
+        subMenu: items.map((item) => ({
+          label: item.text,
+          path: `/${item.category}`,
+        })),
+      },
+      {
+        label: "Logos",
+        path: "/logos",
+      },
+    ],
+  };
 };

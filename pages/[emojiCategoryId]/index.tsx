@@ -20,6 +20,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     page: 1,
     pageSize,
   });
+  if (!emojis || !emojis.length) return { notFound: true };
   return {
     props: {
       emojis: emojis.map((emoji) => ({
