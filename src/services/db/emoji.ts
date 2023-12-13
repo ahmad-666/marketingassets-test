@@ -15,16 +15,16 @@ export async function getEmoji({ emojiId }: EmojiFilters) {
 }
 export async function getEmojis({
   category,
-  urls,
+  urls = [],
   page = 1,
-  pageSize,
+  pageSize = null,
 }: EmojisFilters) {
   let where: EmojisDbFilters = {};
-  if (urls) where.url = urls;
+  if (urls?.length) where.url = urls;
   if (category) where.parent = category;
   const { count, rows } = await Emoji.findAndCountAll({
     offset: (page - 1) * pageSize,
-    limit: pageSize || null,
+    limit: pageSize,
     where,
   });
   return { count, rows };

@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
       page: +page || 1,
       pageSize: +pageSize || null,
       category: category as string,
-      urls: (urls as string)?.split(","),
+      urls: (urls as string)?.split(",") || [],
     });
     return res.status(200).json({
       items: rows.map((emoji) => ({

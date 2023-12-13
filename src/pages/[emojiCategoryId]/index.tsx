@@ -21,7 +21,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
       page: 1,
       pageSize,
     });
-    if (!emojis || !emojis.length) return { notFound: true };
     return {
       props: {
         emojis: emojis.map((emoji) => ({
@@ -50,6 +49,7 @@ export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
         items={emojis}
         totalItems={totalEmojis}
         pageSize={pageSize}
+        emojiCategoryId={emojiCategoryId}
       />
     </div>
   );

@@ -29,26 +29,29 @@ MyApp.getInitialProps = async (
   context: AppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
   const ctx = await App.getInitialProps(context);
-  const { items } = await getEmojiCategories();
-
-  return {
-    ...ctx,
-    menuItems: [
-      {
-        label: "Home",
-        path: "/",
-      },
-      {
-        label: "Emojis",
-        subMenu: items.map((item) => ({
-          label: item.text,
-          path: `/${item.category}`,
-        })),
-      },
-      {
-        label: "Logos",
-        path: "/logos",
-      },
-    ],
-  };
+  try {
+    const { items } = await getEmojiCategories();
+    return {
+      ...ctx,
+      menuItems: [
+        {
+          label: "Home",
+          path: "/",
+        },
+        {
+          label: "Emojis",
+          subMenu: items.map((item) => ({
+            label: item.text,
+            path: `/${item.category}`,
+          })),
+        },
+        {
+          label: "Logos",
+          path: "/logos",
+        },
+      ],
+    };
+  } catch (err) {
+    return { ...ctx, menuItems: [] };
+  }
 };

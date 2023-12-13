@@ -13,6 +13,7 @@ type EmojisListProps = {
   totalItems?: number;
   pageSize?: number;
   emojiList?: string[];
+  emojiCategoryId?: string;
   showMore?: boolean;
   className?: string;
 };
@@ -24,10 +25,11 @@ export default function EmojisList({
   pageSize = 8,
   showMore = true,
   emojiList = [],
+  emojiCategoryId,
   className = "",
 }: EmojisListProps) {
   const router = useRouter();
-  const { emojiCategoryId, emojiId } = router.query;
+  const { emojiId } = router.query;
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -39,7 +41,7 @@ export default function EmojisList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, emojiId, pageSize],
+    queryKey: ["get-emojis", emojiCategoryId, emojiId, emojiList, pageSize],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
@@ -52,7 +54,7 @@ export default function EmojisList({
     },
     queryFn: async ({ pageParam }) => {
       const { items } = await getEmojis({
-        category: (emojiCategoryId as string) || undefined,
+        category: emojiCategoryId || undefined,
         urls: emojiList,
         page: pageParam.page || 1,
         pageSize,

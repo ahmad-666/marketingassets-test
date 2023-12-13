@@ -17,14 +17,14 @@ export async function getCompany({ companyId }: CompanyFilters) {
 }
 export async function getCompanies({
   page = 1,
-  pageSize,
+  pageSize = null,
   industry,
 }: CompaniesFilters) {
   let where: CompaniesDbFilters = {};
   if (industry) where.industry = industry;
   const { count, rows } = await Company.findAndCountAll({
     offset: (page - 1) * pageSize,
-    limit: pageSize || null,
+    limit: pageSize,
     where,
   });
   return { count, rows };
