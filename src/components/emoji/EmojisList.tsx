@@ -12,7 +12,7 @@ type EmojisListProps = {
   items: Emoji[];
   totalItems?: number;
   pageSize?: number;
-  emojiList: string[];
+  emojiList?: string[];
   showMore?: boolean;
   className?: string;
 };
