@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import EmojiCard from "./EmojiCard";
+import { useQuery } from "@tanstack/react-query";
+import EmojiCard from "@/src/components/emoji/EmojiCard";
 import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
+import Pagination from "@/src/components/common/Pagination";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { Emoji } from "@/src/types/Emoji";
@@ -14,7 +15,7 @@ type EmojisListProps = {
   pageSize?: number;
   emojiList?: string[];
   emojiCategoryId?: string;
-  showMore?: boolean;
+  showPagination?: boolean;
   className?: string;
 };
 
@@ -23,40 +24,24 @@ export default function EmojisList({
   items = [],
   totalItems = 0,
   pageSize = 8,
-  showMore = true,
+  showPagination = true,
   emojiList = [],
   emojiCategoryId,
   className = "",
 }: EmojisListProps) {
   const router = useRouter();
   const { id } = router.query;
-  const totalPages = useMemo(() => {
-    return Math.ceil(totalItems / pageSize);
-  }, [pageSize, totalItems]);
-  const {
-    isFetching,
-    data: pages,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
-    initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
+  const [page, setPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null!);
+  const { isFetching, data: emojis } = useQuery<Emoji[]>({
+    initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, pageSize],
-    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
-      const currentPage = lastPageParam.page;
-      if (currentPage === totalPages) return null; //no next-page
-      return {
-        page: currentPage + 1,
-      };
-    },
-    initialPageParam: {
-      page: 1,
-    },
-    queryFn: async ({ pageParam }) => {
+    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, page, pageSize],
+    queryFn: async () => {
       const { items } = await getEmojis({
         category: emojiCategoryId || undefined,
         urls: emojiList,
-        page: pageParam.page || 1,
+        page: page || 1,
         pageSize,
       });
       const newEmojis: Emoji[] = [];
@@ -71,12 +56,15 @@ export default function EmojisList({
           usersScore: emoji.score,
         });
       });
+      if (showPagination) {
+        containerRef.current.scrollIntoView({ behavior: "smooth" });
+      }
       return newEmojis;
     },
   });
   return (
     <section className={`${className}`}>
-      <div className="container">
+      <div className="container" ref={containerRef}>
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="main-title text-center text-capitalize">
@@ -87,41 +75,33 @@ export default function EmojisList({
         <div className="row">
           <div className="col-lg-12" data-aos-delay="100" data-aos="fade-up">
             <div className="row align-items-stretch">
-              {pages.pages.map((page) =>
-                page.map((emoji) => (
-                  <EmojiCard
-                    className="col-sm-6 col-xl-3 p10"
-                    key={emoji.id}
-                    id={emoji.id}
-                    name={emoji.name}
-                    emoji={emoji.emoji}
-                    score={emoji.score}
-                    usersScore={emoji.usersScore}
-                    categoryValue={emoji.categoryValue}
-                    categoryText={emoji.categoryText}
-                  />
-                ))
-              )}
+              {emojis.map((emoji) => (
+                <EmojiCard
+                  className="col-sm-6 col-xl-3 p10"
+                  key={emoji.id}
+                  id={emoji.id}
+                  name={emoji.name}
+                  emoji={emoji.emoji}
+                  score={emoji.score}
+                  usersScore={emoji.usersScore}
+                  categoryValue={emoji.categoryValue}
+                  categoryText={emoji.categoryText}
+                />
+              ))}
             </div>
           </div>
         </div>
         {isFetching && <SpinnerLoader className="mt10" />}
-        {!!(totalItems && showMore && hasNextPage) && (
+        {!!(totalItems && showPagination) && (
           <div className="row mt20">
             <div className="col-lg-12">
-              <div className="text-center">
-                <button
-                  className="btn more_listing"
-                  onClick={() => {
-                    fetchNextPage();
-                  }}
-                >
-                  Show More
-                  <span className="icon">
-                    <span className="fas fa-plus" />
-                  </span>
-                </button>
-              </div>
+              <Pagination
+                className="d-flex justify-content-center"
+                page={page}
+                setPage={(newVal) => setPage(newVal)}
+                totalItems={totalItems}
+                pageSize={pageSize}
+              />
             </div>
           </div>
         )}
