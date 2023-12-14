@@ -93,7 +93,7 @@ export default function CompaniesList({
           )}
         </div>
         {isFetching && <SpinnerLoader className="mt10" />}
-        {showMore && hasNextPage && (
+        {!!(totalItems && showMore && hasNextPage) && (
           <div className="mt10 text-center">
             <button
               className="btn more_listing"

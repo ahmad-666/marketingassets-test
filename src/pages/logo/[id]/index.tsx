@@ -158,9 +158,11 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
           <div className="row mt30">
             <div className="col-lg-8 col-xl-8">
               <ImageGallery name={company.name} imgSrc={company.imgSrc} />
-              <div className="opening_hour_widgets p30 mt30">
-                <ContactInformation name={company.name} items={contactItems} />
-              </div>
+              <ContactInformation
+                className="mt30"
+                name={company.name}
+                items={contactItems}
+              />
               <DescSection
                 className="mt30"
                 title="Description"

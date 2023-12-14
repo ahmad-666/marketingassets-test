@@ -11278,14 +11278,14 @@ a.btn_error {
   letter-spacing: 0em;
   padding: 15px 40px;
 }
-.opening_hour_widgets {
+.info_widgets {
   background-color: #fff;
   border: 1px solid #eaeaea;
   border-radius: 8px;
   padding: 40px;
   position: relative;
 }
-.opening_hour_widgets .wrapper .title {
+.info_widgets .wrapper .title {
   color: #1a3760;
   font-size: 16px;
   font-style: normal;
@@ -11294,7 +11294,7 @@ a.btn_error {
   letter-spacing: 0em;
   margin-bottom: 30px;
 }
-.opening_hour_widgets .wrapper .list-group-item {
+.list-group-item {
   border: none;
   border-bottom: 1px solid #eaeaea;
   font-size: 13px;
@@ -11303,14 +11303,14 @@ a.btn_error {
   letter-spacing: 0em;
   padding: 0;
 }
-.opening_hour_widgets .wrapper .list-group-item:last-child {
+.list-group-item:last-child {
   border-bottom: none;
 }
-.opening_hour_widgets .wrapper .list-group-item .day {
+.list-group-item .day,.list-group-item .device {
   color: #1a3760;
   font-weight: 600;
 }
-.opening_hour_widgets .wrapper .list-group-item .schedule {
+.list-group-item .schedule {
   color: #5f6973;
   font-weight: 400;
   line-height: 38px;

@@ -6,6 +6,9 @@ import DescSection from "@/src/components/details/DescSection";
 import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CopySection from "@/src/components/details/CopySection";
+import EmojiDevices, {
+  type Item as DeviceItem,
+} from "@/src/components/details/EmojiDevices";
 import SimilarTags from "@/src/components/details/SimilarTags";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { textNormalize } from "@/src/utils/textTransform";
@@ -106,6 +109,34 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
     emoji.name,
     emoji.response,
   ]);
+  const deviceItems = useMemo<DeviceItem[]>(() => {
+    return [
+      {
+        device: "Apple",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`,
+      },
+      {
+        device: "Google Noto Color",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Google-Noto-Color-Emoji.png`,
+      },
+      {
+        device: "Microsoft",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Microsoft.png`,
+      },
+      {
+        device: "Samsung",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Samsung.png`,
+      },
+      {
+        device: "Twitter",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Twitter.png`,
+      },
+      {
+        device: "WhatsApp",
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-WhatsApp.png`,
+      },
+    ];
+  }, [emoji.id]);
   const tags = useMemo<Tag[]>(() => {
     return emoji.relatedEmojis.map((emoji) => ({
       text: textNormalize(emoji),
@@ -141,6 +172,11 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                   desc={faq.answer}
                 />
               ))}
+              <EmojiDevices
+                className="mt30"
+                name={emoji.name}
+                items={deviceItems}
+              />
               <SimilarTags
                 className="mt30"
                 title="Similar Emojis"
