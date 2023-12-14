@@ -194,7 +194,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
             title="Related Emojis"
             items={relatedEmojis}
             emojiList={emoji.relatedEmojis}
-            showMore={false}
+            showPagination={false}
           />
         </div>
       </section>

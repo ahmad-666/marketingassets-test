@@ -183,7 +183,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
             <CompaniesList
               title="Related Companies"
               items={relatedCompanies}
-              showMore={false}
+              showPagination={false}
               targetIndustry={company.category}
             />
           </div>
