@@ -79,7 +79,7 @@ export default function EmojisList({
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
-            <div className="main-title text-center">
+            <div className="main-title text-center text-capitalize">
               <h2>{title}</h2>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function EmojisList({
           </div>
         </div>
         {isFetching && <SpinnerLoader className="mt10" />}
-        {showMore && hasNextPage && (
+        {!!(totalItems && showMore && hasNextPage) && (
           <div className="row mt20">
             <div className="col-lg-12">
               <div className="text-center">
