@@ -5,6 +5,7 @@ import App, {
 } from "next/app";
 import Layout from "@/src/components/layout";
 import type { MenuItems } from "@/src/types/Common";
+import { Inter } from "next/font/google";
 import "aos/dist/aos.css";
 // import "swiper/css";
 // import "swiper/css/navigation";
@@ -13,13 +14,14 @@ import "@/public/scss/global.scss";
 import { getEmojiCategories } from "@/src/services/emoji";
 
 type AppOwnProps = { menuItems: MenuItems };
+const inter = Inter({ subsets: ["latin"] });
 export default function MyApp({
   Component,
   pageProps,
   menuItems = [],
 }: AppProps & AppOwnProps) {
   return (
-    <Layout menuItems={menuItems}>
+    <Layout className={`${inter.className}`} menuItems={menuItems}>
       <Component {...pageProps} />
     </Layout>
   );

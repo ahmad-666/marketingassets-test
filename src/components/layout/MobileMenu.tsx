@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,6 +19,7 @@ type MobileMenuProps = {
   menuItems?: MenuItemsType;
 };
 const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const socialLinks = [
     {
@@ -60,6 +62,10 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
       text: "Mon - Fri 8:00 - 18:00",
     },
   ];
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <div className="stylehome1 h0">
@@ -114,44 +120,46 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
               <i className="fa-light fa-circle-xmark"></i>
             </div>
           </div>
-          <ProSidebarProvider>
-            <Sidebar
-              width="100%"
-              backgroundColor="#0A2357"
-              className="my-custom-class"
-            >
-              <Menu>
-                {menuItems.map((item, index) => {
-                  const isSingle = (item as MenuItemType).path;
-                  if (isSingle) {
-                    const newItem = item as MenuItemType;
-                    return (
-                      <MenuItem
-                        key={index}
-                        component={<Link href={newItem.path} />}
-                      >
-                        {newItem.label}
-                      </MenuItem>
-                    );
-                  } else {
-                    const newItem = item as NestedMenuItemType;
-                    return (
-                      <SubMenu key={index} label={newItem.label}>
-                        {newItem.subMenu.map((subItem, subIndex) => (
-                          <MenuItem
-                            key={subIndex}
-                            component={<Link href={subItem.path} />}
-                          >
-                            {subItem.label}
-                          </MenuItem>
-                        ))}
-                      </SubMenu>
-                    );
-                  }
-                })}
-              </Menu>
-            </Sidebar>
-          </ProSidebarProvider>
+          {isClient && (
+            <ProSidebarProvider>
+              <Sidebar
+                width="100%"
+                backgroundColor="#0A2357"
+                className="my-custom-class"
+              >
+                <Menu>
+                  {menuItems.map((item, index) => {
+                    const isSingle = (item as MenuItemType).path;
+                    if (isSingle) {
+                      const newItem = item as MenuItemType;
+                      return (
+                        <MenuItem
+                          key={index}
+                          component={<Link href={newItem.path} />}
+                        >
+                          {newItem.label}
+                        </MenuItem>
+                      );
+                    } else {
+                      const newItem = item as NestedMenuItemType;
+                      return (
+                        <SubMenu key={index} label={newItem.label}>
+                          {newItem.subMenu.map((subItem, subIndex) => (
+                            <MenuItem
+                              key={subIndex}
+                              component={<Link href={subItem.path} />}
+                            >
+                              {subItem.label}
+                            </MenuItem>
+                          ))}
+                        </SubMenu>
+                      );
+                    }
+                  })}
+                </Menu>
+              </Sidebar>
+            </ProSidebarProvider>
+          )}
           <div className="pro-footer mm-add-listing">
             <div className="border-none">
               <div className="mmenu-contact-info">
