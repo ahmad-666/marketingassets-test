@@ -22,7 +22,7 @@ const listingCar = (module.exports = [
   {
     id: 2,
     featured: true,
-    image: "/images/listing/2.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 33,
     videosCount: 4,
     title: "Mercedes-Benz S 560 - 2021",
@@ -37,7 +37,7 @@ const listingCar = (module.exports = [
   {
     id: 3,
     featured: false,
-    image: "/images/listing/3.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 55,
     videosCount: 3,
     title: "BMW M8 Gran Coupe Base - 2023",
@@ -52,7 +52,7 @@ const listingCar = (module.exports = [
   {
     id: 4,
     featured: true,
-    image: "/images/listing/4.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 12,
     videosCount: 3,
     title: "Nıssan Qasqai - Sky Pack",
@@ -67,7 +67,7 @@ const listingCar = (module.exports = [
   {
     id: 5,
     featured: false,
-    image: "/images/listing/5.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 22,
     videosCount: 3,
     title: "Audi A8 L 55 - 2021",
@@ -82,7 +82,7 @@ const listingCar = (module.exports = [
   {
     id: 6,
     featured: false,
-    image: "/images/listing/6.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 33,
     videosCount: 4,
     title: "Land Rover Range HSE Westminster",
@@ -97,7 +97,7 @@ const listingCar = (module.exports = [
   {
     id: 7,
     featured: true,
-    image: "/images/listing/7.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 55,
     videosCount: 3,
     title: "Bentley Bentayga V8 - 2023",
@@ -112,7 +112,7 @@ const listingCar = (module.exports = [
   {
     id: 8,
     featured: true,
-    image: "/images/listing/8.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 12,
     videosCount: 3,
     title: "Ferrari 488 Spider Base - 2019",
@@ -127,7 +127,7 @@ const listingCar = (module.exports = [
   {
     id: 9,
     featured: false,
-    image: "/images/listing/4.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 22,
     videosCount: 3,
     title: "Audi A8 L 55 - 2021",
@@ -142,7 +142,7 @@ const listingCar = (module.exports = [
   {
     id: 10,
     featured: true,
-    image: "/images/listing/9.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 33,
     videosCount: 4,
     title: "Land Rover Range HSE Westminster",
@@ -157,7 +157,7 @@ const listingCar = (module.exports = [
   {
     id: 11,
     featured: true,
-    image: "/images/listing/10.jpg",
+    image: "/images/listing/1.jpg",
     photosCount: 55,
     videosCount: 3,
     title: "Bentley Bentayga V8 - 2023",
