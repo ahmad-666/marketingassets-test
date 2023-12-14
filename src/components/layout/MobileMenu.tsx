@@ -165,7 +165,7 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
               <div className="mmenu-contact-info">
                 {contactInfo.map((info, index) => (
                   <span className="phone-num" key={index}>
-                    <i className={info.icon} /> <a href="#">{info.text}</a>
+                    <i className={info.icon} /> {info.text}
                   </span>
                 ))}
               </div>
