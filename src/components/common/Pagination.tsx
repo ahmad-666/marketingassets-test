@@ -29,13 +29,13 @@ export default function Pagination({
     return "d-flex fs-6";
   }, []);
   const pageCssClass = useMemo(() => {
-    return "pagination-size d-flex justify-content-center align-items-center";
+    return "d-flex justify-content-center align-items-center";
   }, []);
   const pageLinkCssClass = useMemo(() => {
-    return "";
+    return "py10 px15";
   }, []);
   const pageActiveCssClass = useMemo(() => {
-    return "rounded-circle bg-primary-color";
+    return "rounded-2 bg-primary-color";
   }, []);
   const pageActiveLinkCssClass = useMemo(() => {
     return "text-white";
