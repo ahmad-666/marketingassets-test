@@ -29,7 +29,7 @@ export default function EmojisList({
   className = "",
 }: EmojisListProps) {
   const router = useRouter();
-  const { emojiId } = router.query;
+  const { id } = router.query;
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -41,7 +41,7 @@ export default function EmojisList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, emojiId, emojiList, pageSize],
+    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, pageSize],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page

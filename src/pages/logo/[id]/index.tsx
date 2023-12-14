@@ -26,8 +26,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { logoId } = context.params;
-    const company = await getCompany({ companyId: logoId as string });
+    const { id } = context.params;
+    const company = await getCompany({ companyId: id as string });
     const { items: relatedCompanies } = await getCompanies({
       page: 1,
       pageSize: relatedPageSize,
@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           founded: company.founded,
         },
         relatedCompanies: relatedCompanies
-          .filter((company) => company.domain !== logoId)
+          .filter((company) => company.domain !== id)
           .map((company) => ({
             id: company.domain,
             name: company.name,

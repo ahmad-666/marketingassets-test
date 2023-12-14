@@ -15,8 +15,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { industryId } = context.params;
-    const decodedIndustry = decodeURIComponent(industryId as string);
+    const { id } = context.params;
+    const decodedIndustry = decodeURIComponent(id as string);
     const { items: companies, meta: companiesMeta } = await getCompanies({
       industry: decodedIndustry,
       page: 1,
@@ -42,11 +42,11 @@ export default function Page({
   totalCompanies = 0,
 }: PageProps) {
   const router = useRouter();
-  const { industryId } = router.query;
+  const { id } = router.query;
   const industryText = useMemo(() => {
-    const decodedIndustry = decodeURIComponent(industryId as string);
+    const decodedIndustry = decodeURIComponent(id as string);
     return textNormalize(decodedIndustry);
-  }, [industryId]);
+  }, [id]);
   return (
     <div>
       <section className="container">
@@ -66,7 +66,7 @@ export default function Page({
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
-              targetIndustry={industryId as string}
+              targetIndustry={id as string}
             />
           </div>
         </div>

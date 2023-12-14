@@ -26,7 +26,7 @@ export default function CompaniesList({
   className = "",
 }: CompanyListProps) {
   const router = useRouter();
-  const { logoId } = router.query;
+  const { id } = router.query;
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [pageSize, totalItems]);
@@ -38,7 +38,7 @@ export default function CompaniesList({
   } = useInfiniteQuery({
     initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
     refetchOnMount: false,
-    queryKey: ["get-companies", logoId, targetIndustry, pageSize],
+    queryKey: ["get-companies", id, targetIndustry, pageSize],
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       const currentPage = lastPageParam.page;
       if (currentPage === totalPages) return null; //no next-page
