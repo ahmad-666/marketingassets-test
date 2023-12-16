@@ -4,6 +4,7 @@ import App, {
   type AppContext,
 } from "next/app";
 import Layout from "@/src/components/layout";
+import MetaData from "@/src/components/common/MetaData";
 import type { MenuItems } from "@/src/types/Common";
 import { Inter } from "next/font/google";
 import "aos/dist/aos.css";
@@ -22,6 +23,7 @@ export default function MyApp({
 }: AppProps & AppOwnProps) {
   return (
     <Layout className={`${inter.className}`} menuItems={menuItems}>
+      <MetaData />
       <Component {...pageProps} />
     </Layout>
   );
