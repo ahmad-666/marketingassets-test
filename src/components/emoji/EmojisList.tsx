@@ -40,19 +40,21 @@ export default function EmojisList({
   const containerRef = useRef<HTMLDivElement>(null!);
   const setUrlQueries = useCallback(
     ({ newPage }: Query) => {
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: {
-            ...router.query,
-            page: newPage,
+      if (showPagination) {
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              page: newPage,
+            },
           },
-        },
-        undefined,
-        { scroll: false }
-      );
+          undefined,
+          { scroll: false }
+        );
+      }
     },
-    [router]
+    [showPagination, router]
   );
   const changePage = useCallback((newVal: number) => {
     setPageVal(newVal);

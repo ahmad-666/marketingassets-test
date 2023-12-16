@@ -37,19 +37,21 @@ export default function CompaniesList({
   const { id } = router.query;
   const setUrlQuery = useCallback(
     ({ newPage }: Query) => {
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: {
-            ...router.query,
-            page: newPage,
+      if (showPagination) {
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              page: newPage,
+            },
           },
-        },
-        undefined,
-        { scroll: false }
-      );
+          undefined,
+          { scroll: false }
+        );
+      }
     },
-    [router]
+    [showPagination, router]
   );
   const scrollToContainer = useCallback(() => {
     if (showPagination) {
