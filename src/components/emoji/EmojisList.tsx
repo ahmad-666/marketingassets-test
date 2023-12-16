@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import EmojiCard from "@/src/components/emoji/EmojiCard";
@@ -18,6 +18,9 @@ type EmojisListProps = {
   showPagination?: boolean;
   className?: string;
 };
+type Query = {
+  newPage: number;
+};
 
 export default function EmojisList({
   title,
@@ -33,6 +36,30 @@ export default function EmojisList({
   const { id } = router.query;
   const [page, setPage] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null!);
+  const setUrlQueries = useCallback(
+    ({ newPage }: Query) => {
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            page: newPage,
+          },
+        },
+        undefined,
+        { scroll: false }
+      );
+    },
+    [router]
+  );
+  const changePage = useCallback((newVal: number) => {
+    setPage(newVal);
+  }, []);
+  const scrollToContainer = useCallback(() => {
+    if (showPagination) {
+      containerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [showPagination]);
   const { isFetching, data: emojis } = useQuery<Emoji[]>({
     initialData: [...items],
     refetchOnMount: false,
@@ -56,9 +83,8 @@ export default function EmojisList({
           usersScore: emoji.score,
         });
       });
-      if (showPagination) {
-        containerRef.current.scrollIntoView({ behavior: "smooth" });
-      }
+      setUrlQueries({ newPage: page });
+      scrollToContainer();
       return newEmojis;
     },
   });
@@ -98,7 +124,7 @@ export default function EmojisList({
               <Pagination
                 className="d-flex justify-content-center"
                 page={page}
-                setPage={(newVal) => setPage(newVal)}
+                setPage={changePage}
                 totalItems={totalItems}
                 pageSize={pageSize}
               />

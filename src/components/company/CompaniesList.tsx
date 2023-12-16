@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import CompanyCard from "@/src/components/company/CompanyCard";
@@ -16,6 +16,9 @@ type CompanyListProps = {
   targetIndustry?: string;
   className?: string;
 };
+type Query = {
+  newPage: number;
+};
 
 export default function CompaniesList({
   title,
@@ -30,6 +33,30 @@ export default function CompaniesList({
   const [page, setPage] = useState(1);
   const router = useRouter();
   const { id } = router.query;
+  const setUrlQuery = useCallback(
+    ({ newPage }: Query) => {
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            page: newPage,
+          },
+        },
+        undefined,
+        { scroll: false }
+      );
+    },
+    [router]
+  );
+  const scrollToContainer = useCallback(() => {
+    if (showPagination) {
+      containerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [showPagination]);
+  const changePage = useCallback((newVal: number) => {
+    setPage(newVal);
+  }, []);
   const { isFetching, data: companies } = useQuery<Company[]>({
     initialData: [...items],
     refetchOnMount: false,
@@ -51,9 +78,8 @@ export default function CompaniesList({
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
         });
       });
-      if (showPagination) {
-        containerRef.current.scrollIntoView({ behavior: "smooth" });
-      }
+      setUrlQuery({ newPage: page });
+      scrollToContainer();
       return newCompanies;
     },
   });
@@ -86,7 +112,7 @@ export default function CompaniesList({
                 <Pagination
                   className="d-flex justify-content-center"
                   page={page}
-                  setPage={(newVal) => setPage(newVal)}
+                  setPage={changePage}
                   totalItems={totalItems}
                   pageSize={pageSize}
                 />
