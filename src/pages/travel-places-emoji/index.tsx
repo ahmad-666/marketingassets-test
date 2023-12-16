@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { useRouter } from "next/router";
 import EmojisList from "@/src/components/emoji/EmojisList";
+import MetaData from "@/src/components/common/MetaData";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -11,12 +13,12 @@ type PageProps = {
   page: number;
 };
 const pageSize = 8;
+const emojiCategoryId = "travel-places-emoji";
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const emojiCategoryId = "travel-places-emoji";
     const { page } = context.query;
     const finalPage = +page || 1;
     const { items: emojis, meta } = await getEmojis({
@@ -49,11 +51,17 @@ export default function Page({
   page = 1,
 }: PageProps) {
   const router = useRouter();
-  const emojiCategoryId = "travel-places-emoji";
+  const emojiCategoryText = useMemo(() => {
+    return textNormalize(emojiCategoryId);
+  }, []);
   return (
     <div>
+      <MetaData
+        title={`List of all ${emojiCategoryText} | CUFinder`}
+        description={`Discover a comprehensive list of ${emojiCategoryText}, including modes of transport, famous landmarks, and geographical features. Browse and express yourself!`}
+      />
       <EmojisList
-        title={`List of All ${textNormalize(emojiCategoryId)}`}
+        title={`List of All ${emojiCategoryText}`}
         items={emojis}
         totalItems={totalEmojis}
         pageSize={pageSize}

@@ -15,6 +15,7 @@ import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Emoji } from "@/src/types/Emoji";
 import type { Faq, Tag } from "@/src/types/Common";
+import MetaData from "@/src/components/common/MetaData";
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
@@ -146,6 +147,11 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
 
   return (
     <div className="wrapper">
+      <MetaData
+        title={`${emoji.emoji} ${emoji.name} emoji | CUFinder`}
+        description={emoji.description}
+        image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`}
+      />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <div className="container">
           <div className="row">
