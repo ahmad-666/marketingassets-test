@@ -1,3 +1,4 @@
+import MetaData from "@/src/components/common/MetaData";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import IndustriesList from "@/src/components/industry/IndustriesList";
 import { getCompanies, getIndustries } from "@/src/services/company";
@@ -48,15 +49,18 @@ export default function Page({
   industries = [],
   page = 1,
 }: PageProps) {
+  const title = "Company Logo Repository: Download Logos or Integrate via API";
   return (
     <div>
+      <MetaData
+        title={title}
+        description="Discover & download high-quality company logos or integrate seamlessly via API. Elevate your projects with our diverse logo collection."
+      />
       <section className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="main-title text-center">
-              <h2>
-                Company Logo Repository: Download Logos or Integrate via API
-              </h2>
+              <h2>{title}</h2>
             </div>
           </div>
         </div>

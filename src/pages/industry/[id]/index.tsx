@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
 import CompaniesList from "@/src/components/company/CompaniesList";
+import MetaData from "@/src/components/common/MetaData";
 import { getCompanies } from "@/src/services/company";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -52,15 +53,20 @@ export default function Page({
     const decodedIndustry = decodeURIComponent(id as string);
     return textNormalize(decodedIndustry);
   }, [id]);
+  const title = useMemo(() => {
+    return `${industryText} Company Logos Repository: Download Logos in industry ${industryText}`;
+  }, [industryText]);
   return (
     <div>
+      <MetaData
+        title={title}
+        description={`Discover & download high-quality company logos in industry ${industryText} or integrate seamlessly via API. Elevate your projects with our diverse logo collection.`}
+      />
       <section className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="main-title text-center">
-              <h2>
-                {`${industryText} Company Logos Repository: Download Logos in industry ${industryText}`}
-              </h2>
+              <h2 className="text-capitalize">{title}</h2>
             </div>
           </div>
         </div>

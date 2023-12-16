@@ -7,6 +7,7 @@ import DownloadSection from "@/src/components/details/DownloadSection";
 import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CompaniesList from "@/src/components/company/CompaniesList";
+import MetaData from "@/src/components/common/MetaData";
 import type { Company } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
@@ -139,9 +140,15 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
     company.size,
     company.twitter,
   ]);
-
+  const title = useMemo(() => {
+    return `Download ${company.name} Logo | CUFinder`;
+  }, [company.name]);
+  const desc = useMemo(() => {
+    return `Download ${company.name} Logo in PNG Format`;
+  }, [company.name]);
   return (
     <div className="wrapper">
+      <MetaData title={title} description={desc} image={`${company.imgSrc}`} />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <div className="container">
           <div className="row">
@@ -173,7 +180,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
               <DownloadSection
                 name={company.name}
                 src={company.imgSrc}
-                text={`Download ${company.name} Logo in PNG Format`}
+                text={desc}
               />
               <EmbedCompanyLogo className="mt30" />
               <UsefulLinks className="mt30" />
