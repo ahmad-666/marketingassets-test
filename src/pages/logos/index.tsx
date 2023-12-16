@@ -9,13 +9,16 @@ type PageProps = {
   companies: Company[];
   totalCompanies: number;
   industries: Industry[];
+  page: number;
 };
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
+    const { page } = context.query;
+    const finalPage = +page || 1;
     const { items: companies, meta: companiesMeta } = await getCompanies({
-      page: 1,
+      page: finalPage,
       pageSize,
     });
     const { items: industries } = await getIndustries();
@@ -32,6 +35,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           id: industry.industry,
           name: industry.text,
         })),
+        page: finalPage,
       },
     };
   } catch (err) {
@@ -42,6 +46,7 @@ export default function Page({
   companies = [],
   totalCompanies = 0,
   industries = [],
+  page = 1,
 }: PageProps) {
   return (
     <div>
@@ -62,6 +67,8 @@ export default function Page({
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
+              page={page}
+              showPagination
             />
           </div>
         </div>

@@ -11,6 +11,7 @@ type CompanyListProps = {
   title: string;
   items: Company[];
   totalItems?: number;
+  page?: number;
   pageSize?: number;
   showPagination?: boolean;
   targetIndustry?: string;
@@ -24,13 +25,14 @@ export default function CompaniesList({
   title,
   items = [],
   totalItems = 0,
+  page = 1,
   pageSize = 8,
   showPagination = true,
   targetIndustry,
   className = "",
 }: CompanyListProps) {
   const containerRef = useRef<HTMLDivElement>(null!);
-  const [page, setPage] = useState(1);
+  const [pageVal, setPageVal] = useState(page);
   const router = useRouter();
   const { id } = router.query;
   const setUrlQuery = useCallback(
@@ -55,15 +57,15 @@ export default function CompaniesList({
     }
   }, [showPagination]);
   const changePage = useCallback((newVal: number) => {
-    setPage(newVal);
+    setPageVal(newVal);
   }, []);
   const { isFetching, data: companies } = useQuery<Company[]>({
     initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-companies", id, targetIndustry, page, pageSize],
+    queryKey: ["get-companies", id, targetIndustry, pageVal, pageSize],
     queryFn: async () => {
       const { items } = await getCompanies({
-        page: page || 1,
+        page: pageVal || 1,
         pageSize,
         industry: targetIndustry
           ? decodeURIComponent(targetIndustry as string)
@@ -78,7 +80,7 @@ export default function CompaniesList({
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
         });
       });
-      setUrlQuery({ newPage: page });
+      setUrlQuery({ newPage: pageVal });
       scrollToContainer();
       return newCompanies;
     },
@@ -97,7 +99,7 @@ export default function CompaniesList({
             {companies.map((company) => (
               <CompanyCard
                 className="col-sm-6 col-xl-3 p10"
-                key={company.id}
+                key={`${company.id}-${company.name}`}
                 id={company.id}
                 name={company.name}
                 category={company.category}
@@ -111,7 +113,7 @@ export default function CompaniesList({
               <div className="col-lg-12">
                 <Pagination
                   className="d-flex justify-content-center"
-                  page={page}
+                  page={pageVal}
                   setPage={changePage}
                   totalItems={totalItems}
                   pageSize={pageSize}

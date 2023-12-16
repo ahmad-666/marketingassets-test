@@ -8,6 +8,7 @@ import type { Emoji } from "@/src/types/Emoji";
 type PageProps = {
   emojis: Emoji[];
   totalEmojis: number;
+  page: number;
 };
 const pageSize = 8;
 
@@ -16,9 +17,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 ) => {
   try {
     const emojiCategoryId = "nature-emoji";
+    const { page } = context.query;
+    const finalPage = +page || 1;
     const { items: emojis, meta } = await getEmojis({
       category: emojiCategoryId as string,
-      page: 1,
+      page: finalPage,
       pageSize,
     });
     return {
@@ -33,13 +36,18 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           usersScore: emoji.score,
         })),
         totalEmojis: meta.totalCount,
+        page: finalPage,
       },
     };
   } catch (err) {
     return { notFound: true };
   }
 };
-export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
+export default function Page({
+  emojis = [],
+  totalEmojis = 0,
+  page = 1,
+}: PageProps) {
   const router = useRouter();
   const emojiCategoryId = "nature-emoji";
   return (
@@ -50,6 +58,8 @@ export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
         totalItems={totalEmojis}
         pageSize={pageSize}
         emojiCategoryId={emojiCategoryId}
+        page={page}
+        showPagination
       />
     </div>
   );

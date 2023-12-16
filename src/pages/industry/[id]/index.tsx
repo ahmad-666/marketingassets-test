@@ -9,6 +9,7 @@ import type { Company } from "@/src/types/Company";
 type PageProps = {
   companies: Company[];
   totalCompanies: number;
+  page: number;
 };
 const pageSize = 8;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
@@ -16,10 +17,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 ) => {
   try {
     const { id } = context.params;
+    const { page } = context.query;
+    const finalPage = +page || 1;
     const decodedIndustry = decodeURIComponent(id as string);
     const { items: companies, meta: companiesMeta } = await getCompanies({
       industry: decodedIndustry,
-      page: 1,
+      page: finalPage,
       pageSize,
     });
     return {
@@ -31,6 +34,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
         })),
         totalCompanies: companiesMeta.totalCount,
+        page: finalPage,
       },
     };
   } catch (err) {
@@ -40,6 +44,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 export default function Page({
   companies = [],
   totalCompanies = 0,
+  page = 1,
 }: PageProps) {
   const router = useRouter();
   const { id } = router.query;
@@ -65,8 +70,10 @@ export default function Page({
               title="Browse Companies"
               items={companies}
               totalItems={totalCompanies}
+              page={page}
               pageSize={pageSize}
               targetIndustry={id as string}
+              showPagination
             />
           </div>
         </div>

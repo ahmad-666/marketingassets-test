@@ -12,6 +12,7 @@ type EmojisListProps = {
   title: string;
   items: Emoji[];
   totalItems?: number;
+  page?: number;
   pageSize?: number;
   emojiList?: string[];
   emojiCategoryId?: string;
@@ -26,6 +27,7 @@ export default function EmojisList({
   title,
   items = [],
   totalItems = 0,
+  page = 1,
   pageSize = 8,
   showPagination = true,
   emojiList = [],
@@ -34,7 +36,7 @@ export default function EmojisList({
 }: EmojisListProps) {
   const router = useRouter();
   const { id } = router.query;
-  const [page, setPage] = useState(1);
+  const [pageVal, setPageVal] = useState(page);
   const containerRef = useRef<HTMLDivElement>(null!);
   const setUrlQueries = useCallback(
     ({ newPage }: Query) => {
@@ -53,7 +55,7 @@ export default function EmojisList({
     [router]
   );
   const changePage = useCallback((newVal: number) => {
-    setPage(newVal);
+    setPageVal(newVal);
   }, []);
   const scrollToContainer = useCallback(() => {
     if (showPagination) {
@@ -63,12 +65,12 @@ export default function EmojisList({
   const { isFetching, data: emojis } = useQuery<Emoji[]>({
     initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, page, pageSize],
+    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, pageVal, pageSize],
     queryFn: async () => {
       const { items } = await getEmojis({
         category: emojiCategoryId || undefined,
         urls: emojiList,
-        page: page || 1,
+        page: pageVal || 1,
         pageSize,
       });
       const newEmojis: Emoji[] = [];
@@ -83,7 +85,7 @@ export default function EmojisList({
           usersScore: emoji.score,
         });
       });
-      setUrlQueries({ newPage: page });
+      setUrlQueries({ newPage: pageVal });
       scrollToContainer();
       return newEmojis;
     },
@@ -123,7 +125,7 @@ export default function EmojisList({
             <div className="col-lg-12">
               <Pagination
                 className="d-flex justify-content-center"
-                page={page}
+                page={pageVal}
                 setPage={changePage}
                 totalItems={totalItems}
                 pageSize={pageSize}
