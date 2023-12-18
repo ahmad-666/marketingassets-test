@@ -1,28 +1,31 @@
-import MetaData from "@/src/components/common/MetaData";
+import { useMemo } from "react";
+import { useRouter } from "next/router";
 import CompaniesList from "@/src/components/company/CompaniesList";
-import IndustriesList from "@/src/components/industry/IndustriesList";
-import { getCompanies, getIndustries } from "@/src/services/company";
-import type { Company, Industry } from "@/src/types/Company";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import MetaData from "@/src/components/common/MetaData";
+import { getCompanies } from "@/src/services/company";
+import { textNormalize } from "@/src/utils/textTransform";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
+import type { Company } from "@/src/types/Company";
 
-const pageSize = 8;
 type PageProps = {
   companies: Company[];
   totalCompanies: number;
-  industries: Industry[];
   page: number;
 };
+const pageSize = 8;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
+    const { id } = context.params;
     const { page } = context.query;
     const finalPage = +page || 1;
+    const decodedIndustry = decodeURIComponent(id as string);
     const { items: companies, meta: companiesMeta } = await getCompanies({
+      industry: decodedIndustry,
       page: finalPage,
       pageSize,
     });
-    const { items: industries } = await getIndustries();
     return {
       props: {
         companies: companies.map((company) => ({
@@ -32,10 +35,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
         })),
         totalCompanies: companiesMeta.totalCount,
-        industries: industries.map((industry) => ({
-          id: industry.industry,
-          name: industry.text,
-        })),
         page: finalPage,
       },
     };
@@ -46,21 +45,28 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 export default function Page({
   companies = [],
   totalCompanies = 0,
-  industries = [],
   page = 1,
 }: PageProps) {
-  const title = "Company Logo Repository: Download Logos or Integrate via API";
+  const router = useRouter();
+  const { id } = router.query;
+  const industryText = useMemo(() => {
+    const decodedIndustry = decodeURIComponent(id as string);
+    return textNormalize(decodedIndustry);
+  }, [id]);
+  const title = useMemo(() => {
+    return `${industryText} Company Logos Repository: Download Logos in industry ${industryText}`;
+  }, [industryText]);
   return (
     <div>
       <MetaData
         title={title}
-        description="Discover & download high-quality company logos or integrate seamlessly via API. Elevate your projects with our diverse logo collection."
+        description={`Discover & download high-quality company logos in industry ${industryText} or integrate seamlessly via API. Elevate your projects with our diverse logo collection.`}
       />
       <section className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="main-title text-center">
-              <h2>{title}</h2>
+              <h2 className="text-capitalize">{title}</h2>
             </div>
           </div>
         </div>
@@ -70,17 +76,10 @@ export default function Page({
               title="Browse Companies"
               items={companies}
               totalItems={totalCompanies}
-              pageSize={pageSize}
               page={page}
+              pageSize={pageSize}
+              targetIndustry={id as string}
               showPagination
-            />
-          </div>
-        </div>
-        <div className="row mt40">
-          <div className="col-lg-12">
-            <IndustriesList
-              title="Browse Companies By Industries"
-              items={industries}
             />
           </div>
         </div>

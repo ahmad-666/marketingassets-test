@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu";
 import Hero from "./Hero";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollTop";
-import { Inter } from "next/font/google";
+
 import type { MenuItems } from "@/src/types/Common";
 
 type LayoutProps = {
@@ -15,14 +15,14 @@ type LayoutProps = {
   menuItems: MenuItems;
   className?: string;
 };
-const inter = Inter({ subsets: ["latin"] });
+
 export default function Layout({
   children,
   menuItems = [],
   className = "",
 }: LayoutProps) {
   return (
-    <div className={`${inter.className} ${className}`}>
+    <div className={`${className}`}>
       <ClientLibraries />
       <ReactQuery>
         <div className="wrapper ovh">

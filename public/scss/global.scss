@@ -9,6 +9,11 @@ body {
   margin: 0px;
   padding: 0px;
 }
+//sizing
+.pagination-size {
+  width: 42px;
+  height: 42px;
+}
 // spacing
 .mx0 {
   margin-left: 0px;
@@ -162,6 +167,16 @@ body {
   line-height: 30px;
 }
 // coloring
+.bg-primary-color {
+  // we have .bg-primary bootstrap class too
+  background-color: var(--primary-color);
+}
+.text-primary-color {
+  color: var(--primary-color);
+}
+.border-primary-color {
+  border-color: var(--primary-color);
+}
 .text-body {
   color: #5f6973;
 }
@@ -177,7 +192,13 @@ body {
 .border-solid {
   border-style: solid;
 }
-
+//others
+.pointer-events-none {
+  pointer-events: none;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
 // custom styles
 .emoji-card,
 .company-card,

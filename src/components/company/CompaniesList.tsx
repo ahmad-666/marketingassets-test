@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import CompanyCard from "./CompanyCard";
+import { useQuery } from "@tanstack/react-query";
+import CompanyCard from "@/src/components/company/CompanyCard";
 import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
+import Pagination from "@/src/components/common/Pagination";
 import { getCompanies } from "@/src/services/company";
 import type { Company } from "@/src/types/Company";
 
@@ -10,48 +11,63 @@ type CompanyListProps = {
   title: string;
   items: Company[];
   totalItems?: number;
+  page?: number;
   pageSize?: number;
-  showMore?: boolean;
+  showPagination?: boolean;
   targetIndustry?: string;
   className?: string;
+};
+type Query = {
+  newPage: number;
 };
 
 export default function CompaniesList({
   title,
   items = [],
   totalItems = 0,
+  page = 1,
   pageSize = 8,
-  showMore = true,
+  showPagination = true,
   targetIndustry,
   className = "",
 }: CompanyListProps) {
+  const containerRef = useRef<HTMLDivElement>(null!);
+  const [pageVal, setPageVal] = useState(page);
   const router = useRouter();
-  const { logoId } = router.query;
-  const totalPages = useMemo(() => {
-    return Math.ceil(totalItems / pageSize);
-  }, [pageSize, totalItems]);
-  const {
-    isFetching,
-    data: pages,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
-    initialData: { pages: [[...items]], pageParams: [{ page: 1 }] },
+  const { id } = router.query;
+  const setUrlQuery = useCallback(
+    ({ newPage }: Query) => {
+      if (showPagination) {
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              page: newPage,
+            },
+          },
+          undefined,
+          { scroll: false }
+        );
+      }
+    },
+    [showPagination, router]
+  );
+  const scrollToContainer = useCallback(() => {
+    if (showPagination) {
+      containerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [showPagination]);
+  const changePage = useCallback((newVal: number) => {
+    setPageVal(newVal);
+  }, []);
+  const { isFetching, data: companies } = useQuery<Company[]>({
+    initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-companies", logoId, targetIndustry, pageSize],
-    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
-      const currentPage = lastPageParam.page;
-      if (currentPage === totalPages) return null; //no next-page
-      return {
-        page: currentPage + 1,
-      };
-    },
-    initialPageParam: {
-      page: 1,
-    },
-    queryFn: async ({ pageParam }) => {
+    queryKey: ["get-companies", id, targetIndustry, pageVal, pageSize],
+    queryFn: async () => {
       const { items } = await getCompanies({
-        page: pageParam.page || 1,
+        page: pageVal || 1,
         pageSize,
         industry: targetIndustry
           ? decodeURIComponent(targetIndustry as string)
@@ -66,48 +82,48 @@ export default function CompaniesList({
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
         });
       });
+      setUrlQuery({ newPage: pageVal });
+      scrollToContainer();
       return newCompanies;
     },
   });
 
   return (
     <div className={`${className}`}>
-      <h3>{title}</h3>
-      <div className="mt30">
-        <div
-          className="row align-items-stretch"
-          data-aos-delay="100"
-          data-aos="fade-up"
-        >
-          {pages.pages.map((page) =>
-            page.map((company) => (
+      <div ref={containerRef}>
+        <h3>{title}</h3>
+        <div className="mt30">
+          <div
+            className="row align-items-stretch"
+            data-aos-delay="100"
+            data-aos="fade-up"
+          >
+            {companies.map((company) => (
               <CompanyCard
                 className="col-sm-6 col-xl-3 p10"
-                key={company.id}
+                key={`${company.id}-${company.name}`}
                 id={company.id}
                 name={company.name}
                 category={company.category}
                 imgSrc={company.imgSrc}
               />
-            ))
+            ))}
+          </div>
+          {isFetching && <SpinnerLoader className="mt10" />}
+          {!!(totalItems && showPagination) && (
+            <div className="row mt20">
+              <div className="col-lg-12">
+                <Pagination
+                  className="d-flex justify-content-center"
+                  page={pageVal}
+                  setPage={changePage}
+                  totalItems={totalItems}
+                  pageSize={pageSize}
+                />
+              </div>
+            </div>
           )}
         </div>
-        {isFetching && <SpinnerLoader className="mt10" />}
-        {showMore && hasNextPage && (
-          <div className="mt10 text-center">
-            <button
-              className="btn more_listing"
-              onClick={() => {
-                fetchNextPage();
-              }}
-            >
-              Show More
-              <span className="icon">
-                <span className="fas fa-plus" />
-              </span>
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
