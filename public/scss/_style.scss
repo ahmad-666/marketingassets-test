@@ -60,7 +60,6 @@ body {
   background-attachment: fixed;
   background-color: #ffffff;
   color: #5f6973;
-  font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 1.5;
   overflow-x: hidden;
@@ -198,7 +197,6 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Inter", sans-serif;
   line-height: 1.2;
   color: #1a3760;
 }
@@ -433,7 +431,6 @@ address {
   background-color: transparent;
   border: none;
   color: rgba(18, 18, 18, 0.3);
-  font-family: "Inter", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -5865,7 +5862,6 @@ form.listing_page_v9 {
   letter-spacing: 0em;
 }
 .home8_main_slider .banner-style-one .banner_top_title {
-  font-family: "Inter", sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 1;
@@ -9799,7 +9795,6 @@ form.listing_page_v9 {
   border: none;
   border-bottom: 2px solid transparent;
   color: rgba(18, 18, 18, 0.4);
-  font-family: "Inter", sans-serif;
   font-size: 26px;
   font-style: normal;
   font-weight: 600;
@@ -11306,7 +11301,8 @@ a.btn_error {
 .list-group-item:last-child {
   border-bottom: none;
 }
-.list-group-item .day,.list-group-item .device {
+.list-group-item .day,
+.list-group-item .device {
   color: #1a3760;
   font-weight: 600;
 }
@@ -16195,7 +16191,6 @@ input.amount4::placeholder {
 }
 .sidebar_priceing_slider_mobile .title {
   color: #1a3760;
-  font-family: "Inter", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
