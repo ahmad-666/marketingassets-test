@@ -177,18 +177,54 @@ body {
 .border-primary-color {
   border-color: var(--primary-color);
 }
-.text-body {
-  color: #5f6973;
+.bg-dark-color {
+  //we have .bg-dark in bootstrap too so we use .bg-dark-color
+  background-color: var(--dark-color);
+}
+.text-dark-color {
+  color: var(--dark-color);
+}
+.border-dark-color {
+  border-color: var(--dark-color);
+}
+.bg-body-color {
+  //in bootstrap we have .bg-body css class so we use .bg-body-color
+  background-color: var(--body-color);
+}
+.text-body-color {
+  color: var(--body-color);
+}
+.border-body-color {
+  border-color: var(--body-color);
+}
+.bg-lightgray {
+  background-color: var(--lightgray-color);
+}
+.text-lightgray {
+  color: var(--lightgray-color);
 }
 .border-lightgray {
-  border-color: #d3d3d3;
+  border-color: var(--lightgray-color);
+}
+.bg-gray {
+  background-color: var(--gray-color);
+}
+.text-gray {
+  color: var(--gray-color);
 }
 .border-gray {
-  border-color: gray;
+  border-color: var(--gray-color);
+}
+.bg-gray2 {
+  background-color: var(--gray2-color);
+}
+.text-gray2 {
+  color: var(--gray2-color);
 }
 .border-gray2 {
-  border-color: #7e7e7e;
+  border-color: var(--gray2-color);
 }
+//border
 .border-solid {
   border-style: solid;
 }

@@ -34,8 +34,8 @@ export default function MetaData({
         name="viewport"
         content="width=device-width, initial-scale=1.0"
       />
-      <meta key="IE=edge" http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta key="ie=edge" http-equiv="X-UA-Compatible" content="ie=edge" />
+      <meta key="IE=edge" httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta key="ie=edge" httpEquiv="X-UA-Compatible" content="ie=edge" />
       <title key="title">{title}</title>
       <meta key="description" name="description" content={description} />
       <meta key="og:title" property="og:title" content={title} />

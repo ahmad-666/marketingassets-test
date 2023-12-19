@@ -1,5 +1,10 @@
 :root {
-    --primary-color: #f5c34b;
+  --primary-color: #f5c34b;
+  --dark-color: #1a3760;
+  --body-color: #5f6973;
+  --lightgray-color: #d3d3d3;
+  --gray-color: gray;
+  --gray2-color: #7e7e7e;
 }
 @import "~bootstrap/scss/bootstrap";
 @import "./custom_voiture";

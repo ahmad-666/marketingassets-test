@@ -8,6 +8,7 @@ import {
   type SelectInstance,
 } from "react-select";
 import InputMessage from "@/src/components/common/form/InputMessage";
+import FormLabel from "@/src/components/common/form/FormLabel";
 
 type ReactSelectProps = Omit<
   React.ComponentProps<typeof ReactSelect>,
@@ -16,6 +17,7 @@ type ReactSelectProps = Omit<
 type SelectProps<Value, Option> = {
   value: Value;
   options: Option[];
+  label?: string;
   onChange: (newValue: Value) => void;
   getOptionLabel?: (option: Option) => string;
   error?: string;
@@ -31,6 +33,7 @@ const Select = <Value, Option>(
   {
     value,
     options = [],
+    label,
     onChange,
     getOptionLabel,
     id,
@@ -97,6 +100,13 @@ const Select = <Value, Option>(
 
   return (
     <div className={`${className}`}>
+      {label && (
+        <FormLabel
+          inputId={inputId || `input-${generatedId}`}
+          label={label}
+          className="mb5"
+        />
+      )}
       <ReactSelect
         id={id || generatedId}
         inputId={inputId || `input-${generatedId}`}
