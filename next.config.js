@@ -25,7 +25,7 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        source: "/api/:path*", //api routes are inside <FRONT_URL>/api/...
+        source: "/:path*", //api routes are inside <FRONT_URL>/api/...
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin(front url)
