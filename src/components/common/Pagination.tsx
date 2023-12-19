@@ -22,9 +22,11 @@ export default function Pagination({
   containerClassName = "",
   className = "",
 }: PaginationProps) {
+  console.log(totalItems, pageSize, Math.ceil(totalItems / pageSize));
   const pageCount = useMemo(() => {
     return Math.ceil(totalItems / pageSize);
   }, [totalItems, pageSize]);
+  console.log("pageCount", pageCount);
   const containerCssClass = useMemo(() => {
     return "d-flex fs-6";
   }, []);
