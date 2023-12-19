@@ -10,7 +10,7 @@ export default function Page() {
     <div>
       <MetaData />
       <h1>Home</h1>
-      <TextField
+      {/* <TextField
         value={name}
         onChange={(newVal) => setName(newVal)}
         placeholder="name"
@@ -22,7 +22,7 @@ export default function Page() {
         placeholder="job"
         label="job"
         options={[{ label: "JOB", value: "job" }]}
-      />
+      /> */}
     </div>
   );
 }

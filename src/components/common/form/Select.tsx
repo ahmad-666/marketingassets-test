@@ -74,6 +74,7 @@ const Select = <Value, Option>(
     return {
       placeholder: (state) => "fz14",
       container: (state) => "fz16",
+      control: (state) => "rounded-3",
     };
   }, []);
   const customTheme: ThemeConfig = useCallback(
