@@ -182,7 +182,7 @@ body {
   background-color: var(--dark-color);
 }
 .text-dark-color {
-  color: var(--dark-color);
+  color: var(--dark-color) !important;
 }
 .border-dark-color {
   border-color: var(--dark-color);
@@ -192,7 +192,7 @@ body {
   background-color: var(--body-color);
 }
 .text-body-color {
-  color: var(--body-color);
+  color: var(--body-color) !important;
 }
 .border-body-color {
   border-color: var(--body-color);

@@ -72,7 +72,7 @@ const TextField = (
         name={name}
         type={type}
         disabled={disabled}
-        className={`d-block w-100 appearance-none outline-none bg-white fz16 text-dark-color rounded-3 px10 transition-0-2-eio ${inputClassName}`}
+        className={`d-block w-100 appearance-none outline-none bg-white fz16 text-dark-color rounded-3 px10 ${inputClassName}`}
         style={{
           height: dense ? "35px" : "50px",
           border: isFocus ? `2px solid ${color}` : "1px solid #eaeaea",

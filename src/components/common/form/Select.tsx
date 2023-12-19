@@ -71,10 +71,15 @@ const Select = <Value, Option>(
   //     };
   //   }, []);
   const customClassNames = useMemo<ClassNamesConfig>(() => {
+    //instead of theme we could work with it , inside state we have isFocus,isDisabled,...
+    //with proper combination of styles,classNames,theme prop we can create any custom style that we want
     return {
-      placeholder: (state) => "fz14",
       container: (state) => "fz16",
       control: (state) => "rounded-3",
+      input: (state) => "text-dark-color",
+      singleValue: (state) => "text-dark-color",
+      multiValue: (state) => "text-dark-color",
+      placeholder: (state) => "fz14 text-body-color text-capitalize",
     };
   }, []);
   const customTheme: ThemeConfig = useCallback(
@@ -89,10 +94,17 @@ const Select = <Value, Option>(
         },
         colors: {
           ...theme.colors,
-          primary: color,
-          primary25: `${color}22`,
+          primary: color, //borderColor on focus + bg of selected option
+          primary25: `${color}33`, //bg of hover option
           primary50: `${color}66`,
           primary75: `${color}aa`,
+          //neutral0: "transparent", //bg of container, can be used if we want to create filled variant
+          neutral20: "#eaeaea", //borderColor on blur
+          neutral30: "#eaeaea", //borderColor when blur + hover
+          //we have:
+          //primary,primary75,primary50,primary25
+          //danger,dangerLight
+          //neutral0,neutral5,neutral10,neutral20,neutral30,neutral40,neutral50,neutral60,neutral70,neutral80,neutral90
         },
       };
     },
