@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: "dist",
-  trailingSlash: true,
+  //trailingSlash: true,
   experimental: {
     serverComponentsExternalPackages: ["sequelize"],
   },
