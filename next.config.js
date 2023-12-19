@@ -25,11 +25,10 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        //source: "/api/:path*", //api routes are inside <FRONT_URL>/api/...
-        source: "https://test.companyurlfinder.com/api/:path*",
+        source: "/api/:path*", //api routes are inside <FRONT_URL>/api/...
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
-          { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+          { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin(front url)
           {
             key: "Access-Control-Allow-Methods",
             value: "GET,DELETE,PATCH,POST,PUT",
