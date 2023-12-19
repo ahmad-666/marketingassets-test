@@ -1,29 +1,27 @@
 import MetaData from "@/src/components/common/MetaData";
-import Select from "../components/common/form/Select";
 import { useState } from "react";
+import TextField from "../components/common/form/TextField";
+import Select from "../components/common/form/Select";
 
-type Option = {
-  value: string;
-  label: string;
-};
-const options: Option[] = [
-  {
-    label: "text",
-    value: "value",
-  },
-];
 export default function Page() {
+  const [name, setName] = useState("");
   const [val, setVal] = useState(null);
   return (
     <div>
       <MetaData />
       <h1>Home</h1>
+      <TextField
+        value={name}
+        onChange={(newVal) => setName(newVal)}
+        placeholder="name"
+        label="name"
+      />
       <Select
-        label="label"
-        placeholder="placeholder"
         value={val}
         onChange={(newVal) => setVal(newVal)}
-        options={options}
+        placeholder="job"
+        label="job"
+        options={[{ label: "JOB", value: "job" }]}
       />
     </div>
   );

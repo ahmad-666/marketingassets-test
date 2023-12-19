@@ -80,7 +80,7 @@ const Select = <Value, Option>(
     (theme: Theme) => {
       return {
         ...theme,
-        borderRadius: 10,
+        //borderRadius: 10,
         spacing: {
           ...theme.spacing,
           controlHeight: dense ? 35 : 50,

@@ -197,6 +197,15 @@ body {
 .border-body-color {
   border-color: var(--body-color);
 }
+.bg-lightgray2 {
+  background-color: var(--lightgray2-color);
+}
+.text-lightgray2 {
+  color: var(--lightgray2-color);
+}
+.border-lightgray2 {
+  border-color: var(--lightgray2-color);
+}
 .bg-lightgray {
   background-color: var(--lightgray-color);
 }
@@ -225,8 +234,33 @@ body {
   border-color: var(--gray2-color);
 }
 //border
+.border-none {
+  border: none;
+}
 .border-solid {
   border-style: solid;
+}
+.outline-none {
+  outline: none;
+}
+//transitions
+.transition-0-2-linear {
+  transition: all 0.2s linear;
+}
+.transition-0-2-eio {
+  transition: all 0.2s ease-in-out;
+}
+.transition-0-5-linear {
+  transition: all 0.5s linear;
+}
+.transition-0-5-eio {
+  transition: all 0.5s ease-in-out;
+}
+.transition-1-linear {
+  transition: all 1s linear;
+}
+.transition-1-eio {
+  transition: all 1s ease-in-out;
 }
 //others
 .pointer-events-none {
@@ -234,6 +268,9 @@ body {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.appearance-none {
+  appearance: none;
 }
 // custom styles
 .emoji-card,
@@ -249,5 +286,14 @@ body {
       background-color: #1947e2;
       text-align: center;
     }
+  }
+}
+input,
+textarea,
+select {
+  &::placeholder {
+    text-transform: capitalize;
+    font-size: 14px;
+    color: var(--body-color);
   }
 }
