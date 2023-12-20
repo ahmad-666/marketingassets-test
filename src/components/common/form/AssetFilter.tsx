@@ -16,7 +16,7 @@ const typeOptions: Option[] = [
     label: "Logo",
   },
 ];
-export default function FormFilter() {
+export default function AssetFilter() {
   const router = useRouter();
   const [type, setType] = useState<null | Type>(null);
   const [search, setSearch] = useState("");
