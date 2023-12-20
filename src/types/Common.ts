@@ -18,3 +18,7 @@ export type Tag = {
 export type ServerError = {
   message: string;
 };
+export type Option = {
+  value: number | string;
+  label: string;
+};

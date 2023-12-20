@@ -14,7 +14,7 @@ type ReactSelectProps = Omit<
   React.ComponentProps<typeof ReactSelect>,
   "value" | "options" | "onChange" | "getOptionLabel" | "className"
 >;
-type SelectProps<Value, Option> = {
+type AutoCompleteProps<Value, Option> = {
   value: Value;
   options: Option[];
   label?: string;
@@ -29,7 +29,7 @@ type SelectProps<Value, Option> = {
   className?: string;
 } & ReactSelectProps;
 
-const Select = <Value, Option>(
+const AutoComplete = <Value, Option>(
   {
     value,
     options = [],
@@ -50,7 +50,7 @@ const Select = <Value, Option>(
     selectClassName = "",
     className = "",
     ...rest
-  }: SelectProps<Value, Option>,
+  }: AutoCompleteProps<Value, Option>,
   ref: React.ForwardedRef<SelectInstance>
 ) => {
   const generatedId = useId();
@@ -142,8 +142,8 @@ const Select = <Value, Option>(
   );
 };
 
-export default forwardRef(Select) as <Value, Option>(
-  props: SelectProps<Value, Option> & {
+export default forwardRef(AutoComplete) as <Value, Option>(
+  props: AutoCompleteProps<Value, Option> & {
     ref?: React.ForwardedRef<SelectInstance>;
   }
-) => ReturnType<typeof Select>;
+) => ReturnType<typeof AutoComplete>;

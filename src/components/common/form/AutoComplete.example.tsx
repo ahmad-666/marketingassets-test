@@ -1,4 +1,4 @@
-import Select from "@/src/components/common/form/Select";
+import AutoComplete from "@/src/components/common/form/AutoComplete";
 import { useEffect, useRef, useState } from "react";
 import { type SelectInstance } from "react-select";
 
@@ -25,7 +25,7 @@ export default function Example() {
   }, []);
   return (
     <div>
-      <Select
+      <AutoComplete
         ref={elm}
         value={val1}
         onChange={(option) => {
@@ -36,7 +36,7 @@ export default function Example() {
         error="error"
         hint="hint"
       />
-      <Select
+      <AutoComplete
         value={val2}
         onChange={(option) => {
           setVal2(option);
