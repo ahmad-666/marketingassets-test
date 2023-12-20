@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import MetaData from "@/src/components/common/MetaData";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import IndustriesList from "@/src/components/industry/IndustriesList";
@@ -10,7 +11,6 @@ type PageProps = {
   companies: Company[];
   totalCompanies: number;
   industries: Industry[];
-  page: number;
 };
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
@@ -36,7 +36,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           id: industry.industry,
           name: industry.text,
         })),
-        page: finalPage,
       },
     };
   } catch (err) {
@@ -47,8 +46,8 @@ export default function Page({
   companies = [],
   totalCompanies = 0,
   industries = [],
-  page = 1,
 }: PageProps) {
+  const router = useRouter();
   const title = "Company Logo Repository: Download Logos or Integrate via API";
   return (
     <div>
@@ -71,7 +70,8 @@ export default function Page({
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
-              page={page}
+              page={+router.query.page || 1}
+              search={router.query.search}
               showPagination
             />
           </div>

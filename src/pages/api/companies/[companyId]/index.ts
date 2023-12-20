@@ -7,8 +7,8 @@ type Res = GetCompanyResponse | ServerError;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
   try {
-    const { id } = req.query;
-    const company = await getCompany({ companyId: id as string });
+    const { companyId } = req.query;
+    const company = await getCompany({ companyId: companyId as string });
     if (!company) return res.status(404).json({ message: "company not found" });
     return res.status(200).json(company);
   } catch (err) {

@@ -17,10 +17,10 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { id } = context.params;
+    const { industryId } = context.params;
     const { page } = context.query;
     const finalPage = +page || 1;
-    const decodedIndustry = decodeURIComponent(id as string);
+    const decodedIndustry = decodeURIComponent(industryId as string);
     const { items: companies, meta: companiesMeta } = await getCompanies({
       industry: decodedIndustry,
       page: finalPage,
@@ -48,11 +48,11 @@ export default function Page({
   page = 1,
 }: PageProps) {
   const router = useRouter();
-  const { id } = router.query;
+  const { industryId } = router.query;
   const industryText = useMemo(() => {
-    const decodedIndustry = decodeURIComponent(id as string);
+    const decodedIndustry = decodeURIComponent(industryId as string);
     return textNormalize(decodedIndustry);
-  }, [id]);
+  }, [industryId]);
   const title = useMemo(() => {
     return `${industryText} Company Logos Repository: Download Logos in industry ${industryText}`;
   }, [industryText]);
@@ -78,7 +78,7 @@ export default function Page({
               totalItems={totalCompanies}
               page={page}
               pageSize={pageSize}
-              targetIndustry={id as string}
+              targetIndustry={industryId as string}
               showPagination
             />
           </div>

@@ -6,7 +6,6 @@ import Icon from "@/src/components/common/Icon";
 import Button from "@/src/components/common/Button";
 import type { Option } from "@/src/types/Common";
 
-type Type = "emoji" | "logo";
 const typeOptions: Option[] = [
   {
     value: "emoji",
@@ -19,27 +18,31 @@ const typeOptions: Option[] = [
 ];
 export default function AssetFilter() {
   const router = useRouter();
-  const [type, setType] = useState<null | Type>(null);
+  const [type, setType] = useState(typeOptions[0]);
   const [search, setSearch] = useState("");
   const readUrlQueries = useCallback(() => {
     const { type, search } = router.query;
-    const typeQuery = type as Type;
+    const typeQuery = type as string;
     const searchQuery = search as string;
-    setType(typeQuery || null);
+    setType(typeOptions.find((o) => o.value === typeQuery) || typeOptions[0]);
     setSearch(searchQuery || "");
   }, [router.query]);
   const setUrlQueries = useCallback(() => {
     let url: null | string = null;
-    if (type === "emoji") url = "/emojis";
-    else if (type === "logo") url = "logos";
+    if (type.value === "emoji") url = "/emojis";
+    else if (type.value === "logo") url = "logos";
     else throw new Error("Invalid type!!!");
-    router.replace({
-      pathname: url,
-      query: {
-        type,
-        search,
+    router.replace(
+      {
+        pathname: url,
+        query: {
+          type: type.value,
+          search,
+        },
       },
-    });
+      undefined,
+      { scroll: false }
+    );
   }, [router, search, type]);
   const submitHandler = useCallback(
     (e: React.FormEvent) => {

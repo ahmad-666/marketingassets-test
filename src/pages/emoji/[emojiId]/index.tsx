@@ -29,8 +29,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { id } = context.params;
-    const emoji = await getEmoji({ emojiId: id as string });
+    const { emojiId } = context.params;
+    const emoji = await getEmoji({ emojiId: emojiId as string });
     const { items: relatedEmojis } = await getEmojis({
       urls: emoji.emoji_list,
       page: 1,

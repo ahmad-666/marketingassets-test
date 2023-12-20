@@ -13,6 +13,7 @@ type CompanyListProps = {
   totalItems?: number;
   page?: number;
   pageSize?: number;
+  search?: string;
   showPagination?: boolean;
   targetIndustry?: string;
   className?: string;
@@ -27,6 +28,7 @@ export default function CompaniesList({
   totalItems = 0,
   page = 1,
   pageSize = 8,
+  search,
   showPagination = true,
   targetIndustry,
   className = "",
@@ -34,7 +36,7 @@ export default function CompaniesList({
   const containerRef = useRef<HTMLDivElement>(null!);
   const [pageVal, setPageVal] = useState(page);
   const router = useRouter();
-  const { id } = router.query;
+  const { logoId } = router.query;
   const setUrlQuery = useCallback(
     ({ newPage }: Query) => {
       if (showPagination) {
@@ -64,7 +66,7 @@ export default function CompaniesList({
   const { isFetching, data: companies } = useQuery<Company[]>({
     initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-companies", id, targetIndustry, pageVal, pageSize],
+    queryKey: ["get-companies", logoId, targetIndustry, pageVal, pageSize],
     queryFn: async () => {
       const { items } = await getCompanies({
         page: pageVal || 1,

@@ -35,7 +35,7 @@ export default function EmojisList({
   className = "",
 }: EmojisListProps) {
   const router = useRouter();
-  const { id } = router.query;
+  const { emojiId } = router.query;
   const [pageVal, setPageVal] = useState(page);
   const containerRef = useRef<HTMLDivElement>(null!);
   const setUrlQueries = useCallback(
@@ -67,7 +67,14 @@ export default function EmojisList({
   const { isFetching, data: emojis } = useQuery<Emoji[]>({
     initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-emojis", emojiCategoryId, id, emojiList, pageVal, pageSize],
+    queryKey: [
+      "get-emojis",
+      emojiCategoryId,
+      emojiId,
+      emojiList,
+      pageVal,
+      pageSize,
+    ],
     queryFn: async () => {
       const { items } = await getEmojis({
         category: emojiCategoryId || undefined,
