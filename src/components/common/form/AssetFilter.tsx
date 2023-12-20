@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import TextField from "@/src/components/common/form/TextField";
 import AutoComplete from "@/src/components/common/form/AutoComplete";
 import Icon from "@/src/components/common/Icon";
+import Button from "@/src/components/common/Button";
 import type { Option } from "@/src/types/Common";
 
 type Type = "emoji" | "logo";
@@ -78,13 +79,16 @@ export default function AssetFilter() {
             />
           </li>
           <li className="col">
-            <button
+            <Button
               type="submit"
-              className="w-100 btn btn-thm advnc_search_form_btn"
+              size="lg"
+              className=" py-1 px-3"
+              color="primary"
+              variant="filled"
             >
               <Icon icon="mdi:search" size="md" className="text-dark-color" />
               Search
-            </button>
+            </Button>
           </li>
         </ul>
       </form>

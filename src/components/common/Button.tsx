@@ -19,7 +19,7 @@ type ButtonProps = {
   onClick?: () => void;
   style?: React.CSSProperties;
   className?: string;
-};
+} & React.ComponentProps<"button">;
 
 export default function Button({
   variant = "filled",
