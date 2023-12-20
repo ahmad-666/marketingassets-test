@@ -6,11 +6,12 @@ import type { ServerError } from "@/src/types/Common";
 type Res = GetCompaniesResponse | ServerError;
 const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
   try {
-    const { page, pageSize, industry } = req.query;
+    const { page, pageSize, industry, search } = req.query;
     const { count, rows } = await getCompanies({
       page: +page || 1,
       pageSize: +pageSize || null,
       industry: industry as string,
+      search: search as string,
     });
     return res.status(200).json({ items: rows, meta: { totalCount: count } });
   } catch (err) {

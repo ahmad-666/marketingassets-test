@@ -14,8 +14,9 @@ type CompanyListProps = {
   page?: number;
   pageSize?: number;
   search?: string;
-  showPagination?: boolean;
+  targetCompany?: string;
   targetIndustry?: string;
+  showPagination?: boolean;
   className?: string;
 };
 type Query = {
@@ -28,15 +29,15 @@ export default function CompaniesList({
   totalItems = 0,
   page = 1,
   pageSize = 8,
-  search,
+  search, //for search on name of companies
+  targetCompany, //id of current company for use as dependency of useQuery to trigger re-fetch
+  targetIndustry, //for list of companies of certain industry
   showPagination = true,
-  targetIndustry,
   className = "",
 }: CompanyListProps) {
   const containerRef = useRef<HTMLDivElement>(null!);
   const [pageVal, setPageVal] = useState(page);
   const router = useRouter();
-  const { logoId } = router.query;
   const setUrlQuery = useCallback(
     ({ newPage }: Query) => {
       if (showPagination) {
@@ -66,7 +67,14 @@ export default function CompaniesList({
   const { isFetching, data: companies } = useQuery<Company[]>({
     initialData: [...items],
     refetchOnMount: false,
-    queryKey: ["get-companies", logoId, targetIndustry, pageVal, pageSize],
+    queryKey: [
+      "get-companies",
+      targetCompany,
+      targetIndustry,
+      search,
+      pageVal,
+      pageSize,
+    ],
     queryFn: async () => {
       const { items } = await getCompanies({
         page: pageVal || 1,
@@ -74,6 +82,7 @@ export default function CompaniesList({
         industry: targetIndustry
           ? decodeURIComponent(targetIndustry as string)
           : undefined,
+        search,
       });
       const newCompanies: Company[] = [];
       items.forEach((company) => {

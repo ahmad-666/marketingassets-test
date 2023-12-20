@@ -42,13 +42,6 @@ export type EmojiCategoryResponse = {
   category: string;
   text: string;
 };
-export type EmojiDbFilters = {
-  url: string;
-};
-export type EmojisDbFilters = {
-  parent?: string | string[];
-  url?: string | string[];
-};
 export type GetEmojiResponse = EmojiResponse;
 export type GetEmojisResponse = {
   items: EmojiResponse[];

@@ -22,6 +22,7 @@ export type CompanyFilters = {
 };
 export type CompaniesFilters = {
   industry?: string;
+  search?: string;
   page?: number;
   pageSize?: number;
 };
@@ -39,12 +40,6 @@ export type CompanyResponse = {
   founded: number;
   industry: string;
   followers_count: number;
-};
-export type CompanyDbFilters = {
-  domain: string;
-};
-export type CompaniesDbFilters = {
-  industry?: string;
 };
 export type GetCompanyResponse = CompanyResponse;
 export type GetCompaniesResponse = {

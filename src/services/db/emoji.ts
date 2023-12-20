@@ -1,13 +1,13 @@
+import { Op, type WhereOptions } from "sequelize";
 import { Emoji } from "@/src/db/models";
 import type {
   EmojiFilters,
   EmojisFilters,
-  EmojiDbFilters,
-  EmojisDbFilters,
+  EmojiResponse,
 } from "@/src/types/Emoji";
 
 export async function getEmoji({ emojiId }: EmojiFilters) {
-  const where: EmojiDbFilters = { url: emojiId };
+  const where: WhereOptions<EmojiResponse> = { url: emojiId };
   const emoji = await Emoji.findOne({
     where,
   });
@@ -19,7 +19,7 @@ export async function getEmojis({
   page = 1,
   pageSize = null,
 }: EmojisFilters) {
-  let where: EmojisDbFilters = {};
+  let where: WhereOptions<EmojiResponse> = {};
   if (urls?.length) where.url = urls;
   if (category) where.parent = category;
   const { count, rows } = await Emoji.findAndCountAll({

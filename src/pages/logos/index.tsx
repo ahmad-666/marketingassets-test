@@ -16,11 +16,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { page } = context.query;
+    const { page, search } = context.query;
     const finalPage = +page || 1;
     const { items: companies, meta: companiesMeta } = await getCompanies({
       page: finalPage,
       pageSize,
+      search: search as string,
     });
     const { items: industries } = await getIndustries();
     return {
@@ -71,7 +72,7 @@ export default function Page({
               totalItems={totalCompanies}
               pageSize={pageSize}
               page={+router.query.page || 1}
-              search={router.query.search}
+              search={router.query.search as string}
               showPagination
             />
           </div>

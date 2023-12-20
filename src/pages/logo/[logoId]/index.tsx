@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useRouter } from "next/router";
 import { getCompanies, getCompany } from "@/src/services/company";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import ImageGallery from "@/src/components/details/ImageGallery";
@@ -65,6 +66,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   }
 };
 const Page = ({ company, relatedCompanies = [] }: PageProps) => {
+  const router = useRouter();
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
     return [
       {
@@ -192,6 +194,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
               items={relatedCompanies}
               showPagination={false}
               targetIndustry={company.category}
+              targetCompany={router.query.logoId as string}
             />
           </div>
         </div>

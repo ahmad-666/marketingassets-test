@@ -11,12 +11,14 @@ export const getCompanies = async ({
   industry,
   page = 1,
   pageSize,
+  search,
 }: CompaniesFilters) => {
   const { data } = await axios.get<GetCompaniesResponse>("/companies", {
     params: {
       industry,
       page,
       pageSize,
+      search,
     },
   });
   return data;
