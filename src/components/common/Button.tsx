@@ -42,32 +42,35 @@ export default function Button({
   const Component = useMemo(() => {
     return !href ? "button" : Link;
   }, [href]);
-  const sizeClass = useMemo(() => {
+  const sizeStyle = useMemo<React.CSSProperties>(() => {
     let padding = "";
     let fontSize = "";
     switch (size) {
       case "xs":
-        padding = "py-0 px-1";
-        fontSize = "fz12";
+        padding = "0rem .25rem";
+        fontSize = "12px";
         break;
       case "sm":
-        padding = "py-1 px-2";
-        fontSize = "fz14";
+        padding = ".25rem .5rem";
+        fontSize = "14px";
         break;
       case "md":
-        padding = "py-2 px-3";
-        fontSize = "fz16";
+        padding = ".5rem 1rem";
+        fontSize = "14px";
         break;
       case "lg":
-        padding = "py-3 px-5";
-        fontSize = "fs-5";
+        padding = "1rem 2rem";
+        fontSize = "14px";
         break;
       case "xl":
-        padding = "py-4 px-6";
-        fontSize = "fs-3";
+        padding = "1.5rem 4rem";
+        fontSize = "20px";
         break;
     }
-    return `${padding} ${fontSize}`;
+    return {
+      padding,
+      fontSize,
+    };
   }, [size]);
   const colorStyles = useMemo<React.CSSProperties>(() => {
     let backgroundColor = "";
@@ -94,14 +97,15 @@ export default function Button({
       border,
       opacity,
     };
-  }, [variant, disabled, dark, parsedColor, parsedDarkColor, isHover]);
+  }, [variant, disabled, dark, parsedColor, parsedDarkColor, isHover, hover]);
   return (
     <Component
       ref={btnRef as any}
       href={href}
       onClick={onClick}
-      className={`d-inline-block cursor-pointer rounded-3 transition-0-2-linear ${sizeClass} ${className}`}
+      className={`d-inline-block cursor-pointer rounded-3 transition-0-2-linear ${className}`}
       style={{
+        ...sizeStyle,
         ...colorStyles,
         ...style,
       }}

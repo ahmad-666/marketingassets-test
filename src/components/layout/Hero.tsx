@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroFilter from "./HeroFilter";
+import AssetFilter from "./AssetFilter";
 
 const Hero = () => {
   return (
@@ -29,7 +29,7 @@ const Hero = () => {
               </div>
               <div className="advance_search_panel">
                 <div className="row">
-                  <HeroFilter />
+                  <AssetFilter />
                 </div>
               </div>
             </div>

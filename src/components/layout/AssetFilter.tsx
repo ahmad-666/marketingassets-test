@@ -56,10 +56,10 @@ export default function AssetFilter() {
     <div>
       <form
         onSubmit={submitHandler}
-        className="bg-white rounded-3 position-relative w-100 shadow p-3 p-md-5"
+        className="bg-white rounded-3 position-relative w-100 shadow p-2 p-md-4"
       >
-        <ul className="row">
-          <li className="col">
+        <ul className="row justify-content-center g-3">
+          <li className="col-12 col-sm-4">
             <AutoComplete
               value={type}
               onChange={(newType) => setType(newType)}
@@ -69,7 +69,7 @@ export default function AssetFilter() {
               hideDetails
             />
           </li>
-          <li className="col">
+          <li className="col-12 col-sm-4">
             <TextField
               value={search}
               onChange={(newSearch) => setSearch(newSearch)}
@@ -78,11 +78,11 @@ export default function AssetFilter() {
               hideDetails
             />
           </li>
-          <li className="col">
+          <li className="col-12 col-sm-3 d-flex align-items-end">
             <Button
               type="submit"
               size="lg"
-              className=" py-1 px-3"
+              className="fw-bold w-100"
               color="primary"
               variant="filled"
             >
