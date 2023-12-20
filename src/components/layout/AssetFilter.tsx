@@ -30,15 +30,12 @@ export default function AssetFilter() {
   const setUrlQueries = useCallback(() => {
     let url: null | string = null;
     if (type.value === "emoji") url = "/emojis";
-    else if (type.value === "logo") url = "logos";
+    else if (type.value === "logo") url = "/logos";
     else throw new Error("Invalid type!!!");
     router.replace(
       {
         pathname: url,
-        query: {
-          type: type.value,
-          search,
-        },
+        query: Object.fromEntries([["search", search]].filter((elm) => elm[1])),
       },
       undefined,
       { scroll: false }

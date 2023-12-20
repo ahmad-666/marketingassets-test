@@ -1,9 +1,10 @@
-import { useCallback, useRef, useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import CompanyCard from "@/src/components/company/CompanyCard";
 import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
 import Pagination from "@/src/components/common/Pagination";
+import useMountedEffect from "@/src/hooks/useMountedEffect";
 import { getCompanies } from "@/src/services/company";
 import type { Company } from "@/src/types/Company";
 
@@ -36,6 +37,7 @@ export default function CompaniesList({
   className = "",
 }: CompanyListProps) {
   const containerRef = useRef<HTMLDivElement>(null!);
+  const filterUpdated = useRef(false); //init value is false because for first render data will come from server
   const [pageVal, setPageVal] = useState(page);
   const router = useRouter();
   const setUrlQuery = useCallback(
@@ -63,10 +65,12 @@ export default function CompaniesList({
   }, [showPagination]);
   const changePage = useCallback((newVal: number) => {
     setPageVal(newVal);
+    filterUpdated.current = true;
   }, []);
   const { isFetching, data: companies } = useQuery<Company[]>({
+    refetchOnMount: false, //first render data will come from server so for first render we set initialData
+    enabled: filterUpdated.current,
     initialData: [...items],
-    refetchOnMount: false,
     queryKey: [
       "get-companies",
       targetCompany,
@@ -95,9 +99,15 @@ export default function CompaniesList({
       });
       setUrlQuery({ newPage: pageVal });
       scrollToContainer();
+      filterUpdated.current = false;
       return newCompanies;
     },
   });
+  useMountedEffect(() => {
+    //reset page to 1 if filters change
+    setPageVal(1);
+    filterUpdated.current = true;
+  }, [search]);
 
   return (
     <div className={`${className}`}>

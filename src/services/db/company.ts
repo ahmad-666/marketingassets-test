@@ -23,9 +23,10 @@ export async function getCompanies({
 }: CompaniesFilters) {
   let where: WhereOptions<CompanyResponse> = {};
   if (industry) where.industry = industry;
-  if(search) where.name = {
-    [Op.substring]: search
-  }
+  if (search)
+    where.name = {
+      [Op.substring]: search,
+    };
   const { count, rows } = await Company.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,

@@ -21,7 +21,7 @@ export default function Example() {
   const [val2, setVal2] = useState<Option[]>([]);
   const elm = useRef<SelectInstance<Option, false>>(null!);
   useEffect(() => {
-    console.log(elm.current.openMenu("first"));
+    elm.current.openMenu("first");
   }, []);
   return (
     <div>
