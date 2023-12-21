@@ -36,14 +36,15 @@ export default function AssetsList({ className = "" }: AssetsListProps) {
   return (
     <div className={`${className}`}>
       <LineTitle title="Various type of assets for innovate marketing" />
-      <div className="mt-4 row gap-3">
+      <div className="mt-6 row g-4">
         {items.map((item) => (
           <Link
             key={item.title}
             href={item.link}
-            className="col-12 cols-sm-6 col-md-4 col-lg-3"
+            className="col-12 col-sm-6 col-md-4 col-lg-3"
           >
             <AssetCard
+              className="h-100"
               title={item.title}
               text={item.text}
               imgSrc={item.imgSrc}

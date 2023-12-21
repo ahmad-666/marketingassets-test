@@ -11,7 +11,7 @@ import "aos/dist/aos.css";
 // import "swiper/css";
 // import "swiper/css/navigation";
 import "@/public/scss/main.scss";
-import "@/public/scss/global.scss";
+import "@/public/scss/global/index.scss";
 import { getEmojiCategories } from "@/src/services/emoji";
 
 type AppOwnProps = { menuItems: MenuItems };

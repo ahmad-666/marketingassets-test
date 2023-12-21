@@ -1,0 +1,39 @@
+@import "./spacing.scss";
+@import "./sizing.scss";
+@import "./colors.scss";
+@import "./text.scss";
+@import "./transitions.scss";
+@import "./others.scss";
+@import "./custom.scss";
+//basic styles
+*,
+::before,
+::after {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+}
+input,
+textarea,
+select {
+  &::placeholder {
+    text-transform: capitalize;
+    font-size: 14px;
+    color: var(--body-color);
+  }
+}
+//container
+.section-container {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 1200px) {
+  .section-container {
+    width: 95%;
+  }
+}

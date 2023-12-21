@@ -1,0 +1,66 @@
+.bg-primary-color {
+  // we have .bg-primary bootstrap class too
+  background-color: var(--primary-color);
+}
+.text-primary-color {
+  color: var(--primary-color);
+}
+.border-primary-color {
+  border-color: var(--primary-color);
+}
+.bg-dark-color {
+  //we have .bg-dark in bootstrap too so we use .bg-dark-color
+  background-color: var(--dark-color);
+}
+.text-dark-color {
+  color: var(--dark-color) !important;
+}
+.border-dark-color {
+  border-color: var(--dark-color);
+}
+.bg-body-color {
+  //in bootstrap we have .bg-body css class so we use .bg-body-color
+  background-color: var(--body-color);
+}
+.text-body-color {
+  color: var(--body-color) !important;
+}
+.border-body-color {
+  border-color: var(--body-color);
+}
+.bg-lightgray2 {
+  background-color: var(--lightgray2-color);
+}
+.text-lightgray2 {
+  color: var(--lightgray2-color);
+}
+.border-lightgray2 {
+  border-color: var(--lightgray2-color);
+}
+.bg-lightgray {
+  background-color: var(--lightgray-color);
+}
+.text-lightgray {
+  color: var(--lightgray-color);
+}
+.border-lightgray {
+  border-color: var(--lightgray-color);
+}
+.bg-gray {
+  background-color: var(--gray-color);
+}
+.text-gray {
+  color: var(--gray-color);
+}
+.border-gray {
+  border-color: var(--gray-color);
+}
+.bg-gray2 {
+  background-color: var(--gray2-color);
+}
+.text-gray2 {
+  color: var(--gray2-color);
+}
+.border-gray2 {
+  border-color: var(--gray2-color);
+}

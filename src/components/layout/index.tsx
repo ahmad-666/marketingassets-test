@@ -38,7 +38,7 @@ export default function Layout({
           <Header menuItems={menuItems} />
           <MobileMenu menuItems={menuItems} />
           <Hero />
-          <main>{children}</main>
+          <main className="py-5">{children}</main>
           <Footer />
         </div>
         <ScrollToTop />
