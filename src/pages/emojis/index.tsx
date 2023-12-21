@@ -47,7 +47,7 @@ export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
     const { page, search } = router.query;
     return {
       page: +page || 1,
-      search: search as string,
+      search: (search as string) || "",
     };
   }, [router.query]);
   return (
