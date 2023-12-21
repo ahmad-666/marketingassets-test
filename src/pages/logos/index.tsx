@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useRouter } from "next/router";
 import MetaData from "@/src/components/common/MetaData";
 import CompaniesList from "@/src/components/company/CompaniesList";
@@ -50,6 +51,13 @@ export default function Page({
 }: PageProps) {
   const router = useRouter();
   const title = "Company Logo Repository: Download Logos or Integrate via API";
+  const queries = useMemo(() => {
+    const { page, search } = router.query;
+    return {
+      page: +page || 1,
+      search: search as string,
+    };
+  }, [router.query]);
   return (
     <div>
       <MetaData
@@ -71,8 +79,8 @@ export default function Page({
               items={companies}
               totalItems={totalCompanies}
               pageSize={pageSize}
-              page={+router.query.page || 1}
-              search={router.query.search as string}
+              page={queries.page}
+              search={queries.search}
               showPagination
             />
           </div>

@@ -12,17 +12,16 @@ type PageProps = {
   totalEmojis: number;
 };
 const pageSize = 8;
-const emojiCategoryId = "people-emoji";
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { page } = context.query;
+    const { page, search } = context.query;
     const finalPage = +page || 1;
     const { items: emojis, meta } = await getEmojis({
-      category: emojiCategoryId as string,
       page: finalPage,
       pageSize,
+      search: search as string,
     });
     return {
       props: {
@@ -44,28 +43,26 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 };
 export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
   const router = useRouter();
-  const emojiCategoryText = useMemo(() => {
-    return textNormalize(emojiCategoryId);
-  }, []);
   const queries = useMemo(() => {
-    const { page } = router.query;
+    const { page, search } = router.query;
     return {
       page: +page || 1,
+      search: search as string,
     };
   }, [router.query]);
   return (
     <div>
       <MetaData
-        title={`List of all ${emojiCategoryText} | CUFinder`}
-        description={`Explore a complete list of ${emojiCategoryText}, featuring faces, emotions, professions, and activities. Find the perfect emoji to express yourself. Browse now!`}
+        title={`List of all ${queries.search} emojis | CUFinder`}
+        description={`Explore a complete list of ${queries.search}, featuring faces, emotions, professions, and activities. Find the perfect emoji to express yourself. Browse now!`}
       />
       <EmojisList
-        title={`List of All ${emojiCategoryText}`}
+        title={`List of All ${queries.search} Emojis`}
         items={emojis}
         totalItems={totalEmojis}
         pageSize={pageSize}
-        emojiCategoryId={emojiCategoryId}
         page={queries.page}
+        search={queries.search}
         showPagination
       />
     </div>

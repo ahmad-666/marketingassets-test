@@ -6,14 +6,19 @@ import Icon from "@/src/components/common/Icon";
 import Button from "@/src/components/common/Button";
 import type { Option } from "@/src/types/Common";
 
-const typeOptions: Option[] = [
+type Type = Option & {
+  prefix: string;
+};
+const typeOptions: Type[] = [
   {
     value: "emoji",
     label: "Emoji",
+    prefix: "emoji",
   },
   {
     value: "logo",
     label: "Logo",
+    prefix: "logo",
   },
 ];
 export default function AssetFilter() {
@@ -21,12 +26,13 @@ export default function AssetFilter() {
   const [type, setType] = useState(typeOptions[0]);
   const [search, setSearch] = useState("");
   const readUrlQueries = useCallback(() => {
-    const { type, search } = router.query;
-    const typeQuery = type as string;
+    const { pathname, query } = router;
+    const { search } = query;
+    const typePrefix = pathname.includes("/logos") ? "logo" : "emoji";
     const searchQuery = search as string;
-    setType(typeOptions.find((o) => o.value === typeQuery) || typeOptions[0]);
+    setType(typeOptions.find((o) => o.prefix === typePrefix) || typeOptions[0]);
     setSearch(searchQuery || "");
-  }, [router.query]);
+  }, [router]);
   const setUrlQueries = useCallback(() => {
     let url: null | string = null;
     if (type.value === "emoji") url = "/emojis";

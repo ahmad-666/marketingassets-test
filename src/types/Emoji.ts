@@ -21,6 +21,7 @@ export type EmojisFilters = {
   category?: string;
   page?: number;
   pageSize?: number;
+  search?: string;
 };
 //server-side types
 export type EmojiResponse = {

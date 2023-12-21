@@ -16,6 +16,7 @@ export const getEmojis = async ({
   category,
   page = 1,
   pageSize,
+  search,
 }: EmojisFilters) => {
   const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
     params: {
@@ -23,6 +24,7 @@ export const getEmojis = async ({
       category,
       page,
       pageSize,
+      search,
     },
   });
   return data;

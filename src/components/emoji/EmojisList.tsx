@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import EmojiCard from "@/src/components/emoji/EmojiCard";
 import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
 import Pagination from "@/src/components/common/Pagination";
+import useMountedEffect from "@/src/hooks/useMountedEffect";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { Emoji } from "@/src/types/Emoji";
@@ -14,6 +15,7 @@ type EmojisListProps = {
   totalItems?: number;
   page?: number;
   pageSize?: number;
+  search?: string;
   emojiList?: string[];
   emojiCategoryId?: string;
   showPagination?: boolean;
@@ -29,6 +31,7 @@ export default function EmojisList({
   totalItems = 0,
   page = 1,
   pageSize = 8,
+  search,
   showPagination = true,
   emojiList = [],
   emojiCategoryId,
@@ -38,6 +41,7 @@ export default function EmojisList({
   const { emojiId } = router.query;
   const [pageVal, setPageVal] = useState(page);
   const containerRef = useRef<HTMLDivElement>(null!);
+  const filterUpdated = useRef(false);
   const setUrlQueries = useCallback(
     ({ newPage }: Query) => {
       if (showPagination) {
@@ -58,6 +62,7 @@ export default function EmojisList({
   );
   const changePage = useCallback((newVal: number) => {
     setPageVal(newVal);
+    filterUpdated.current = true;
   }, []);
   const scrollToContainer = useCallback(() => {
     if (showPagination) {
@@ -65,8 +70,9 @@ export default function EmojisList({
     }
   }, [showPagination]);
   const { isFetching, data: emojis } = useQuery<Emoji[]>({
-    initialData: [...items],
     refetchOnMount: false,
+    enabled: filterUpdated.current,
+    initialData: [...items],
     queryKey: [
       "get-emojis",
       emojiCategoryId,
@@ -74,6 +80,7 @@ export default function EmojisList({
       emojiList,
       pageVal,
       pageSize,
+      search,
     ],
     queryFn: async () => {
       const { items } = await getEmojis({
@@ -81,6 +88,7 @@ export default function EmojisList({
         urls: emojiList,
         page: pageVal || 1,
         pageSize,
+        search,
       });
       const newEmojis: Emoji[] = [];
       items.forEach((emoji) => {
@@ -96,9 +104,14 @@ export default function EmojisList({
       });
       setUrlQueries({ newPage: pageVal });
       scrollToContainer();
+      filterUpdated.current = false;
       return newEmojis;
     },
   });
+  useMountedEffect(() => {
+    setPageVal(1);
+    filterUpdated.current = true;
+  }, [search]);
   return (
     <section className={`${className}`}>
       <div className="container" ref={containerRef}>

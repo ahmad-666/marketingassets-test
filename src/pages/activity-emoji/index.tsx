@@ -10,7 +10,6 @@ import type { Emoji } from "@/src/types/Emoji";
 type PageProps = {
   emojis: Emoji[];
   totalEmojis: number;
-  page: number;
 };
 const pageSize = 8;
 const emojiCategoryId = "activity-emoji";
@@ -37,22 +36,23 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           usersScore: emoji.score,
         })),
         totalEmojis: meta.totalCount,
-        page: finalPage,
       },
     };
   } catch (err) {
     return { notFound: true };
   }
 };
-export default function Page({
-  emojis = [],
-  totalEmojis = 0,
-  page = 1,
-}: PageProps) {
+export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
   const router = useRouter();
   const emojiCategoryText = useMemo(() => {
     return textNormalize(emojiCategoryId);
   }, []);
+  const queries = useMemo(() => {
+    const { page } = router.query;
+    return {
+      page: +page || 1,
+    };
+  }, [router.query]);
   return (
     <div>
       <MetaData
@@ -65,7 +65,7 @@ export default function Page({
         totalItems={totalEmojis}
         pageSize={pageSize}
         emojiCategoryId={emojiCategoryId}
-        page={page}
+        page={queries.page}
         showPagination
       />
     </div>

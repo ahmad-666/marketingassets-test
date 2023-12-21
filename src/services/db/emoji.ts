@@ -18,10 +18,15 @@ export async function getEmojis({
   urls = [],
   page = 1,
   pageSize = null,
+  search,
 }: EmojisFilters) {
   let where: WhereOptions<EmojiResponse> = {};
   if (urls?.length) where.url = urls;
   if (category) where.parent = category;
+  if (search)
+    where.text = {
+      [Op.substring]: search,
+    };
   const { count, rows } = await Emoji.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
