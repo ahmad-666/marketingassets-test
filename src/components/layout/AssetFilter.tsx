@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import TextField from "@/src/components/common/form/TextField";
-import AutoComplete from "@/src/components/common/form/AutoComplete";
+// import AutoComplete from "@/src/components/common/form/AutoComplete";
 import Icon from "@/src/components/common/Icon";
 import Button from "@/src/components/common/Button";
 import type { Option } from "@/src/types/Common";
@@ -60,12 +60,27 @@ export default function AssetFilter() {
   }, []);
   return (
     <div>
+      <ul className="d-flex justify-content-center gap-3 mb0">
+        {typeOptions.map((typeOption) => (
+          <li key={typeOption.value}>
+            <Button
+              size="lg"
+              color={typeOption.value === type.value ? "primary" : "white"}
+              onClick={() => setType(typeOption)}
+              className="fw-bold"
+              hover={false}
+            >
+              {typeOption.label}
+            </Button>
+          </li>
+        ))}
+      </ul>
       <form
         onSubmit={submitHandler}
-        className="bg-white rounded-3 position-relative w-100 shadow p-2 p-md-4"
+        className="bg-white rounded-3 position-relative w-100 shadow p-2 p-md-4 mtn5"
       >
         <ul className="row justify-content-center g-3">
-          <li className="col-12 col-sm-4">
+          {/* <li className="col-12 col-sm-4">
             <AutoComplete
               value={type}
               onChange={(newType) => setType(newType)}
@@ -74,23 +89,26 @@ export default function AssetFilter() {
               placeholder="Select Asset..."
               hideDetails
             />
-          </li>
-          <li className="col-12 col-sm-4">
+          </li> */}
+          <li className="col-8 col-md-9">
             <TextField
               value={search}
               onChange={(newSearch) => setSearch(newSearch)}
-              label="Term"
+              label="Search"
               placeholder="Enter Search Term..."
               hideDetails
             />
           </li>
-          <li className="col-12 col-sm-3 d-flex align-items-end">
+          <li className="col-4 col-md-3 d-flex align-items-end">
             <Button
               type="submit"
               size="lg"
-              className="fw-bold w-100"
+              className="fw-bold w-100 py0"
               color="primary"
               variant="filled"
+              style={{
+                height: "50px",
+              }}
             >
               <Icon icon="mdi:search" size="md" className="text-dark-color" />
               Search
