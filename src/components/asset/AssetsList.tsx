@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LineTitle from "@/src/components/others/LineTitle";
 import AssetCard, { type AssetCardProps as AssetType } from "./AssetCard";
 
 type AssetsListProps = {
@@ -34,9 +35,14 @@ const items: Item[] = [
 export default function AssetsList({ className = "" }: AssetsListProps) {
   return (
     <div className={`${className}`}>
-      <div className="row gap-3">
+      <LineTitle title="Various type of assets for innovate marketing" />
+      <div className="mt-4 row gap-3">
         {items.map((item) => (
-          <Link key={item.title} href={item.link}>
+          <Link
+            key={item.title}
+            href={item.link}
+            className="col-12 cols-sm-6 col-md-4 col-lg-3"
+          >
             <AssetCard
               title={item.title}
               text={item.text}
