@@ -36,7 +36,7 @@ export default function AssetsList({ className = "" }: AssetsListProps) {
   return (
     <div className={`${className}`}>
       <LineTitle title="Various type of assets for innovate marketing" />
-      <div className="mt-6 row g-4">
+      <div className="mt-5 row g-4">
         {items.map((item) => (
           <Link
             key={item.title}

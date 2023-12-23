@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "./assetCard.module.scss";
 
 export type AssetCardProps = {
   title: string;
@@ -14,7 +15,7 @@ export default function AssetCard({
 }: AssetCardProps) {
   return (
     <div
-      className={`rounded-3 border-1 border-solid border-lightgray transition-0-2-linear p-2 d-flex flex-column align-items-center ${className}`}
+      className={`rounded-3 border-1 border-solid border-lightgray2 transition-0-2-linear p-4 d-flex flex-column align-items-center ${styles["asset-card"]} ${className}`}
     >
       <Image
         src={imgSrc}
@@ -26,8 +27,8 @@ export default function AssetCard({
           height: "60px",
         }}
       />
-      <h4 className="text-dark-color mt-2 fs-4">{title}</h4>
-      <p className="text-body-color mt-2 fz16 text-center">{text}</p>
+      <h4 className="text-dark-color mt-3 fs-5">{title}</h4>
+      <p className="text-body-color mt-3 fz15 text-center fw-bold">{text}</p>
     </div>
   );
 }

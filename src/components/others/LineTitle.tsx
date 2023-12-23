@@ -9,7 +9,7 @@ export default function LineTitle({ title, className = "" }: LineTitleProps) {
   return (
     <div className={`${className}`}>
       <div className="d-flex flex-column align-items-center">
-        <h2 className="fs-2 text-dark-color text-center">{title}</h2>
+        <h2 className="fs-2 fw-medium text-dark-color text-center">{title}</h2>
         <Image
           src="/images/background/line-shape.svg"
           alt="line-shape"

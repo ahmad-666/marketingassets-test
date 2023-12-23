@@ -1,0 +1,5 @@
+.asset-card {
+  &:hover {
+    border: 2px solid var(--bs-primary) !important;
+  }
+}
