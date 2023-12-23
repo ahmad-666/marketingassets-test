@@ -42,7 +42,7 @@ export default function Layout({
             <Landing />
           </SectionContainer>
           {/* <Hero /> */}
-          <main className="py-5">{children}</main>
+          <main className="pt-5">{children}</main>
           <Footer />
         </div>
         <ScrollToTop />

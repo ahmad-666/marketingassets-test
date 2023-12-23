@@ -20,7 +20,7 @@ export default function Page() {
         <FaqsList />
         <BrandsList className="mt-7" />
       </SectionContainer>
-      <NewsLetters className="mt-5 mb-n5" />
+      <NewsLetters className="mt-5" />
     </div>
   );
 }
