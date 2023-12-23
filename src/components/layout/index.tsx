@@ -38,12 +38,10 @@ export default function Layout({
           <SectionContainer>
             <HeaderTop />
             <Header menuItems={menuItems} />
-          </SectionContainer>
-          <MobileMenu menuItems={menuItems} />
-          {/* <Hero /> */}
-          <SectionContainer>
+            <MobileMenu menuItems={menuItems} />
             <Landing />
           </SectionContainer>
+          {/* <Hero /> */}
           <main className="py-5">{children}</main>
           <Footer />
         </div>

@@ -70,18 +70,7 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
     <>
       <div className="stylehome1">
         <div className="mobile-menu">
-          <div className="header stylehome1">
-            <div className="mobile_menu_bar">
-              <a
-                className="menubar"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#mobileMenu"
-                aria-controls="mobileMenu"
-              >
-                <small>Menu</small>
-                <span />
-              </a>
-            </div>
+          <div className="header stylehome1 d-flex justify-content-between align-items-center">
             <div className="mobile_menu_main_logo">
               <Link href="/">
                 <Image
@@ -92,6 +81,17 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
                   alt="companyurlfinder"
                 />
               </Link>
+            </div>
+            <div className="mobile_menu_bar">
+              <a
+                className="menubar"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenu"
+                aria-controls="mobileMenu"
+              >
+                {/* <small>Menu</small> */}
+                <span />
+              </a>
             </div>
           </div>
         </div>

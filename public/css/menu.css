@@ -16,10 +16,10 @@
   .mobile-menu {
     display: block;
   }
-  .header,
+  /* .header,
   .footer {
     padding: 0 20px !important;
-  }
+  } */
 }
 .header.stylehome1 {
   background-color: #fff;
@@ -44,7 +44,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 70px;
-  padding: 0 50px;
+  /* padding: 0 50px; */
 }
 .header.fixed {
   position: fixed;
@@ -62,13 +62,10 @@
 .mobile_menu_bar a.menubar {
   display: block;
   height: 50px;
-  right: 0;
-  left: auto;
   line-height: 40px;
   padding-top: 15px;
-  position: absolute;
-  top: 12px;
   width: 50px;
+  position: relative;
 }
 .header a.menubar span {
   background: #1a3760;
@@ -77,6 +74,7 @@
   margin: 8px 5px;
   right: 0;
   width: 20px;
+  position: absolute;
 }
 .mobile_menu_bar a.menubar small {
   left: -50px;
@@ -93,6 +91,8 @@
   background: #1a3760;
   height: 2px;
   width: 25px;
+  position: absolute;
+  right: 5px;
 }
 .header li.list_s a:before,
 .header li.list_s a:after {
@@ -630,7 +630,9 @@ li.mm-add-listing.mm-listitem:after {
   min-height: 20px;
   min-height: var(--mm-line-height);
   padding: 6.5px;
-  padding: calc(((var(--mm-listitem-size) * 0.75) - var(--mm-line-height)) * 0.5);
+  padding: calc(
+    ((var(--mm-listitem-size) * 0.75) - var(--mm-line-height)) * 0.5
+  );
   padding-right: 10px;
   padding-left: 20px;
 }
@@ -847,7 +849,8 @@ li.mm-add-listing.mm-listitem:after {
   color: #cecff9;
 }
 .stylehome1.home3 a.mm-listitem__text:hover,
-.stylehome1.home3 a.mm-btn.mm-btn_next.mm-listitem__btn.mm-listitem__text:hover {
+.stylehome1.home3
+  a.mm-btn.mm-btn_next.mm-listitem__btn.mm-listitem__text:hover {
   background-color: #e5e5e5;
   color: #1a3760;
 }
@@ -862,7 +865,8 @@ li.mm-add-listing.mm-listitem:after {
   color: #252834;
 }
 .stylehome1.home6 a.mm-listitem__text:hover,
-.stylehome1.home6 a.mm-btn.mm-btn_next.mm-listitem__btn.mm-listitem__text:hover {
+.stylehome1.home6
+  a.mm-btn.mm-btn_next.mm-listitem__btn.mm-listitem__text:hover {
   background-color: #43d4b6;
   color: #ffffff;
 }
@@ -884,9 +888,21 @@ li.mm-add-listing.mm-listitem:after {
 /* Small devices (min-width: 576px) (max-width: 767.98px) // (landscape phones, less than 992px) */
 @media only screen and (max-width: 992px) {
   .header.stylehome1.dashbord_pages:before {
-    background-image: -moz-linear-gradient(0deg, rgb(52, 82, 255) 0%, rgb(255, 16, 83) 100%);
-    background-image: -webkit-linear-gradient(0deg, rgb(52, 82, 255) 0%, rgb(255, 16, 83) 100%);
-    background-image: -ms-linear-gradient(0deg, rgb(52, 82, 255) 0%, rgb(255, 16, 83) 100%);
+    background-image: -moz-linear-gradient(
+      0deg,
+      rgb(52, 82, 255) 0%,
+      rgb(255, 16, 83) 100%
+    );
+    background-image: -webkit-linear-gradient(
+      0deg,
+      rgb(52, 82, 255) 0%,
+      rgb(255, 16, 83) 100%
+    );
+    background-image: -ms-linear-gradient(
+      0deg,
+      rgb(52, 82, 255) 0%,
+      rgb(255, 16, 83) 100%
+    );
   }
   .mobile-menu .header_user_notif.dashbord_pages_mobile_version li:first-child {
     display: inline-block !important;
