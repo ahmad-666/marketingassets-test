@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import CompanyCard from "@/src/components/company/CompanyCard";
-import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
+import SpinnerLoader from "@/src/components/common/SpinnerLoader";
 import Pagination from "@/src/components/common/Pagination";
 import useMountedEffect from "@/src/hooks/useMountedEffect";
 import { getCompanies } from "@/src/services/company";

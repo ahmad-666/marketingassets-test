@@ -4,7 +4,8 @@ import HeaderTop from "./HeaderTop";
 import HeaderSidebar from "./HeaderSidebar";
 import Header from "./Header";
 import MobileMenu from "./MobileMenu";
-import Hero from "./Hero";
+//import Hero from "./Hero";
+import Landing from "@/src/components/others/Landing";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollTop";
 
@@ -37,7 +38,8 @@ export default function Layout({
           <HeaderTop />
           <Header menuItems={menuItems} />
           <MobileMenu menuItems={menuItems} />
-          <Hero />
+          {/* <Hero /> */}
+          <Landing />
           <main className="py-5">{children}</main>
           <Footer />
         </div>

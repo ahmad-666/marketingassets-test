@@ -1,6 +1,6 @@
 import { useMemo, useRef } from "react";
 import Link from "next/link";
-import SpinnerLoader from "@/src/components/loaders/SpinnerLoader";
+import SpinnerLoader from "@/src/components/common/SpinnerLoader";
 import useColor from "@/src/hooks/useColor";
 import useHover from "@/src/hooks/useHover";
 
