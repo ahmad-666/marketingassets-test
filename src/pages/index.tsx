@@ -2,6 +2,7 @@ import MetaData from "@/src/components/common/MetaData";
 import SectionContainer from "@/src/components/common/SectionContainer";
 import AssetsList from "@/src/components/asset/AssetsList";
 import EmojiCategoryList from "@/src/components/emoji/EmojiCategoriesList";
+import FaqsList from "@/src/components/others/FaqsList";
 
 export default function Page() {
   return (
@@ -10,6 +11,7 @@ export default function Page() {
       <SectionContainer>
         <AssetsList />
         <EmojiCategoryList className="mt-7" />
+        <FaqsList className="mt-7" />
       </SectionContainer>
     </div>
   );
