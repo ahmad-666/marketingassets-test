@@ -22,8 +22,6 @@ export default function Divider({
         height: typeof height === "number" ? `${height}px` : height,
         backgroundColor: parsedColor,
       }}
-    >
-      Divider
-    </div>
+    ></div>
   );
 }

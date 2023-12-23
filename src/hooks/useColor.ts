@@ -3,7 +3,7 @@ import colors from "@/src/utils/colors";
 
 const useColor = (val: string) => {
   //color can be 'primary','primary-main','secondary-lighten2','red','#f00','rgb(255,0,0)'
-  const [color, setColor] = useState();
+  const [color, setColor] = useState("transparent");
   const findColor = useCallback(() => {
     const colorSplit = val.split("-");
     const name = colorSplit?.[0];

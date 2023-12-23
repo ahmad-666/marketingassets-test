@@ -1,3 +1,4 @@
+// reset some bootstrap injected styles
 .h1,
 .h2,
 .h3,
@@ -13,9 +14,48 @@ h6,
 p {
   margin-bottom: 0px;
 }
-
+// our newly added css class for margin,padding in rem unit
+.pt-6 {
+  padding-top: 5rem;
+}
+.pt-7 {
+  padding-top: 7rem;
+}
+.pt-8 {
+  padding-top: 10rem;
+}
+.px-6 {
+  padding-left: 5rem !important;
+  padding-right: 5rem !important;
+}
+.px-7 {
+  padding-left: 7rem !important;
+  padding-right: 7rem !important;
+}
+.px-8 {
+  padding-left: 10rem !important;
+  padding-right: 10rem !important;
+}
+.py-6 {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+.py-7 {
+  padding-top: 7rem !important;
+  padding-bottom: 7rem !important;
+}
+.py-8 {
+  padding-top: 10rem !important;
+  padding-bottom: 10rem !important;
+}
 .mt-6 {
   margin-top: 5rem;
+}
+.mt-7 {
+  margin-top: 7rem;
+}
+.mt-8 {
+  margin-top: 10rem;
 }
 .mx-6 {
   margin-left: 5rem !important;
@@ -29,6 +69,291 @@ p {
   margin-left: 10rem !important;
   margin-right: 10rem !important;
 }
+.my-6 {
+  margin-top: 5rem !important;
+  margin-bottom: 5rem !important;
+}
+.my-7 {
+  margin-top: 7rem !important;
+  margin-bottom: 7rem !important;
+}
+.my-8 {
+  margin-top: 10rem !important;
+  margin-bottom: 10rem !important;
+}
+@media screen and (min-width: 576px) {
+  .pt-sm-6 {
+    padding-top: 5rem;
+  }
+  .pt-sm-7 {
+    padding-top: 7rem;
+  }
+  .pt-sm-8 {
+    padding-top: 10rem;
+  }
+  .px-sm-6 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .px-sm-7 {
+    padding-left: 7rem !important;
+    padding-right: 7rem !important;
+  }
+  .px-sm-8 {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+  .py-sm-6 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  .py-sm-7 {
+    padding-top: 7rem !important;
+    padding-bottom: 7rem !important;
+  }
+  .py-sm-8 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+  .mt-sm-6 {
+    margin-top: 5rem;
+  }
+  .mt-sm-7 {
+    margin-top: 7rem;
+  }
+  .mt-sm-8 {
+    margin-top: 10rem;
+  }
+  .mx-sm-6 {
+    margin-left: 5rem !important;
+    margin-right: 5rem !important;
+  }
+  .mx-sm-7 {
+    margin-left: 7rem !important;
+    margin-right: 7rem !important;
+  }
+  .mx-sm-8 {
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+  }
+  .my-sm-6 {
+    margin-top: 5rem !important;
+    margin-bottom: 5rem !important;
+  }
+  .my-sm-7 {
+    margin-top: 7rem !important;
+    margin-bottom: 7rem !important;
+  }
+  .my-sm-8 {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pt-md-6 {
+    padding-top: 5rem;
+  }
+  .pt-md-7 {
+    padding-top: 7rem;
+  }
+  .pt-md-8 {
+    padding-top: 10rem;
+  }
+  .px-md-6 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .px-md-7 {
+    padding-left: 7rem !important;
+    padding-right: 7rem !important;
+  }
+  .px-md-8 {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+  .py-md-6 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  .py-md-7 {
+    padding-top: 7rem !important;
+    padding-bottom: 7rem !important;
+  }
+  .py-md-8 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+  .mt-md-6 {
+    margin-top: 5rem;
+  }
+  .mt-md-7 {
+    margin-top: 7rem;
+  }
+  .mt-md-8 {
+    margin-top: 10rem;
+  }
+  .mx-md-6 {
+    margin-left: 5rem !important;
+    margin-right: 5rem !important;
+  }
+  .mx-md-7 {
+    margin-left: 7rem !important;
+    margin-right: 7rem !important;
+  }
+  .mx-md-8 {
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+  }
+  .my-md-6 {
+    margin-top: 5rem !important;
+    margin-bottom: 5rem !important;
+  }
+  .my-md-7 {
+    margin-top: 7rem !important;
+    margin-bottom: 7rem !important;
+  }
+  .my-md-8 {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .pt-lg-6 {
+    padding-top: 5rem;
+  }
+  .pt-lg-7 {
+    padding-top: 7rem;
+  }
+  .pt-lg-8 {
+    padding-top: 10rem;
+  }
+  .px-lg-6 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .px-lg-7 {
+    padding-left: 7rem !important;
+    padding-right: 7rem !important;
+  }
+  .px-lg-8 {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+  .py-lg-6 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  .py-lg-7 {
+    padding-top: 7rem !important;
+    padding-bottom: 7rem !important;
+  }
+  .py-lg-8 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+  .mt-lg-6 {
+    margin-top: 5rem;
+  }
+  .mt-lg-7 {
+    margin-top: 7rem;
+  }
+  .mt-lg-8 {
+    margin-top: 10rem;
+  }
+  .mx-lg-6 {
+    margin-left: 5rem !important;
+    margin-right: 5rem !important;
+  }
+  .mx-lg-7 {
+    margin-left: 7rem !important;
+    margin-right: 7rem !important;
+  }
+  .mx-lg-8 {
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+  }
+  .my-lg-6 {
+    margin-top: 5rem !important;
+    margin-bottom: 5rem !important;
+  }
+  .my-lg-7 {
+    margin-top: 7rem !important;
+    margin-bottom: 7rem !important;
+  }
+  .my-lg-8 {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .pt-xl-6 {
+    padding-top: 5rem;
+  }
+  .pt-xl-7 {
+    padding-top: 7rem;
+  }
+  .pt-xl-8 {
+    padding-top: 10rem;
+  }
+  .px-xl-6 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .px-xl-7 {
+    padding-left: 7rem !important;
+    padding-right: 7rem !important;
+  }
+  .px-xl-8 {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+  .py-xl-6 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  .py-xl-7 {
+    padding-top: 7rem !important;
+    padding-bottom: 7rem !important;
+  }
+  .py-xl-8 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+  .mt-xl-6 {
+    margin-top: 5rem;
+  }
+  .mt-xl-7 {
+    margin-top: 7rem;
+  }
+  .mt-xl-8 {
+    margin-top: 10rem;
+  }
+  .mx-xl-6 {
+    margin-left: 5rem !important;
+    margin-right: 5rem !important;
+  }
+  .mx-xl-7 {
+    margin-left: 7rem !important;
+    margin-right: 7rem !important;
+  }
+  .mx-xl-8 {
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+  }
+  .my-xl-6 {
+    margin-top: 5rem !important;
+    margin-bottom: 5rem !important;
+  }
+  .my-xl-7 {
+    margin-top: 7rem !important;
+    margin-bottom: 7rem !important;
+  }
+  .my-xl-8 {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+}
+//out newly added css classes for padding,margin in px unit
 .mx0 {
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -64,18 +389,6 @@ p {
 .mx40 {
   margin-left: 40px !important;
   margin-right: 40px !important;
-}
-.my-6 {
-  margin-top: 5rem !important;
-  margin-bottom: 5rem !important;
-}
-.my-7 {
-  margin-top: 7rem !important;
-  margin-bottom: 7rem !important;
-}
-.my-8 {
-  margin-top: 10rem !important;
-  margin-bottom: 10rem !important;
 }
 .my0 {
   margin-top: 0px !important;
@@ -113,17 +426,41 @@ p {
   margin-top: 40px !important;
   margin-bottom: 40px !important;
 }
-.py-6 {
-  padding-top: 5rem !important;
-  padding-bottom: 5rem !important;
+.px0 {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
-.py-7 {
-  padding-top: 7rem !important;
-  padding-bottom: 7rem !important;
+.px5 {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
-.py-8 {
-  padding-top: 10rem !important;
-  padding-bottom: 10rem !important;
+.px10 {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.px15 {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+.px20 {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+.px25 {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+.px30 {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+.px35 {
+  padding-left: 35px !important;
+  padding-right: 35px !important;
+}
+.px40 {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
 }
 .py0 {
   padding-top: 0px !important;
@@ -160,52 +497,4 @@ p {
 .py40 {
   padding-top: 40px !important;
   padding-bottom: 40px !important;
-}
-.px-6 {
-  padding-left: 5rem !important;
-  padding-right: 5rem !important;
-}
-.px-7 {
-  padding-left: 7rem !important;
-  padding-right: 7rem !important;
-}
-.px-8 {
-  padding-left: 10rem !important;
-  padding-right: 10rem !important;
-}
-.px0 {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-.px5 {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-}
-.px10 {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-.px15 {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-}
-.px20 {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-}
-.px25 {
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-}
-.px30 {
-  padding-left: 30px !important;
-  padding-right: 30px !important;
-}
-.px35 {
-  padding-left: 35px !important;
-  padding-right: 35px !important;
-}
-.px40 {
-  padding-left: 40px !important;
-  padding-right: 40px !important;
 }

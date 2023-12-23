@@ -2,7 +2,8 @@ import { useCallback, useRef } from "react";
 import Link from "next/link";
 import Button from "@/src/components/common/Button";
 import Icon from "@/src/components/common/Icon";
-import { SwiperSlide, type SwiperRef } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
+import { type Swiper as SwiperType } from "swiper";
 import SwiperCarousel from "@/src/components/common/SwiperCarousel";
 import EmojiCategoryCard, {
   type EmojiCategoryCardProps as CategoryType,
@@ -65,18 +66,22 @@ const categories: Category[] = [
 export default function EmojiCategoriesList({
   className = "",
 }: EmojiCategoriesListProps) {
-  const swiper = useRef<SwiperRef>(null!);
-  const prevSlide = useCallback(() => {}, []);
-  const nextSlide = useCallback(() => {}, []);
+  const swiper = useRef<SwiperType>(null!);
+  const prevSlide = useCallback(() => {
+    swiper.current.slidePrev();
+  }, []);
+  const nextSlide = useCallback(() => {
+    swiper.current.slideNext();
+  }, []);
   return (
     <div className={`${className}`}>
       <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
-        <h2 className="fs-2 text-dark-color">Emojis categories</h2>
+        <h2 className="fs-2 fw-medium text-dark-color">Emojis categories</h2>
         <div className="d-flex align-items-center gap-2">
           <Button
             variant="filled"
-            size="md"
-            color="gray-lighten"
+            size="sm"
+            color="gray-lighten2"
             onClick={prevSlide}
           >
             <Icon
@@ -87,8 +92,8 @@ export default function EmojiCategoriesList({
           </Button>
           <Button
             variant="filled"
-            size="md"
-            color="gray-lighten"
+            size="sm"
+            color="gray-lighten2"
             onClick={nextSlide}
           >
             <Icon
@@ -100,6 +105,9 @@ export default function EmojiCategoriesList({
         </div>
       </div>
       <SwiperCarousel
+        className="mt-4"
+        ref={swiper}
+        loop
         slidesPerView={1}
         spaceBetween={20}
         breakpoints={{
@@ -113,12 +121,12 @@ export default function EmojiCategoriesList({
             slidesPerView: 4,
           },
         }}
-        ref={swiper}
       >
         {categories.map((category) => (
-          <SwiperSlide key={category.title}>
-            <Link href={category.link}>
+          <SwiperSlide key={category.title} className="h-auto">
+            <Link href={category.link} className="h-100 d-block">
               <EmojiCategoryCard
+                className="h-100"
                 title={category.title}
                 text={category.text}
                 imgSrc={category.imgSrc}
