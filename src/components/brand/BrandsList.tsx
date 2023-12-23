@@ -12,44 +12,57 @@ type Brand = {
 const brands: Brand[] = [
   {
     name: "airbnb",
-    imgSrc: "/images/public/brands/airbnb.png",
+    imgSrc: "/images/brands/airbnb.png",
   },
   {
     name: "booking",
-    imgSrc: "/images/public/brands/booking.png",
+    imgSrc: "/images/brands/booking.png",
   },
   {
     name: "expedia",
-    imgSrc: "/images/public/brands/expedia.png",
+    imgSrc: "/images/brands/expedia.png",
   },
   {
     name: "goibibo",
-    imgSrc: "/images/public/brands/goibibo.png",
+    imgSrc: "/images/brands/goibibo.png",
   },
   {
     name: "make-my-trip",
-    imgSrc: "/images/public/brands/make-my-trip.png",
+    imgSrc: "/images/brands/make-my-trip.png",
   },
   {
     name: "trip-advisor",
-    imgSrc: "/images/public/brands/trip-advisor.png",
+    imgSrc: "/images/brands/trip-advisor.png",
   },
 ];
 export default function BrandsList({ className = "" }: BrandsListProps) {
   return (
     <div className={`${className}`}>
       <SwiperCarousel
+        autoplay={{
+          disableOnInteraction: false,
+          waitForTransition: true,
+          pauseOnMouseEnter: true,
+          delay: 3000,
+        }}
+        loop
         spaceBetween={20}
         slidesPerView={1}
         breakpoints={{
-          500: {
+          400: {
             slidesPerView: 2,
           },
-          750: {
+          600: {
             slidesPerView: 3,
           },
-          1000: {
+          800: {
             slidesPerView: 4,
+          },
+          1000: {
+            slidesPerView: 5,
+          },
+          1200: {
+            slidesPerView: 6,
           },
         }}
       >
@@ -60,7 +73,10 @@ export default function BrandsList({ className = "" }: BrandsListProps) {
               alt={brand.name}
               width={400}
               height={400}
-              className="h-auto w-100"
+              className="w-auto max-w-100"
+              style={{
+                height: "40px",
+              }}
             />
           </SwiperSlide>
         ))}

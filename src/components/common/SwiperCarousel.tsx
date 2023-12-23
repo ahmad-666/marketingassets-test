@@ -6,7 +6,12 @@ import {
   type ForwardedRef,
 } from "react";
 import { Swiper, type SwiperRef } from "swiper/react";
-import { Pagination, Navigation, type Swiper as SwiperType } from "swiper";
+import {
+  Pagination,
+  Navigation,
+  Autoplay,
+  type Swiper as SwiperType,
+} from "swiper";
 import "swiper/swiper.css";
 
 type SwiperCarouselProps = Omit<
@@ -27,11 +32,11 @@ const SwiperCarousel = (
     className = "",
     ...rest
   }: SwiperCarouselProps,
-  ref: MutableRefObject<SwiperType>
+  ref?: MutableRefObject<SwiperType>
 ) => {
   const onSwiperHandler = useCallback(
     (swiper: SwiperType) => {
-      ref.current = swiper;
+      if (ref) ref.current = swiper;
     },
     [ref]
   );
@@ -40,7 +45,7 @@ const SwiperCarousel = (
       <Swiper
         ref={containerRef}
         onSwiper={onSwiperHandler}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Autoplay]}
         className={`${swiperClassName}`}
         {...rest}
       >
