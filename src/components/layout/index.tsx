@@ -8,7 +8,7 @@ import MobileMenu from "./MobileMenu";
 import Landing from "@/src/components/others/Landing";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollTop";
-
+import SectionContainer from "@/src/components/common/SectionContainer";
 import type { MenuItems } from "@/src/types/Common";
 
 type LayoutProps = {
@@ -39,7 +39,9 @@ export default function Layout({
           <Header menuItems={menuItems} />
           <MobileMenu menuItems={menuItems} />
           {/* <Hero /> */}
-          <Landing />
+          <SectionContainer>
+            <Landing />
+          </SectionContainer>
           <main className="py-5">{children}</main>
           <Footer />
         </div>

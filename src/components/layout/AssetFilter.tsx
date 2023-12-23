@@ -9,6 +9,9 @@ import type { Option } from "@/src/types/Common";
 type Type = Option & {
   prefix: string;
 };
+type AssetFilterProps = {
+  className?: string;
+};
 const typeOptions: Type[] = [
   {
     value: "emoji",
@@ -21,7 +24,7 @@ const typeOptions: Type[] = [
     prefix: "logo",
   },
 ];
-export default function AssetFilter() {
+export default function AssetFilter({ className = "" }: AssetFilterProps) {
   const router = useRouter();
   const [type, setType] = useState(typeOptions[0]);
   const [search, setSearch] = useState("");
@@ -59,7 +62,7 @@ export default function AssetFilter() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
+    <div className={`${className}`}>
       <ul className="d-flex justify-content-center gap-3 mb0">
         {typeOptions.map((typeOption) => (
           <li key={typeOption.value}>

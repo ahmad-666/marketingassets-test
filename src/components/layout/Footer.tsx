@@ -12,11 +12,10 @@ const Footer = () => {
             <div className="footer_about_widget text-start">
               <div className="logo mb40 mb0-sm">
                 <Image
-                  width={140}
-                  height={45}
-                  className="logo2 img-fluid"
-                  src="/images/header-logo.svg"
-                  alt="header-logo.png"
+                  width={75}
+                  height={75}
+                  src="/images/logos/logo2.svg"
+                  alt="companyurlfinder"
                 />
               </div>
             </div>

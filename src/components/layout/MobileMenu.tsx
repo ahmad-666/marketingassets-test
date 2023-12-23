@@ -68,7 +68,7 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
 
   return (
     <>
-      <div className="stylehome1 h0">
+      <div className="stylehome1">
         <div className="mobile-menu">
           <div className="header stylehome1">
             <div className="mobile_menu_bar">
@@ -83,13 +83,15 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
               </a>
             </div>
             <div className="mobile_menu_main_logo">
-              <Image
-                width={140}
-                height={45}
-                priority
-                src="/images/header-logo2.svg"
-                alt="brand"
-              />
+              <Link href="/">
+                <Image
+                  width={150}
+                  height={40}
+                  priority
+                  src="/images/logos/logo-text.svg"
+                  alt="companyurlfinder"
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -105,11 +107,11 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
           <div className="pro-header">
             <Link href="/">
               <Image
-                width={140}
-                height={45}
+                width={40}
+                height={40}
                 priority
-                src="/images/header-logo.svg"
-                alt="brand"
+                src="/images/logos/logo2.svg"
+                alt="companyurlfinder"
               />
             </Link>
             <div
