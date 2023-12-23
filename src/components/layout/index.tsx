@@ -35,8 +35,10 @@ export default function Layout({
           >
             <HeaderSidebar />
           </div>
-          <HeaderTop />
-          <Header menuItems={menuItems} />
+          <SectionContainer>
+            <HeaderTop />
+            <Header menuItems={menuItems} />
+          </SectionContainer>
           <MobileMenu menuItems={menuItems} />
           {/* <Hero /> */}
           <SectionContainer>

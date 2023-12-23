@@ -910,7 +910,7 @@ h6,
 }
 .header_top_contact_opening_widget ul li a,
 .header_top_social_widgets ul li a {
-  color: #fff;
+  color: var(--bs-gray-700);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -1678,7 +1678,7 @@ header.header-nav.menu_style_home_one.dashbord_pages.stricky-fixed li a {
   color: #ffffff;
 }
 header.header-nav.menu_style_home_one .ace-responsive-menu li a {
-  color: #fff;
+  color: var(--bs-gray-700);
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -2717,7 +2717,7 @@ header.header-nav.menu_style_home_five .ace-responsive-menu > li > a {
   padding: 27px 20px 30px 10px;
 }
 header.header-nav.menu_style_home_one .ace-responsive-menu > li.add_listing a {
-  border: 1px solid #fff;
+  border: 1px solid var(--bs-gray-700);
   border-radius: 60px;
   padding: 10px 20px;
   margin: 0 20px;
@@ -2754,7 +2754,7 @@ header.header-nav.menu_style_home_one
   > li.sidebar_panel
   > a
   span {
-  background-color: #fff;
+  background-color: var(--bs-gray-700);
   bottom: 0;
   height: 2px;
   position: absolute;
@@ -2797,7 +2797,7 @@ header.header-nav.menu_style_home_one
   > li.sidebar_panel
   > a
   span:before {
-  background-color: #fff;
+  background-color: var(--bs-gray-700);
   bottom: 8px;
   content: "";
   height: 2px;

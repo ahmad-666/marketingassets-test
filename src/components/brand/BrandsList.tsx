@@ -47,11 +47,8 @@ export default function BrandsList({ className = "" }: BrandsListProps) {
         }}
         loop
         spaceBetween={20}
-        slidesPerView={1}
+        slidesPerView={2}
         breakpoints={{
-          400: {
-            slidesPerView: 2,
-          },
           600: {
             slidesPerView: 3,
           },

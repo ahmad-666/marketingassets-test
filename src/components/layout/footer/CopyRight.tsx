@@ -2,7 +2,7 @@ import Social from "./Social";
 
 const CopyRight = () => {
   return (
-    <div className="container">
+    <div>
       <div className="row">
         <div className="col-md-6 col-lg-8 col-xl-9">
           <div className="copyright-widget mt5 text-start mb20-sm">

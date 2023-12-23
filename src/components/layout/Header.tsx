@@ -11,7 +11,7 @@ const Header = ({ menuItems }: HeaderProps) => {
   return (
     <header className="header-nav menu_style_home_one transparent main-menu">
       <nav>
-        <div className="container posr">
+        <div className="d-flex justify-content-between align-items-center  posr">
           <div className="menu-toggle">
             <button type="button" id="menu-btn">
               <span className="icon-bar" />
