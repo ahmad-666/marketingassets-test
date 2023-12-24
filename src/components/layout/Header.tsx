@@ -41,6 +41,7 @@ const Header = ({ menuItems }: HeaderProps) => {
                 dark
                 size="lg"
                 href="https://dashboard.companyurlfinder.com/"
+                className="mx-0"
               >
                 Dashboard
               </Button>
