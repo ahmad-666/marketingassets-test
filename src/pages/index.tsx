@@ -15,7 +15,7 @@ export default function Page() {
         <AssetsList />
         <EmojiCategoryList className="mt-7" />
       </SectionContainer>
-      {/* <HubSection className="mt-7" /> */}
+      <HubSection className="mt-7" />
       <SectionContainer className="mt-7">
         <FaqsList />
         <BrandsList className="mt-7" />

@@ -1,0 +1,13 @@
+.animate-top-pop {
+  animation: popAnime 0.4s ease-in-out;
+  @keyframes popAnime {
+    from {
+      opacity: 0;
+      transform: scale(0) translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0px);
+    }
+  }
+}
