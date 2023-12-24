@@ -141,7 +141,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
   const tags = useMemo<Tag[]>(() => {
     return emoji.relatedEmojis.map((emoji) => ({
       text: textNormalize(emoji),
-      route: `/emojis/${emoji}`,
+      route: `/emoji/${emoji}`,
     }));
   }, [emoji.relatedEmojis]);
 
