@@ -9,6 +9,7 @@ import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import MetaData from "@/src/components/common/MetaData";
+import SectionContainer from "@/src/components/common/SectionContainer";
 import type { Company } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
@@ -152,7 +153,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
     <div className="wrapper">
       <MetaData title={title} description={desc} image={`${company.imgSrc}`} />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
-        <div className="container">
+        <SectionContainer>
           <div className="row">
             <div className="col">
               <BreadCrumb items={breadcrumbItems} />
@@ -197,7 +198,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
               targetCompany={router.query.logoId as string}
             />
           </div>
-        </div>
+        </SectionContainer>
       </section>
     </div>
   );

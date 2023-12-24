@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { getEmoji, getEmojis } from "@/src/services/emoji";
+import SectionContainer from "@/src/components/common/SectionContainer";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import EmojiGallery from "@/src/components/details/EmojiGallery";
 import DescSection from "@/src/components/details/DescSection";
@@ -153,7 +154,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
         image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`}
       />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
-        <div className="container">
+        <SectionContainer>
           <div className="row">
             <div className="col">
               <BreadCrumb items={breadcrumbItems} />
@@ -205,7 +206,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
               showPagination={false}
             />
           </div>
-        </div>
+        </SectionContainer>
       </section>
     </div>
   );

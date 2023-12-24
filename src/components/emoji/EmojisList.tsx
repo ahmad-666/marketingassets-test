@@ -113,8 +113,8 @@ export default function EmojisList({
     filterUpdated.current = true;
   }, [search]);
   return (
-    <section className={`${className}`}>
-      <div className="container" ref={containerRef}>
+    <section className={`pt-5 ${className}`}>
+      <div ref={containerRef}>
         {title && (
           <div className="row justify-content-center">
             <div className="col-lg-8">

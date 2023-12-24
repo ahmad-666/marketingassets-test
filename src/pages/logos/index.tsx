@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
 import MetaData from "@/src/components/common/MetaData";
+import SectionContainer from "@/src/components/common/SectionContainer";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import IndustriesList from "@/src/components/industry/IndustriesList";
 import { getCompanies, getIndustries } from "@/src/services/company";
@@ -64,36 +65,38 @@ export default function Page({
         title={title}
         description="Discover & download high-quality company logos or integrate seamlessly via API. Elevate your projects with our diverse logo collection."
       />
-      <section className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="main-title text-center">
-              <h1 className="fs-2">{title}</h1>
+      <SectionContainer>
+        <section className="pt-5">
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <div className="main-title text-center">
+                <h1 className="fs-2">{title}</h1>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="row mt40">
-          <div className="col-lg-12">
-            <CompaniesList
-              title="Browse Companies"
-              items={companies}
-              totalItems={totalCompanies}
-              pageSize={pageSize}
-              page={queries.page}
-              search={queries.search}
-              showPagination
-            />
+          <div className="row mt40">
+            <div className="col-lg-12">
+              <CompaniesList
+                title="Browse Companies"
+                items={companies}
+                totalItems={totalCompanies}
+                pageSize={pageSize}
+                page={queries.page}
+                search={queries.search}
+                showPagination
+              />
+            </div>
           </div>
-        </div>
-        <div className="row mt40">
-          <div className="col-lg-12">
-            <IndustriesList
-              title="Browse Companies By Industries"
-              items={industries}
-            />
+          <div className="row mt40">
+            <div className="col-lg-12">
+              <IndustriesList
+                title="Browse Companies By Industries"
+                items={industries}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionContainer>
     </div>
   );
 }

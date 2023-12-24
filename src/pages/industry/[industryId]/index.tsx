@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import MetaData from "@/src/components/common/MetaData";
+import SectionContainer from "@/src/components/common/SectionContainer";
 import { getCompanies } from "@/src/services/company";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -62,28 +63,30 @@ export default function Page({
         title={title}
         description={`Discover & download high-quality company logos in industry ${industryText} or integrate seamlessly via API. Elevate your projects with our diverse logo collection.`}
       />
-      <section className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="main-title text-center">
-              <h2 className="text-capitalize">{title}</h2>
+      <SectionContainer>
+        <section className="pt-5">
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <div className="main-title text-center">
+                <h2 className="text-capitalize fs-2">{title}</h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="row mt40">
-          <div className="col-lg-12">
-            <CompaniesList
-              title="Browse Companies"
-              items={companies}
-              totalItems={totalCompanies}
-              page={page}
-              pageSize={pageSize}
-              targetIndustry={industryId as string}
-              showPagination
-            />
+          <div className="row mt40">
+            <div className="col-lg-12">
+              <CompaniesList
+                title="Browse Companies"
+                items={companies}
+                totalItems={totalCompanies}
+                page={page}
+                pageSize={pageSize}
+                targetIndustry={industryId as string}
+                showPagination
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionContainer>
     </div>
   );
 }
