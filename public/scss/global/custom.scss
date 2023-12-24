@@ -13,3 +13,11 @@
     }
   }
 }
+.pagination-size {
+  padding: 8px 15px;
+}
+@media screen and (max-width: 750px) {
+  .pagination-size {
+    padding: 4px 10px;
+  }
+}

@@ -18,7 +18,7 @@ export default function Pagination({
   setPage,
   totalItems = 0,
   pageSize = 10,
-  pageRange = 1,
+  pageRange = 2,
   containerClassName = "",
   className = "",
 }: PaginationProps) {
@@ -32,7 +32,7 @@ export default function Pagination({
     return "d-flex justify-content-center align-items-center";
   }, []);
   const pageLinkCssClass = useMemo(() => {
-    return "py10 px15";
+    return "pagination-size";
   }, []);
   const pageActiveCssClass = useMemo(() => {
     return "rounded-2 bg-primary-color";
@@ -54,6 +54,7 @@ export default function Pagination({
           onPageChange={pageChangeHandler}
           pageCount={pageCount}
           pageRangeDisplayed={pageRange}
+          marginPagesDisplayed={pageRange}
           breakLabel="..."
           previousLabel={<Icon icon="mdi:arrow-left-thin" size="md" />}
           nextLabel={<Icon icon="mdi:arrow-right-thin" size="md" />}
