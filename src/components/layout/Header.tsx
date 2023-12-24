@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import MainMenu from "./MainMenu";
+import Button from "@/src/components/common/Button";
 import type { MenuItems } from "@/src/types/Common";
 
 type HeaderProps = {
@@ -34,7 +35,15 @@ const Header = ({ menuItems }: HeaderProps) => {
           >
             <MainMenu items={menuItems} />
             <li className="add_listing">
-              <Link href="/add-listings">+ Add Listing</Link>
+              <Button
+                variant="filled"
+                color="primary-darken1"
+                dark
+                size="lg"
+                href="https://dashboard.companyurlfinder.com/auth/signup/"
+              >
+                Dashboard
+              </Button>
             </li>
             <li
               className="sidebar_panel"

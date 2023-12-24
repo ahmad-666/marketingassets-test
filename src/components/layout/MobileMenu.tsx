@@ -14,6 +14,7 @@ import type {
   MenuItem as MenuItemType,
   NestedMenuItem as NestedMenuItemType,
 } from "@/src/types/Common";
+import Button from "@/src/components/common/Button";
 
 type MobileMenuProps = {
   menuItems?: MenuItemsType;
@@ -130,6 +131,15 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
                 className="my-custom-class"
               >
                 <Menu>
+                  <Button
+                    variant="filled"
+                    color="primary-darken1"
+                    dark
+                    href="https://dashboard.companyurlfinder.com/auth/signup/"
+                    size="md"
+                  >
+                    Dashboard
+                  </Button>
                   {menuItems.map((item, index) => {
                     const isSingle = (item as MenuItemType).path;
                     if (isSingle) {
