@@ -22,3 +22,9 @@ export type Option = {
   value: number | string;
   label: string;
 };
+export type Social = {
+  icon: string;
+  route: string;
+  label: string;
+  color: string;
+};

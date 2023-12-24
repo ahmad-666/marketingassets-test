@@ -45,7 +45,7 @@ const Header = ({ menuItems }: HeaderProps) => {
                 Dashboard
               </Button>
             </li>
-            <li
+            {/* <li
               className="sidebar_panel"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasRight"
@@ -54,7 +54,7 @@ const Header = ({ menuItems }: HeaderProps) => {
               <a className="sidebar_switch pt0" role="button">
                 <span />
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Button from "@/src/components/common/Button";
+import Icon from "@/src/components/common/Icon";
 import {
   ProSidebarProvider,
   Sidebar,
@@ -9,60 +10,31 @@ import {
   MenuItem,
   SubMenu,
 } from "react-pro-sidebar";
+import { socials, email } from "@/src/data/socials";
 import type {
   MenuItems as MenuItemsType,
   MenuItem as MenuItemType,
   NestedMenuItem as NestedMenuItemType,
 } from "@/src/types/Common";
-import Button from "@/src/components/common/Button";
 
 type MobileMenuProps = {
   menuItems?: MenuItemsType;
 };
+
+type Contact = {
+  icon: string;
+  value: string;
+  label: string;
+};
+const contactData: Contact[] = [
+  {
+    label: "email",
+    icon: "mdi:email-outline",
+    value: email,
+  },
+];
 const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
   const [isClient, setIsClient] = useState(false);
-  const router = useRouter();
-  const socialLinks = [
-    {
-      name: "Facebook",
-      icon: "fab fa-facebook-f",
-      link: "#",
-    },
-    {
-      name: "Twitter",
-      icon: "fab fa-twitter",
-      link: "#",
-    },
-    {
-      name: "Instagram",
-      icon: "fab fa-instagram",
-      link: "#",
-    },
-    {
-      name: "YouTube",
-      icon: "fab fa-youtube",
-      link: "#",
-    },
-    {
-      name: "Pinterest",
-      icon: "fab fa-pinterest",
-      link: "#",
-    },
-  ];
-  const contactInfo = [
-    {
-      icon: "flaticon-map",
-      text: "47 Bakery Street, London, UK",
-    },
-    {
-      icon: "flaticon-phone-call",
-      text: "1-800-458-56987",
-    },
-    {
-      icon: "flaticon-clock",
-      text: "Mon - Fri 8:00 - 18:00",
-    },
-  ];
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -175,16 +147,26 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
           <div className="pro-footer mm-add-listing">
             <div className="border-none">
               <div className="mmenu-contact-info">
-                {contactInfo.map((info, index) => (
-                  <span className="phone-num" key={index}>
-                    <i className={info.icon} /> {info.text}
+                {contactData.map((data) => (
+                  <span className="phone-num" key={data.label}>
+                    <Icon
+                      icon={data.icon}
+                      className="mr-5 text-white"
+                      size={16}
+                    />
+                    <span>{data.value}</span>
                   </span>
                 ))}
               </div>
               <div className="social-links">
-                {socialLinks.map((link, index) => (
-                  <a href={link.link} key={index}>
-                    <span className={link.icon} />
+                {socials.map((social) => (
+                  <a
+                    target="_blank"
+                    href={social.route}
+                    key={social.label}
+                    className="bg-transparent"
+                  >
+                    <Icon icon={social.icon} size={16} className="text-white" />
                   </a>
                 ))}
               </div>
