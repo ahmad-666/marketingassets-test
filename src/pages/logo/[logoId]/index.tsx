@@ -10,6 +10,7 @@ import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import MetaData from "@/src/components/common/MetaData";
 import SectionContainer from "@/src/components/common/SectionContainer";
+import getRand from "@/src/utils/random";
 import type { Company } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
@@ -151,7 +152,22 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
   }, [company.name]);
   return (
     <div className="wrapper">
-      <MetaData title={title} description={desc} image={`${company.imgSrc}`} />
+      <MetaData
+        title={title}
+        description={desc}
+        image={`${company.imgSrc}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWorkSeries",
+          name: `Download ${company.name} Logo | CUFinder`,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            bestRating: "5",
+            ratingCount: `${getRand(150, 200)}`,
+          },
+        }}
+      />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <SectionContainer>
           <div className="row">

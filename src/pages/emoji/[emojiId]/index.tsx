@@ -152,6 +152,17 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
         title={`${emoji.emoji} ${emoji.name} emoji | CUFinder`}
         description={emoji.description}
         image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWorkSeries",
+          name: `${emoji.emoji} ${emoji.name} | CUFinder`,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: `${emoji.score}`,
+            bestRating: "5",
+            ratingCount: `${emoji.usersScore}`,
+          },
+        }}
       />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <SectionContainer>
