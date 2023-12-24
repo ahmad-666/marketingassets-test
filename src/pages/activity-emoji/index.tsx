@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           categoryText: textNormalize(emoji.parent),
           name: emoji.text,
           emoji: emoji.emoji,
-          score: 5,
+          score: 4.9,
           usersScore: emoji.score,
         })),
         totalEmojis: meta.totalCount,

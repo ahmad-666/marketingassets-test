@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           name: emoji.text,
           categoryText: textNormalize(emoji.parent),
           categoryValue: emoji.parent,
-          score: 5,
+          score: 4.9,
           usersScore: emoji.score,
           description: emoji.description,
           marketing: emoji.marketing,
@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           emoji: emoji.emoji,
           categoryValue: emoji.parent,
           categoryText: textNormalize(emoji.parent),
-          score: 5,
+          score: 4.9,
           usersScore: emoji.score,
         })),
       },
@@ -163,8 +163,8 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 name={emoji.name}
                 category={emoji.categoryText}
                 categoryLink={`/${emoji.categoryValue}`}
-                score={5}
-                usersScore={emoji.score}
+                score={emoji.score}
+                usersScore={emoji.usersScore}
               />
             </div>
           </div>
