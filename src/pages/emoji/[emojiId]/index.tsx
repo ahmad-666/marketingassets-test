@@ -195,13 +195,16 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
               <UsefulLinks className="mt30" />
             </div>
           </div>
-          <EmojisList
-            className="row mt30"
-            title="Related Emojis"
-            items={relatedEmojis}
-            emojiList={emoji.relatedEmojis}
-            showPagination={false}
-          />
+          <div className="row mt30">
+            <h2 className="fs-3 text-dark-color">Related Emojis</h2>
+            <EmojisList
+              className="mt-4 pt-0 px-0"
+              title=""
+              items={relatedEmojis}
+              emojiList={emoji.relatedEmojis}
+              showPagination={false}
+            />
+          </div>
         </div>
       </section>
     </div>

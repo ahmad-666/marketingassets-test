@@ -14,8 +14,8 @@ export default function IndustriesList({
 }: IndustryListProps) {
   return (
     <div className={`${className}`}>
-      <div className="main-title">
-        <h3>{title}</h3>
+      <div className="main-title mb-4">
+        <h2 className="fs-4">{title}</h2>
       </div>
       <div
         className="row align-items-stretch"

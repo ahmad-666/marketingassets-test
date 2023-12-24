@@ -27,7 +27,7 @@ export default function EmojiCard({
         </div>
         <div className="details">
           <div className="wrapper">
-            <h6 className="title">{name}</h6>
+            <h3 className="title">{name}</h3>
             <div className="listign_review">
               <ul className="mb0">
                 {[...Array(5)].map((_, index) => (

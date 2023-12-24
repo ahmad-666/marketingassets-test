@@ -15,9 +15,9 @@ export default function IndustryCard({
       <div className="car-listing h-100">
         <div className="details">
           <div className="wrapper">
-            <h6 className="title text-center fs-5 lh-base text-break">
+            <h3 className="title text-center fs-5 lh-base text-break">
               {name}
-            </h6>
+            </h3>
           </div>
           <div className="listing_footer">
             <Link href={`/industry/${id}`} className="submit-action">

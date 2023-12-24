@@ -27,7 +27,7 @@ export default function CompanyCard({
         </div>
         <div className="details">
           <div className="wrapper">
-            <h6 className="title">{name}</h6>
+            <h3 className="title">{name}</h3>
           </div>
           <div className="listing_footer">
             <Link href={`/logo/${id}`} className="submit-action">

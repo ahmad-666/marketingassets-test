@@ -19,9 +19,9 @@ const EmojiDevices = ({
     <div className={`${className}`}>
       <div className="info_widgets p30">
         <div className="wrapper">
-          <h4 className="title text-capitalize">
+          <h3 className="title text-capitalize fs-6">
             View {name} On Different Devices
-          </h4>
+          </h3>
           <ul className="list-group">
             {items.map((item) => (
               <li
@@ -30,7 +30,7 @@ const EmojiDevices = ({
               >
                 <div className="me-auto">
                   <div className="device">
-                    <span>View on {item.device}</span>
+                    <h3 className="fz14">View on {item.device}</h3>
                   </div>
                 </div>
                 <div>

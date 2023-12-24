@@ -15,7 +15,7 @@ export default function SimilarTags({
 }: SimilarTagsProps) {
   return (
     <div className={`listing_single_description ${className}`}>
-      <h4>{title}</h4>
+      <h4 className="fs-6">{title}</h4>
       <div className="mt30 text-body-color">
         {tags.map((tag, i) => (
           <Fragment key={tag.route}>

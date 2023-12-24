@@ -68,7 +68,7 @@ export default function Page({
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="main-title text-center">
-              <h2>{title}</h2>
+              <h1 className="fs-2">{title}</h1>
             </div>
           </div>
         </div>

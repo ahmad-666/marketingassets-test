@@ -28,7 +28,7 @@ export default function DetailsSection({
               </Link>
             </li>
           </ul>
-          <h2 className="title text-capitalize">{name}</h2>
+          <h1 className="title text-capitalize">{name}</h1>
           {score && usersScore && (
             <div className="listign_review">
               <ul className="mb0">

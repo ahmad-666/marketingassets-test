@@ -115,13 +115,15 @@ export default function EmojisList({
   return (
     <section className={`${className}`}>
       <div className="container" ref={containerRef}>
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="main-title text-center text-capitalize">
-              <h2>{title}</h2>
+        {title && (
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <div className="main-title text-center text-capitalize">
+                <h1 className="fs-2">{title}</h1>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="row">
           <div className="col-lg-12" data-aos-delay="100" data-aos="fade-up">
             <div className="row align-items-stretch">

@@ -112,7 +112,7 @@ export default function CompaniesList({
   return (
     <div className={`${className}`}>
       <div ref={containerRef}>
-        <h3>{title}</h3>
+        <h2 className="fs-4">{title}</h2>
         <div className="mt30">
           <div
             className="row align-items-stretch"

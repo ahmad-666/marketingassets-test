@@ -30,7 +30,7 @@ const ContactInformation = ({
     <div className={`${className}`}>
       <div className="info_widgets p30">
         <div className="wrapper">
-          <h4 className="title text-capitalize">{`${name} Contact Information`}</h4>
+          <h3 className="title text-capitalize">{`${name} Contact Information`}</h3>
           <ul className="list-group">
             {items.map((item) => (
               <li
@@ -38,17 +38,17 @@ const ContactInformation = ({
                 key={item.title}
               >
                 <div className="me-auto">
-                  <div className="day">
+                  <div className="day d-flex align-items-center">
                     <Icon className="mr5" icon={item.icon} size="sm" />
-                    <span>{item.title}</span>
+                    <h3 className="fz13 mt-1">{item.title}</h3>
                   </div>
                 </div>
                 {item.type === "text" && (
-                  <span className="schedule">{item.value}</span>
+                  <h4 className="schedule fz13">{item.value}</h4>
                 )}
                 {item.type === "link" && (
-                  <Link href={item.link} target="_blank" className="schedule">
-                    {item.value}
+                  <Link href={item.link} target="_blank">
+                    <h4 className="schedule fz13">{item.value}</h4>
                   </Link>
                 )}
               </li>
