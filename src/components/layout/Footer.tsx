@@ -7,7 +7,7 @@ import SectionContainer from "@/src/components/common/SectionContainer";
 
 const Footer = () => {
   return (
-    <section className="footer_one pt50 pb25">
+    <footer className="footer_one pt50 pb25">
       <SectionContainer>
         <div className="row">
           <div className="col-12 col-md-5 col-lg-4 col-xl-3">
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
         <CopyRight />
       </SectionContainer>
-    </section>
+    </footer>
   );
 };
 
