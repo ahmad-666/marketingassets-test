@@ -10,7 +10,7 @@ const Footer = () => {
     <section className="footer_one pt50 pb25">
       <SectionContainer>
         <div className="row">
-          <div className="col-md-4 col-xl-7">
+          <div className="col-12 col-md-5 col-lg-4 col-xl-3">
             <div className="footer_about_widget text-start">
               <div className="logo mb40 mb0-sm">
                 <Link href="/">
@@ -30,9 +30,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-8 col-xl-5">
+          <div className="col-12 col-md-7 col-lg-8 col-xl-9">
             <div className="footer_menu_widget text-start text-md-end mt15">
-              <ul>
+              <ul className="d-flex flex-wrap gap-3 justify-content-md-end">
                 <Navigation />
               </ul>
             </div>

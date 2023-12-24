@@ -73,10 +73,10 @@ export default function Button({
     };
   }, [size]);
   const colorStyles = useMemo<React.CSSProperties>(() => {
-    let backgroundColor = "";
-    let color = "";
-    let border = "";
-    let opacity = "";
+    let backgroundColor = "transparent";
+    let color = "transparent";
+    let border = "none";
+    let opacity = "1";
     if (variant === "filled") {
       backgroundColor = hover && isHover ? `${parsedColor}bb` : parsedColor;
       color = dark ? "white" : parsedDarkColor;
