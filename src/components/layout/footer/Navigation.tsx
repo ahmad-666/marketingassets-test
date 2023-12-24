@@ -3,11 +3,12 @@ import Link from "next/link";
 const Navigation = () => {
   const links = [
     { label: "Home", path: "/" },
-    { label: "About Us", path: "/about-us" },
-    { label: "Listings", path: "/listing-v1" },
-    { label: "Blog", path: "/blog" },
-    { label: "User", path: "/user-profile" },
-    { label: "Service", path: "/service" },
+    { label: "Emoji", path: "/emojis" },
+    { label: "Logo", path: "/logos" },
+    { label: "CUFinder", path: "https://companyurlfinder.com/" },
+    { label: "Blog", path: "https://companyurlfinder.com/blog/" },
+    { label: "Dashboard", path: "https://dashboard.companyurlfinder.com/" },
+    { label: "Our Data", path: "https://companyurlfinder.com/our-data/" },
   ];
 
   return (

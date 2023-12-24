@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import CopyRight from "./footer/CopyRight";
 import FooterItems from "./footer/FooterItems";
 import Navigation from "./footer/Navigation";
@@ -12,12 +13,20 @@ const Footer = () => {
           <div className="col-md-4 col-xl-7">
             <div className="footer_about_widget text-start">
               <div className="logo mb40 mb0-sm">
-                <Image
-                  width={75}
-                  height={75}
-                  src="/images/logos/logo2.svg"
-                  alt="companyurlfinder"
-                />
+                <Link href="/">
+                  <Image
+                    width={75}
+                    height={75}
+                    src="/images/logos/logo2.svg"
+                    alt="companyurlfinder"
+                  />
+                  <h3 className="fs-5 text-white mt-3">
+                    CUFinder Marketing Assets
+                  </h3>
+                </Link>
+                <p className="mt-3 text-lightgray2">
+                  All things you need for Personalized Marketing Messages
+                </p>
               </div>
             </div>
           </div>
@@ -32,7 +41,7 @@ const Footer = () => {
       </SectionContainer>
       <hr />
       <SectionContainer>
-        <div className="pt80 pt20-sm pb70 pb0-sm">
+        <div className="py-4">
           <FooterItems />
         </div>
         <CopyRight />

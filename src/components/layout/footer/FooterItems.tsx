@@ -1,7 +1,10 @@
+import Icon from "@/src/components/common/Icon";
+import { email } from "@/src/data/socials";
+
 const FooterItems = () => {
   return (
-    <div className="row">
-      <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+    <div className="row align-items-start g-4">
+      {/* <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_about_widget">
           <h5 className="title">OFFICE</h5>
           <p>
@@ -30,8 +33,15 @@ const FooterItems = () => {
             Sunday: Closed
           </p>
         </div>
+      </div> */}
+      <div className="col-12 col-sm-6 col-md-8 col-lg-9 d-flex align-items-center">
+        <Icon icon="mdi:email-outline" size="xl" className="text-primary" />
+        <div className="ml15">
+          <p className="fs-6 text-white">Have a question?</p>
+          <p className="mt-2 fs-6 fw-bold text-white">{email}</p>
+        </div>
       </div>
-      <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+      <div className="col-12 col-sm-6 col-md-4 col-lg-3">
         <div className="footer_contact_widget">
           <h5 className="title">KEEP IN TOUCH</h5>
           <form className="footer_mailchimp_form">

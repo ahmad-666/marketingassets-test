@@ -107,7 +107,7 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
                     variant="filled"
                     color="primary-darken1"
                     dark
-                    href="https://dashboard.companyurlfinder.com/auth/signup/"
+                    href="https://dashboard.companyurlfinder.com/"
                     size="md"
                   >
                     Dashboard

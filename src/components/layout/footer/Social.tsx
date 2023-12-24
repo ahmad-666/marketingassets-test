@@ -1,29 +1,13 @@
-const Social = () => {
-  const socialIcons = [
-    {
-      icon: "fab fa-facebook-f",
-      link: "#",
-    },
-    {
-      icon: "fab fa-twitter",
-      link: "#",
-    },
-    {
-      icon: "fab fa-instagram",
-      link: "#",
-    },
-    {
-      icon: "fab fa-linkedin",
-      link: "#",
-    },
-  ];
+import { socials } from "@/src/data/socials";
+import Icon from "@/src/components/common/Icon";
 
+const Social = () => {
   return (
     <>
-      {socialIcons.map((icon, index) => (
-        <li className="list-inline-item" key={index}>
-          <a href={icon.link}>
-            <i className={icon.icon} />
+      {socials.map((social) => (
+        <li className="list-inline-item" key={social.label}>
+          <a target="_blank" href={social.route}>
+            <Icon icon={social.icon} size="sm" className="text-white" />
           </a>
         </li>
       ))}

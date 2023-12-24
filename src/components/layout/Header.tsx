@@ -40,7 +40,7 @@ const Header = ({ menuItems }: HeaderProps) => {
                 color="primary-darken1"
                 dark
                 size="lg"
-                href="https://dashboard.companyurlfinder.com/auth/signup/"
+                href="https://dashboard.companyurlfinder.com/"
               >
                 Dashboard
               </Button>
