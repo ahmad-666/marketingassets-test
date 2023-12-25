@@ -11,6 +11,7 @@ import EmojiDevices, {
   type Item as DeviceItem,
 } from "@/src/components/details/EmojiDevices";
 import SimilarTags from "@/src/components/details/SimilarTags";
+import ReviewSection from "@/src/components/details/ReviewSection";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -200,6 +201,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 title="Similar Emojis"
                 tags={tags}
               />
+              <ReviewSection targetId={emoji.id} className="mt30" />
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />
