@@ -1,5 +1,13 @@
+// const [rate,setRate] = useState(3.5)
+// <Rating value={rate}
+//   onChange={(newValue) =>setRate(newValue)}
+//   size={25} iconsCount={5}
+//   allowHover allowFraction fillColor="orange" emptyColor="#ddd"
+// />
+
 import { useCallback, type ComponentProps } from "react";
 import { Rating as ReactRating } from "react-simple-star-rating";
+import ClientOnly from "@/src/components/common/ClientOnly";
 
 type RatingProps = {
   value: number;
@@ -31,12 +39,14 @@ export default function Rating({
   );
   return (
     <div className={`${className}`}>
-      <ReactRating
-        initialValue={value}
-        onClick={clickHandler}
-        className={`${ratingClassName}`}
-        {...rest}
-      />
+      <ClientOnly>
+        <ReactRating
+          initialValue={value}
+          onClick={clickHandler}
+          className={`${ratingClassName}`}
+          {...rest}
+        />
+      </ClientOnly>
     </div>
   );
 }

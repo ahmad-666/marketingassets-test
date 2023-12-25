@@ -6,7 +6,9 @@ import useHover from "@/src/hooks/useHover";
 
 type Variant = "filled" | "outlined" | "text";
 type Size = "xs" | "sm" | "md" | "lg" | "xl";
+type Type = "button" | "submit";
 type ButtonProps = {
+  type?: Type;
   variant?: Variant;
   children: React.ReactNode;
   size?: Size;
@@ -19,9 +21,10 @@ type ButtonProps = {
   onClick?: () => void;
   style?: React.CSSProperties;
   className?: string;
-} & React.ComponentProps<"button">;
+};
 
 export default function Button({
+  type = "button",
   variant = "filled",
   children,
   size = "md",
@@ -101,6 +104,7 @@ export default function Button({
   return (
     <Component
       ref={btnRef as any}
+      type={!href ? type : undefined}
       href={href}
       onClick={onClick}
       className={`d-inline-block cursor-pointer rounded-3 transition-0-2-linear ${className}`}

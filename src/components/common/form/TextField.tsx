@@ -21,7 +21,18 @@ type Variant = "filled" | "outlined";
 type TextFieldProps = {
   as?: As;
   value: string;
-  onChange: (newValue: string) => void;
+  onChange?: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  onInput?: (
+    e: FormEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>
+  ) => void;
+  onFocus?: (
+    e: FocusEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>
+  ) => void;
+  onBlur?: (
+    e: FocusEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>
+  ) => void;
   placeholder?: string;
   label?: string;
   variant?: Variant;
@@ -47,6 +58,9 @@ const TextField = (
     as = "textfield",
     value,
     onChange,
+    onInput,
+    onFocus,
+    onBlur,
     placeholder,
     disabled = false,
     label,
@@ -110,19 +124,20 @@ const TextField = (
   const focusHandler = useCallback(
     (e: FocusEvent<HTMLInputElement> | FocusEvent<HTMLTextAreaElement>) => {
       setIsFocus(true);
+      if (onFocus) onFocus(e);
     },
-    []
+    [onFocus]
   );
   const blurHandler = useCallback(
     (e: FocusEvent<HTMLInputElement> | FocusEvent<HTMLTextAreaElement>) => {
       setIsFocus(false);
+      if (onBlur) onBlur(e);
     },
-    []
+    [onBlur]
   );
   const changeHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-      const newVal = e.target.value;
-      onChange(newVal);
+      if (onChange) onChange(e);
     },
     [onChange]
   );
@@ -133,8 +148,9 @@ const TextField = (
         elm.style.height = "auto";
         elm.style.height = `${elm.scrollHeight}px`;
       }
+      if (onInput) onInput(e);
     },
-    [as, autoGrow]
+    [as, autoGrow, onInput]
   );
   return (
     <div className={`${disabled ? "opacity-50" : ""} ${className}`}>

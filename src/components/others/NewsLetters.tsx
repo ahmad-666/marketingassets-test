@@ -48,7 +48,7 @@ export default function NewsLetters({ className = "" }: NewsLettersProps) {
             <div className="d-flex align-items-start rounded-3 overflow-hidden">
               <TextField
                 value={email}
-                onChange={(newVal) => setEmail(newVal)}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Enter Email..."
                 variant="filled"

@@ -96,7 +96,7 @@ export default function AssetFilter({ className = "" }: AssetFilterProps) {
           <li className="col-8 col-md-9">
             <TextField
               value={search}
-              onChange={(newSearch) => setSearch(newSearch)}
+              onChange={(e) => setSearch(e.target.value)}
               label="Search"
               placeholder="Enter Search Term..."
               hideDetails
