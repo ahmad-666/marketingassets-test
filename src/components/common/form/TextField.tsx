@@ -5,21 +5,30 @@ import {
   useId,
   forwardRef,
   type CSSProperties,
+  type ForwardedRef,
+  type FocusEvent,
+  type FormEvent,
+  type ChangeEvent,
 } from "react";
 import FormLabel from "@/src/components/common/form/FormLabel";
 import InputMessage from "@/src/components/common/form/InputMessage";
 import useColor from "@/src/hooks/useColor";
 
+type As = "textfield" | "textarea";
 type Type = "text" | "number" | "email" | "tel" | "password";
 type Variant = "filled" | "outlined";
+
 type TextFieldProps = {
+  as?: As;
   value: string;
   onChange: (newValue: string) => void;
   placeholder?: string;
   label?: string;
   variant?: Variant;
-  disabled?: boolean;
   type?: Type;
+  autoGrow?: boolean;
+  minHeight?: number;
+  disabled?: boolean;
   name?: string;
   id?: string;
   error?: string;
@@ -33,9 +42,9 @@ type TextFieldProps = {
   inputStyle?: CSSProperties;
   className?: string;
 };
-
 const TextField = (
   {
+    as = "textfield",
     value,
     onChange,
     placeholder,
@@ -43,6 +52,8 @@ const TextField = (
     label,
     variant = "outlined",
     type = "text",
+    autoGrow = true,
+    minHeight = 150,
     name,
     id,
     error,
@@ -56,19 +67,30 @@ const TextField = (
     inputStyle = {},
     className = "",
   }: TextFieldProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement> | ForwardedRef<HTMLTextAreaElement>
 ) => {
   const parsedColor = useColor(color);
   const parsedBgColor = useColor(bgColor);
   const parsedTextColor = useColor(textColor);
   const generatedId = useId();
   const [isFocus, setIsFocus] = useState(false);
-  const sizingStyle = useMemo<React.CSSProperties>(() => {
+  const Component = useMemo(() => {
+    return as === "textfield" ? "input" : "textarea";
+  }, [as]);
+  const sizingStyle = useMemo<CSSProperties>(() => {
+    let height = "auto";
+    let minHeightStyle = "auto";
+    if (as === "textfield") {
+      height = dense ? "35px" : "50px";
+    } else if (as === "textarea") {
+      minHeightStyle = `${minHeight}px`;
+    }
     return {
-      height: dense ? "35px" : "50px",
+      height,
+      minHeight: minHeightStyle,
     };
-  }, [dense]);
-  const coloringStyle = useMemo<React.CSSProperties>(() => {
+  }, [as, dense, minHeight]);
+  const coloringStyle = useMemo<CSSProperties>(() => {
     let color = parsedTextColor;
     let backgroundColor = "";
     let border = "";
@@ -85,36 +107,55 @@ const TextField = (
       border,
     };
   }, [variant, isFocus, parsedColor, parsedTextColor, parsedBgColor]);
-  const focusHandler = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocus(true);
-  }, []);
-  const blurHandler = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocus(false);
-  }, []);
+  const focusHandler = useCallback(
+    (e: FocusEvent<HTMLInputElement> | FocusEvent<HTMLTextAreaElement>) => {
+      setIsFocus(true);
+    },
+    []
+  );
+  const blurHandler = useCallback(
+    (e: FocusEvent<HTMLInputElement> | FocusEvent<HTMLTextAreaElement>) => {
+      setIsFocus(false);
+    },
+    []
+  );
   const changeHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
       const newVal = e.target.value;
       onChange(newVal);
     },
     [onChange]
+  );
+  const inputHandler = useCallback(
+    (e: FormEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>) => {
+      if (as === "textarea" && autoGrow) {
+        const elm = e.target as HTMLElement;
+        elm.style.height = "auto";
+        elm.style.height = `${elm.scrollHeight}px`;
+      }
+    },
+    [as, autoGrow]
   );
   return (
     <div className={`${disabled ? "opacity-50" : ""} ${className}`}>
       {label && (
         <FormLabel label={label} inputId={id || generatedId} className="mb5" />
       )}
-      <input
-        ref={ref}
+      <Component
+        ref={ref as any}
         value={value}
         onChange={changeHandler}
+        onInput={inputHandler}
         onFocus={focusHandler}
         onBlur={blurHandler}
         placeholder={placeholder}
         id={id || generatedId}
         name={name}
-        type={type}
+        type={as === "textfield" ? type : undefined}
         disabled={disabled}
-        className={`d-block w-100 px10 rounded-3 fz16 appearance-none outline-none ${inputClassName}`}
+        className={`d-block w-100 px10 rounded-3 fz16 appearance-none outline-none ${
+          as === "textarea" ? "py10 resize-none" : ""
+        } ${inputClassName}`}
         style={{
           ...sizingStyle,
           ...coloringStyle,
