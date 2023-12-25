@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import TextField from "@/src/components/common/form/TextField";
-// import AutoComplete from "@/src/components/common/form/AutoComplete";
+// import Select from "@/src/components/common/form/Select";
 import Icon from "@/src/components/common/Icon";
 import Button from "@/src/components/common/Button";
 import type { Option } from "@/src/types/Common";
@@ -84,7 +84,7 @@ export default function AssetFilter({ className = "" }: AssetFilterProps) {
       >
         <ul className="row justify-content-center g-3">
           {/* <li className="col-12 col-sm-4">
-            <AutoComplete
+            <Select
               value={type}
               onChange={(newType) => setType(newType)}
               options={typeOptions}

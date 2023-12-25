@@ -1,4 +1,4 @@
-import AutoComplete from "@/src/components/common/form/AutoComplete";
+import Select from "@/src/components/common/form/Select";
 import { useEffect, useRef, useState } from "react";
 import { type SelectInstance } from "react-select";
 
@@ -17,6 +17,7 @@ const options: Option[] = [
   },
 ];
 export default function Example() {
+  //can be used for both Select(isSearchable prop to false),Autocomplete(isSearchable prop to true)
   const [val1, setVal1] = useState<null | Option>(null);
   const [val2, setVal2] = useState<Option[]>([]);
   const elm = useRef<SelectInstance<Option, false>>(null!);
@@ -25,7 +26,7 @@ export default function Example() {
   }, []);
   return (
     <div>
-      <AutoComplete
+      <Select
         ref={elm}
         value={val1}
         onChange={(option) => {
@@ -36,7 +37,7 @@ export default function Example() {
         error="error"
         hint="hint"
       />
-      <AutoComplete
+      <Select
         value={val2}
         onChange={(option) => {
           setVal2(option);

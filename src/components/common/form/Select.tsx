@@ -1,3 +1,5 @@
+//can be used for both Select(isSearchable prop to false),Autocomplete(isSearchable prop to true)
+
 import { useMemo, useCallback, useId, forwardRef } from "react";
 import {
   default as ReactSelect,
@@ -14,7 +16,7 @@ type ReactSelectProps = Omit<
   React.ComponentProps<typeof ReactSelect>,
   "value" | "options" | "onChange" | "getOptionLabel" | "className"
 >;
-type AutoCompleteProps<Value, Option> = {
+type SelectProps<Value, Option> = {
   value: Value;
   options: Option[];
   label?: string;
@@ -29,7 +31,7 @@ type AutoCompleteProps<Value, Option> = {
   className?: string;
 } & ReactSelectProps;
 
-const AutoComplete = <Value, Option>(
+const Select = <Value, Option>(
   {
     value,
     options = [],
@@ -50,7 +52,7 @@ const AutoComplete = <Value, Option>(
     selectClassName = "",
     className = "",
     ...rest
-  }: AutoCompleteProps<Value, Option>,
+  }: SelectProps<Value, Option>,
   ref: React.ForwardedRef<SelectInstance>
 ) => {
   const generatedId = useId();
@@ -142,8 +144,8 @@ const AutoComplete = <Value, Option>(
   );
 };
 
-export default forwardRef(AutoComplete) as <Value, Option>(
-  props: AutoCompleteProps<Value, Option> & {
+export default forwardRef(Select) as <Value, Option>(
+  props: SelectProps<Value, Option> & {
     ref?: React.ForwardedRef<SelectInstance>;
   }
-) => ReturnType<typeof AutoComplete>;
+) => ReturnType<typeof Select>;
