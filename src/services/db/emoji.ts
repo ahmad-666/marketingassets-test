@@ -7,8 +7,8 @@ import type {
   CommentReqBody,
 } from "@/src/types/Emoji";
 
-export async function getEmoji({ emojiId }: EmojiFilters) {
-  const where: WhereOptions<EmojiResponse> = { url: emojiId };
+export async function getEmoji({ url }: EmojiFilters) {
+  const where: WhereOptions<EmojiResponse> = { url };
   const emoji = await Emoji.findOne({
     where,
   });

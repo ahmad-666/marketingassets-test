@@ -28,7 +28,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     return {
       props: {
         emojis: emojis.map((emoji) => ({
-          id: emoji.url,
+          id: emoji.id,
+          url: emoji.url,
           categoryValue: emoji.parent,
           categoryText: textNormalize(emoji.parent),
           name: emoji.text,

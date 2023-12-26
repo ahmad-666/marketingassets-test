@@ -1,7 +1,7 @@
 //client-side types
 export type Emoji = {
-  id: string;
-  emojiId?: number;
+  id: number;
+  url: string;
   name: string;
   emoji: string;
   score: number;
@@ -15,7 +15,7 @@ export type Emoji = {
   relatedEmojis?: string[];
 };
 export type EmojiFilters = {
-  emojiId: string;
+  url: string;
 };
 export type EmojisFilters = {
   urls?: string[];

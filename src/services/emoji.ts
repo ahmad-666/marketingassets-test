@@ -11,8 +11,8 @@ import type {
 } from "@/src/types/Emoji";
 import { type AxiosResponse } from "axios";
 
-export const getEmoji = async ({ emojiId }: EmojiFilters) => {
-  const { data } = await axios.get<GetEmojiResponse>(`/emojis/${emojiId}`);
+export const getEmoji = async ({ url }: EmojiFilters) => {
+  const { data } = await axios.get<GetEmojiResponse>(`/emojis/${url}`);
   return data;
 };
 export const getEmojis = async ({
@@ -50,7 +50,7 @@ export const addComment = async ({
     CommentResponse,
     AxiosResponse<CommentResponse>,
     CommentReqBody
-  >(`/emojis/${emojiId}/comments`, {
+  >("/emojis/comments", {
     emojiId,
     userName,
     userEmail,

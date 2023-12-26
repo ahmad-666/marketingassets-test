@@ -93,7 +93,8 @@ export default function EmojisList({
       const newEmojis: Emoji[] = [];
       items.forEach((emoji) => {
         newEmojis.push({
-          id: emoji.url,
+          id: emoji.id,
+          url: emoji.url,
           categoryValue: emoji.parent,
           categoryText: textNormalize(emoji.parent),
           name: emoji.text,
@@ -132,6 +133,7 @@ export default function EmojisList({
                   className="col-sm-6 col-xl-3 p10"
                   key={emoji.id}
                   id={emoji.id}
+                  url={emoji.url}
                   name={emoji.name}
                   emoji={emoji.emoji}
                   score={emoji.score}

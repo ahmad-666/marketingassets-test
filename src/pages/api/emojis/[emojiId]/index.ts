@@ -9,7 +9,7 @@ type Res = GetEmojiResponse | ServerError;
 const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
   try {
     const { emojiId } = req.query;
-    const emoji = await getEmoji({ emojiId: emojiId as string });
+    const emoji = await getEmoji({ url: emojiId as string });
     if (!emoji) return res.status(404).json({ message: "emoji not found" });
     return res.status(200).json({
       ...emoji.dataValues,

@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 ) => {
   try {
     const { emojiId } = context.params;
-    const emoji = await getEmoji({ emojiId: emojiId as string });
+    const emoji = await getEmoji({ url: emojiId as string });
     const { items: relatedEmojis } = await getEmojis({
       urls: emoji.emoji_list,
       page: 1,
@@ -40,8 +40,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     return {
       props: {
         emoji: {
-          id: emoji.url,
-          emojiId: emoji.id,
+          id: emoji.id,
+          url: emoji.url,
           emoji: emoji.emoji,
           name: emoji.text,
           categoryText: textNormalize(emoji.parent),
@@ -55,7 +55,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           relatedEmojis: emoji.emoji_list,
         },
         relatedEmojis: relatedEmojis.map((emoji) => ({
-          id: emoji.url,
+          id: emoji.id,
+          url: emoji.url,
           name: emoji.text,
           emoji: emoji.emoji,
           categoryValue: emoji.parent,
@@ -82,10 +83,10 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
       },
       {
         text: emoji.emoji,
-        link: `/emoji/${emoji.id}`,
+        link: `/emoji/${emoji.url}`,
       },
     ];
-  }, [emoji.categoryText, emoji.categoryValue, emoji.emoji, emoji.id]);
+  }, [emoji.categoryText, emoji.categoryValue, emoji.emoji, emoji.url]);
   const faqs = useMemo<Faq[]>(() => {
     return [
       {
@@ -117,30 +118,30 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
     return [
       {
         device: "Apple",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Apple.png`,
       },
       {
         device: "Google Noto Color",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Google-Noto-Color-Emoji.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Google-Noto-Color-Emoji.png`,
       },
       {
         device: "Microsoft",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Microsoft.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Microsoft.png`,
       },
       {
         device: "Samsung",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Samsung.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Samsung.png`,
       },
       {
         device: "Twitter",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Twitter.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Twitter.png`,
       },
       {
         device: "WhatsApp",
-        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-WhatsApp.png`,
+        imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-WhatsApp.png`,
       },
     ];
-  }, [emoji.id]);
+  }, [emoji.url]);
   const tags = useMemo<Tag[]>(() => {
     return emoji.relatedEmojis.map((emoji) => ({
       text: textNormalize(emoji),
@@ -153,7 +154,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
       <MetaData
         title={`${emoji.emoji} ${emoji.name} emoji | CUFinder`}
         description={emoji.description}
-        image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.id}-Apple.png`}
+        image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/emojis/${emoji.url}-Apple.png`}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "CreativeWorkSeries",
@@ -202,7 +203,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 title="Similar Emojis"
                 tags={tags}
               />
-              <ReviewSection targetId={emoji.emojiId} className="mt30" />
+              <ReviewSection targetId={emoji.id} className="mt30" />
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />

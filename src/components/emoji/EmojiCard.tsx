@@ -8,6 +8,7 @@ type EmojiCardProps = Emoji & {
 
 export default function EmojiCard({
   id,
+  url,
   name,
   emoji,
   score,
@@ -43,7 +44,7 @@ export default function EmojiCard({
             </div>
           </div>
           <div className="listing_footer">
-            <Link href={`/emoji/${id}`} className="submit-action">
+            <Link href={`/emoji/${url}`} className="submit-action">
               Use {name}
             </Link>
           </div>
