@@ -17087,7 +17087,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
   color: var(--bs-success);
 }
 .color-info {
-  color: #5bc0de;
+  color: var(--bs-info);;
 }
 .color-silver {
   color: #c0c0c0;
@@ -17231,7 +17231,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
   background-color: var(--bs-success);
 }
 .bgc-info {
-  background-color: #5bc0de;
+  background-color: var(--bs-info);
 }
 .bgc-warning {
   background-color: #f0ad4e;

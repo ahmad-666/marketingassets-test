@@ -12,6 +12,7 @@
 //here we override theme variables: (will change bootstrap classes like bg-danger,text-danger,will change any time bootstrap used $success,... inside its functionality,in .css,.scss files we have access to --bs-success css variable)
 $success: #00897b;
 $danger: #e53935;
+$info: #1e88e5;
 $enable-negative-margins: true;
 @import "../../node_modules/bootstrap/scss/bootstrap"; //we import all bootstrap , we could import just needed part
 @import "./custom_voiture";
