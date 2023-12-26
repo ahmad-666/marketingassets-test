@@ -41,6 +41,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
       props: {
         emoji: {
           id: emoji.url,
+          emojiId: emoji.id,
           emoji: emoji.emoji,
           name: emoji.text,
           categoryText: textNormalize(emoji.parent),
@@ -201,7 +202,7 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 title="Similar Emojis"
                 tags={tags}
               />
-              <ReviewSection targetId={emoji.id} className="mt30" />
+              <ReviewSection targetId={emoji.emojiId} className="mt30" />
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />

@@ -1,9 +1,10 @@
 import { Op, type WhereOptions } from "sequelize";
-import { Emoji } from "@/src/db/models";
+import { Emoji, EmojiComment } from "@/src/db/models";
 import type {
   EmojiFilters,
   EmojisFilters,
   EmojiResponse,
+  CommentReqBody,
 } from "@/src/types/Emoji";
 
 export async function getEmoji({ emojiId }: EmojiFilters) {
@@ -39,4 +40,20 @@ export async function getCategories() {
     plain: false,
   });
   return categories as { DISTINCT: string }[];
+}
+export async function addComment({
+  emojiId,
+  userName,
+  userEmail,
+  body,
+  rate,
+}: CommentReqBody) {
+  const newComment = await EmojiComment.create({
+    emojiId,
+    userName,
+    userEmail,
+    body,
+    rate,
+  });
+  return newComment;
 }

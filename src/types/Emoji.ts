@@ -1,6 +1,7 @@
 //client-side types
 export type Emoji = {
   id: string;
+  emojiId?: number;
   name: string;
   emoji: string;
   score: number;
@@ -22,6 +23,13 @@ export type EmojisFilters = {
   page?: number;
   pageSize?: number;
   search?: string;
+};
+export type Comment = {
+  emojiId: number;
+  userName: string;
+  userEmail: string;
+  comment: string;
+  rate: number;
 };
 //server-side types
 export type EmojiResponse = {
@@ -52,4 +60,18 @@ export type GetEmojisResponse = {
 };
 export type GetEmojiCategoriesResponse = {
   items: EmojiCategoryResponse[];
+};
+export type CommentReqBody = {
+  emojiId: number;
+  userName: string;
+  userEmail: string;
+  body: string;
+  rate: number;
+};
+export type CommentResponse = {
+  id: number;
+  userName: string;
+  userEmail: string;
+  body: string;
+  rate: number;
 };

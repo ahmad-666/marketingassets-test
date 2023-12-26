@@ -5,7 +5,11 @@ import type {
   GetEmojiResponse,
   GetEmojisResponse,
   GetEmojiCategoriesResponse,
+  CommentResponse,
+  Comment,
+  CommentReqBody,
 } from "@/src/types/Emoji";
+import { type AxiosResponse } from "axios";
 
 export const getEmoji = async ({ emojiId }: EmojiFilters) => {
   const { data } = await axios.get<GetEmojiResponse>(`/emojis/${emojiId}`);
@@ -33,5 +37,25 @@ export const getEmojiCategories = async () => {
   const { data } = await axios.get<GetEmojiCategoriesResponse>(
     "/emojis/categories"
   );
+  return data;
+};
+export const addComment = async ({
+  emojiId,
+  userName,
+  userEmail,
+  comment,
+  rate,
+}: Comment) => {
+  const { data } = await axios.post<
+    CommentResponse,
+    AxiosResponse<CommentResponse>,
+    CommentReqBody
+  >(`/emojis/${emojiId}/comments`, {
+    emojiId,
+    userName,
+    userEmail,
+    body: comment,
+    rate,
+  });
   return data;
 };

@@ -9,6 +9,11 @@ try {
     dialect: "mysql",
     logging: false,
   });
+  sequelize.sync({
+    alter: false, //checks what is the current state of the table in the database (which columns, which data types, etc), and then performs the necessary changes in the table to make it match the model.
+    force: false, //creates the table, dropping it first if it already existed
+    logging: false, //disable logger
+  });
   connection = sequelize;
   console.log("db connected");
 } catch (err) {

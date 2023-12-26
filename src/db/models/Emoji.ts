@@ -19,6 +19,8 @@ const createEmojisModel = () => {
   } //Emojis will be data type , data types that we use here will be used for typescript and can be different from DataTypes that we set bellow e.g 'aliases' is string like '["a","b"]' in db so we use DataTypes.TEXT for it but we say its typescript type is string[] because we convert it to array of string when we return it from api route
   Emojis.init(
     {
+      //each column can have these data:
+      //type,allowNull,primaryKey,autoIncrement,unique,references,defaultValue,field,onUpdate,onDelete
       id: { type: DataTypes.BIGINT, allowNull: false, primaryKey: true },
       parent: { type: DataTypes.TEXT, allowNull: true },
       emoji: { type: DataTypes.TEXT, allowNull: true },

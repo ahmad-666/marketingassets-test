@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
 import TextField from "@/src/components/common/form/TextField";
 import Rating from "@/src/components/common/Rating";
 import Button from "@/src/components/common/Button";
-import axios from "@/src/utils/axios";
+import Alert from "@/src/components/common/Alert";
+import { addComment } from "@/src/services/emoji";
+import type { Comment } from "@/src/types/Emoji";
 
 type ReviewSectionProps = {
-  targetId: string;
+  targetId: number;
   className?: string;
 };
 type ReviewForm = {
@@ -20,6 +23,7 @@ export default function ReviewSection({
   targetId,
   className = "",
 }: ReviewSectionProps) {
+  const [showAlert, setShowAlert] = useState(false);
   const reviewForm = useFormik<ReviewForm>({
     validateOnMount: false,
     validateOnBlur: true,
@@ -40,14 +44,34 @@ export default function ReviewSection({
         .min(3, "Comment Should have at least 3 characters"),
       rate: Yup.number().required("Enter Rating"),
     }),
-    onSubmit: ({ name, email, comment, rate }, { resetForm }) => {},
+    onSubmit: async (
+      { name, email, comment, rate },
+      { resetForm, setFieldValue }
+    ) => {
+      await mutateAsync({
+        emojiId: targetId,
+        userName: name,
+        userEmail: email,
+        comment,
+        rate,
+      });
+      resetForm();
+      setFieldValue("rate", 5);
+    },
   });
-  // const { isPending, isSuccess, isError, mutateAsync } = useMutation({
-  //   mutationKey: ["post-comments"],
-  //   mutationFn: async () => {
-  //     await axios.post(`/emojis/${targetId}/comments`, {});
-  //   },
-  // });
+  const { mutateAsync, isPending, isSuccess, isError } = useMutation<
+    any,
+    any,
+    Comment
+  >({
+    mutationKey: ["add-comment"],
+    mutationFn: async ({ emojiId, userName, userEmail, comment, rate }) => {
+      await addComment({ emojiId, userName, userEmail, comment, rate });
+    },
+    onSettled: () => {
+      setShowAlert(true);
+    },
+  });
   return (
     <div className={`${className}`}>
       <div className={`listing_single_description`}>
@@ -94,12 +118,26 @@ export default function ReviewSection({
               type="submit"
               size="lg"
               className="fw-semibold mt-4"
-              // loading={isPending}
+              loading={isPending}
             >
               Submit Your Review
             </Button>
           </form>
         </div>
+        <Alert
+          show={showAlert}
+          onChange={(newValue) => setShowAlert(newValue)}
+          type={isSuccess ? "success" : "danger"}
+          closeable={false}
+          timeout={4000}
+          className="mt-4"
+        >
+          <p className="text-white">
+            {isSuccess
+              ? "Your Comment Added successfully"
+              : "Error happens when adding comment!"}
+          </p>
+        </Alert>
       </div>
     </div>
   );
