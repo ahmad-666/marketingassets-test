@@ -1,6 +1,8 @@
 import { useEffect, useRef, useCallback, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Button from "@/src/components/common/Button";
 import Icon from "@/src/components/common/Icon";
+import useClient from "@/src/hooks/useClient";
 
 export type Type = "success" | "error";
 export type SnackbarProps = {
@@ -22,6 +24,7 @@ export default function Snackbar({
   children,
   className = "",
 }: SnackbarProps) {
+  const isClient = useClient();
   const timerId = useRef<NodeJS.Timeout>(null!);
   const clearTimer = useCallback(() => {
     clearTimeout(timerId.current);
@@ -40,8 +43,8 @@ export default function Snackbar({
       };
     }
   }, [timeout, clearTimer, closeHandler]);
-  if (!show) return null;
-  return (
+  if (!show || !isClient) return null;
+  return createPortal(
     <div
       className={`p-3 rounded-2 position-fixed z5 left-50 overflow-hidden ${
         type === "success" ? "bg-success" : "bg-danger"
@@ -61,6 +64,7 @@ export default function Snackbar({
           </Button>
         )}
       </div>
-    </div>
+    </div>,
+    document.querySelector("#portals")
   );
 }
