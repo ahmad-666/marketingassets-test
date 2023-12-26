@@ -203,7 +203,11 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 title="Similar Emojis"
                 tags={tags}
               />
-              <ReviewSection targetId={emoji.id} className="mt30" />
+              <ReviewSection
+                type="emoji"
+                targetId={emoji.id}
+                className="mt30"
+              />
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />

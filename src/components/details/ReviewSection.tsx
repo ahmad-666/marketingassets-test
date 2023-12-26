@@ -9,8 +9,10 @@ import Alert from "@/src/components/common/Alert";
 import { addComment } from "@/src/services/emoji";
 import type { CommentReqBody } from "@/src/types/Emoji";
 
+type Type = 'emoji' | 'logo'
 type ReviewSectionProps = {
   targetId: number;
+  type: Type,
   className?: string;
 };
 type ReviewForm = {
@@ -20,6 +22,7 @@ type ReviewForm = {
   rate: number;
 };
 export default function ReviewSection({
+  type,
   targetId,
   className = "",
 }: ReviewSectionProps) {

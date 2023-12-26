@@ -8,6 +8,7 @@ import DownloadSection from "@/src/components/details/DownloadSection";
 import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CompaniesList from "@/src/components/company/CompaniesList";
+import ReviewSection from "@/src/components/details/ReviewSection";
 import MetaData from "@/src/components/common/MetaData";
 import SectionContainer from "@/src/components/common/SectionContainer";
 import getRand from "@/src/utils/random";
@@ -194,6 +195,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
                 title="Description"
                 desc={company.overview}
               />
+              <ReviewSection type="logo" targetId={1} className="mt30" />
             </div>
             <div className="col-lg-4 col-xl-4">
               <DownloadSection
