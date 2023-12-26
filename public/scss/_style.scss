@@ -17093,7 +17093,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
   color: #c0c0c0;
 }
 .color-warning {
-  color: #f0ad4e;
+  color: var(--bs-warning);
 }
 .color-danger {
   color: var(--bs-danger);
@@ -17234,7 +17234,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
   background-color: var(--bs-info);
 }
 .bgc-warning {
-  background-color: #f0ad4e;
+  background-color: var(--bs-warning);
 }
 .bgc-danger {
   background-color: var(--bs-danger);

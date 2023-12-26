@@ -2,8 +2,8 @@ import { useEffect, useRef, useCallback, type ReactNode } from "react";
 import Button from "@/src/components/common/Button";
 import Icon from "@/src/components/common/Icon";
 
-type Type = "success" | "error";
-type SnackbarProps = {
+export type Type = "success" | "error";
+export type SnackbarProps = {
   show?: boolean;
   onChange: (newValue: boolean) => void;
   type?: Type;
@@ -48,7 +48,7 @@ export default function Snackbar({
       } ${className}`}
       style={{
         transform: "translateX(-50%)",
-        bottom: "5%",
+        bottom: "3%",
         width: "320px",
         maxWidth: "90%",
       }}

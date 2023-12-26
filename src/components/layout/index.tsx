@@ -1,5 +1,6 @@
 import ClientLibraries from "@/src/components/common/ClientLibraries";
 import ReactQuery from "@/src/providers/ReactQuery";
+import SnackbarProvider from "@/src/providers/Snackbar";
 import HeaderTop from "./HeaderTop";
 import HeaderSidebar from "./HeaderSidebar";
 import Header from "./Header";
@@ -26,25 +27,27 @@ export default function Layout({
     <div className={`${className}`}>
       <ClientLibraries />
       <ReactQuery>
-        <div className="wrapper ovh">
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex={-1}
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
-          >
-            <HeaderSidebar />
+        <SnackbarProvider>
+          <div className="wrapper ovh">
+            <div
+              className="offcanvas offcanvas-end"
+              tabIndex={-1}
+              id="offcanvasRight"
+              aria-labelledby="offcanvasRightLabel"
+            >
+              <HeaderSidebar />
+            </div>
+            <SectionContainer>
+              <HeaderTop />
+              <Header menuItems={menuItems} />
+              <MobileMenu menuItems={menuItems} />
+              <Landing />
+            </SectionContainer>
+            {/* <Hero /> */}
+            <main className="pt-5">{children}</main>
+            <Footer />
           </div>
-          <SectionContainer>
-            <HeaderTop />
-            <Header menuItems={menuItems} />
-            <MobileMenu menuItems={menuItems} />
-            <Landing />
-          </SectionContainer>
-          {/* <Hero /> */}
-          <main className="pt-5">{children}</main>
-          <Footer />
-        </div>
+        </SnackbarProvider>
         <ScrollToTop />
       </ReactQuery>
     </div>
