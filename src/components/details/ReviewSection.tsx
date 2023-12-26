@@ -7,7 +7,7 @@ import Rating from "@/src/components/common/Rating";
 import Button from "@/src/components/common/Button";
 import Alert from "@/src/components/common/Alert";
 import { addComment } from "@/src/services/emoji";
-import type { Comment } from "@/src/types/Emoji";
+import type { CommentReqBody } from "@/src/types/Emoji";
 
 type ReviewSectionProps = {
   targetId: number;
@@ -52,7 +52,7 @@ export default function ReviewSection({
         emojiId: targetId,
         userName: name,
         userEmail: email,
-        comment,
+        body: comment,
         rate,
       });
       resetForm();
@@ -62,11 +62,11 @@ export default function ReviewSection({
   const { mutateAsync, isPending, isSuccess, isError } = useMutation<
     any,
     any,
-    Comment
+    CommentReqBody
   >({
     mutationKey: ["add-comment"],
-    mutationFn: async ({ emojiId, userName, userEmail, comment, rate }) => {
-      await addComment({ emojiId, userName, userEmail, comment, rate });
+    mutationFn: async ({ emojiId, userName, userEmail, body, rate }) => {
+      await addComment({ emojiId, userName, userEmail, body, rate });
     },
     onSettled: () => {
       setShowAlert(true);

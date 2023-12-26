@@ -25,7 +25,7 @@ export type EmojisFilters = {
   search?: string;
 };
 export type Comment = {
-  emojiId: number;
+  id: number;
   userName: string;
   userEmail: string;
   comment: string;
@@ -69,7 +69,8 @@ export type CommentReqBody = {
   rate: number;
 };
 export type CommentResponse = {
-  id: number;
+  id: number; //commentId
+  emojiId: number;
   userName: string;
   userEmail: string;
   body: string;

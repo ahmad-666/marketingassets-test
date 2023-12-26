@@ -6,7 +6,6 @@ import type {
   GetEmojisResponse,
   GetEmojiCategoriesResponse,
   CommentResponse,
-  Comment,
   CommentReqBody,
 } from "@/src/types/Emoji";
 import { type AxiosResponse } from "axios";
@@ -43,9 +42,9 @@ export const addComment = async ({
   emojiId,
   userName,
   userEmail,
-  comment,
+  body,
   rate,
-}: Comment) => {
+}: CommentReqBody) => {
   const { data } = await axios.post<
     CommentResponse,
     AxiosResponse<CommentResponse>,
@@ -54,7 +53,7 @@ export const addComment = async ({
     emojiId,
     userName,
     userEmail,
-    body: comment,
+    body,
     rate,
   });
   return data;
