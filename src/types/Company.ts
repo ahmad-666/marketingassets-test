@@ -33,6 +33,12 @@ export type Comment = {
   userEmail: string;
   comment: string;
   rate: number;
+  date: string;
+};
+export type CommentFilters = {
+  companyId: number;
+  page?: number;
+  pageSize?: number;
 };
 //server-side types
 export type CompanyResponse = {
@@ -77,4 +83,10 @@ export type CommentResponse = {
   userEmail: string;
   body: string;
   rate: number;
+};
+export type GetCommentsResponse = {
+  items: CommentResponse[];
+  meta: {
+    totalCount: number;
+  };
 };

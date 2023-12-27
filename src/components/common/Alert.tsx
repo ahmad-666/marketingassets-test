@@ -61,7 +61,7 @@ export default function Alert({
   if (!show) return null;
   return (
     <div
-      className={`p-3 rounded-2 overflow-hidden ${alertColorClass} ${className}`}
+      className={`p-3 rounded-2 d-inline-block overflow-hidden ${alertColorClass} ${className}`}
       style={{
         ...style,
       }}

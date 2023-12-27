@@ -5,6 +5,8 @@ import type {
   EmojisFilters,
   EmojiResponse,
   CommentReqBody,
+  CommentResponse,
+  CommentFilters,
 } from "@/src/types/Emoji";
 
 export async function getEmoji({ url }: EmojiFilters) {
@@ -56,4 +58,18 @@ export async function addComment({
     rate,
   });
   return newComment;
+}
+export async function getComments({
+  emojiId,
+  page = 1,
+  pageSize = null,
+}: CommentFilters) {
+  let where: WhereOptions<CommentResponse> = {};
+  if (emojiId) where.emojiId = emojiId;
+  const { count, rows } = await EmojiComment.findAndCountAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    where,
+  });
+  return { count, rows };
 }

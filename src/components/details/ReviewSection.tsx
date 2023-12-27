@@ -1,3 +1,5 @@
+//this component can be used for Submit comment for both Emoji,Company
+
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";

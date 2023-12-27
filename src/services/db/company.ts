@@ -5,6 +5,8 @@ import type {
   CompaniesFilters,
   CompanyFilters,
   CompanyResponse,
+  CommentFilters,
+  CommentResponse,
 } from "@/src/types/Company";
 
 export async function getCompany({ domain }: CompanyFilters) {
@@ -59,4 +61,18 @@ export async function addComment({
     rate,
   });
   return newComment;
+}
+export async function getComments({
+  companyId,
+  page = 1,
+  pageSize = null,
+}: CommentFilters) {
+  let where: WhereOptions<CommentResponse> = {};
+  if (companyId) where.companyId = companyId;
+  const { count, rows } = await CompanyComment.findAndCountAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    where,
+  });
+  return { count, rows };
 }

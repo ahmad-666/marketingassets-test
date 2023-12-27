@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
-import { getCompanies, getCompany } from "@/src/services/company";
+import { getCompanies, getCompany, getComments } from "@/src/services/company";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import ImageGallery from "@/src/components/details/ImageGallery";
 import DescSection from "@/src/components/details/DescSection";
@@ -12,7 +12,7 @@ import ReviewSection from "@/src/components/details/ReviewSection";
 import MetaData from "@/src/components/common/MetaData";
 import SectionContainer from "@/src/components/common/SectionContainer";
 import getRand from "@/src/utils/random";
-import type { Company } from "@/src/types/Company";
+import type { Company, Comment } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
   type Item as ContactItem,
@@ -20,13 +20,19 @@ import ContactInformation, {
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
+import CommentsSection from "@/src/components/details/CommentsSection";
 
 type PageProps = {
   company: Company;
   relatedCompanies: Company[];
+  comments: {
+    items: Comment[];
+    total: number;
+  };
 };
 
 const relatedPageSize = 12;
+const commentPageSize = 5;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
@@ -37,6 +43,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
       page: 1,
       pageSize: relatedPageSize,
       industry: company.industry,
+    });
+    const { items: comments, meta: commentMeta } = await getComments({
+      page: 1,
+      pageSize: commentPageSize,
+      companyId: company.id,
     });
     return {
       props: {
@@ -64,13 +75,24 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
             category: company.industry,
             imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
           })),
+        comments: {
+          items: comments.map((comment) => ({
+            id: comment.id,
+            userName: comment.userName,
+            userEmail: comment.userEmail,
+            comment: comment.body,
+            rate: comment.rate,
+            date: "2020/10/10",
+          })),
+          total: commentMeta.totalCount,
+        },
       },
     };
   } catch (err) {
     return { notFound: true };
   }
 };
-const Page = ({ company, relatedCompanies = [] }: PageProps) => {
+const Page = ({ company, relatedCompanies = [], comments }: PageProps) => {
   const router = useRouter();
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
     return [
@@ -202,6 +224,15 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
                 targetId={company.id}
                 className="mt30"
               />
+              {!!comments.items.length && (
+                <CommentsSection
+                  className="mt30"
+                  type="company"
+                  comments={comments.items}
+                  totalComments={comments.total}
+                  pageSize={commentPageSize}
+                />
+              )}
             </div>
             <div className="col-lg-4 col-xl-4">
               <DownloadSection

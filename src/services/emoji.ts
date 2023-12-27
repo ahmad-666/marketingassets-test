@@ -7,6 +7,8 @@ import type {
   GetEmojiCategoriesResponse,
   CommentResponse,
   CommentReqBody,
+  CommentFilters,
+  GetCommentsResponse,
 } from "@/src/types/Emoji";
 import { type AxiosResponse } from "axios";
 
@@ -56,5 +58,22 @@ export const addComment = async ({
     body,
     rate,
   });
+  return data;
+};
+export const getComments = async ({
+  emojiId,
+  page = 1,
+  pageSize,
+}: CommentFilters) => {
+  const { data } = await axios.get<GetCommentsResponse>(
+    `/emojis/${emojiId}/comments`,
+    {
+      params: {
+        emojiId,
+        page,
+        pageSize,
+      },
+    }
+  );
   return data;
 };

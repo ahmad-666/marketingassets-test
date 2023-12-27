@@ -30,6 +30,12 @@ export type Comment = {
   userEmail: string;
   comment: string;
   rate: number;
+  date: string;
+};
+export type CommentFilters = {
+  emojiId: number;
+  page?: number;
+  pageSize?: number;
 };
 //server-side types
 export type EmojiResponse = {
@@ -75,4 +81,10 @@ export type CommentResponse = {
   userEmail: string;
   body: string;
   rate: number;
+};
+export type GetCommentsResponse = {
+  items: CommentResponse[];
+  meta: {
+    totalCount: number;
+  };
 };

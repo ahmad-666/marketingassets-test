@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getEmoji, getEmojis } from "@/src/services/emoji";
+import { getEmoji, getEmojis, getComments } from "@/src/services/emoji";
 import SectionContainer from "@/src/components/common/SectionContainer";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import EmojiGallery from "@/src/components/details/EmojiGallery";
@@ -15,17 +15,24 @@ import ReviewSection from "@/src/components/details/ReviewSection";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import type { Emoji } from "@/src/types/Emoji";
+import type { Emoji, Comment } from "@/src/types/Emoji";
 import type { Faq, Tag } from "@/src/types/Common";
-import MetaData from "@/src/components/common/MetaData";
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
+import MetaData from "@/src/components/common/MetaData";
+import CommentsSection from "@/src/components/details/CommentsSection";
 
 type PageProps = {
   emoji: Emoji;
   relatedEmojis: Emoji[];
+  comments: {
+    items: Comment[];
+    total: number;
+  };
 };
+
+const commentPageSize = 5;
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
@@ -36,6 +43,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     const { items: relatedEmojis } = await getEmojis({
       urls: emoji.emoji_list,
       page: 1,
+    });
+    const { items: comments, meta: commentMeta } = await getComments({
+      page: 1,
+      pageSize: commentPageSize,
+      emojiId: emoji.id,
     });
     return {
       props: {
@@ -64,13 +76,28 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
           score: 4.9,
           usersScore: emoji.score,
         })),
+        comments: {
+          items: comments.map((comment) => ({
+            id: comment.id,
+            comment: comment.body,
+            userName: comment.userName,
+            userEmail: comment.userEmail,
+            rate: comment.rate,
+            date: "2020/10/10",
+          })),
+          total: commentMeta.totalCount,
+        },
       },
     };
   } catch (err) {
     return { notFound: true };
   }
 };
-export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
+export default function Page({
+  emoji,
+  relatedEmojis = [],
+  comments,
+}: PageProps) {
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
     return [
       {
@@ -208,6 +235,15 @@ export default function Page({ emoji, relatedEmojis = [] }: PageProps) {
                 targetId={emoji.id}
                 className="mt30"
               />
+              {!!comments.items.length && (
+                <CommentsSection
+                  className="mt30"
+                  type="emoji"
+                  comments={comments.items}
+                  pageSize={commentPageSize}
+                  totalComments={comments.total}
+                />
+              )}
             </div>
             <div className="col-lg-4 col-xl-4">
               <CopySection value={emoji.emoji} />

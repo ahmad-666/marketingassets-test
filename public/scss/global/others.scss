@@ -22,3 +22,25 @@
 .resize-none {
   resize: none;
 }
+.divider-y {
+  &:not(:last-child) {
+    border: none;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+}
+.divider-y-gray {
+  &:not(:last-child) {
+    border-color: var(--gray-color);
+  }
+}
+.divider-y-lightgray {
+  &:not(:last-child) {
+    border-color: var(--lightgray-color);
+  }
+}
+.divider-y-lightgray2 {
+  &:not(:last-child) {
+    border-color: var(--lightgray2-color);
+  }
+}

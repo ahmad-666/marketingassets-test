@@ -8,6 +8,8 @@ import type {
   CompaniesFilters,
   CommentReqBody,
   CommentResponse,
+  CommentFilters,
+  GetCommentsResponse,
 } from "@/src/types/Company";
 
 export const getCompanies = async ({
@@ -54,5 +56,22 @@ export const addComment = async ({
     body,
     rate,
   });
+  return data;
+};
+export const getComments = async ({
+  companyId,
+  page = 1,
+  pageSize,
+}: CommentFilters) => {
+  const { data } = await axios.get<GetCommentsResponse>(
+    `/companies/${companyId}/comments`,
+    {
+      params: {
+        companyId,
+        page,
+        pageSize,
+      },
+    }
+  );
   return data;
 };
