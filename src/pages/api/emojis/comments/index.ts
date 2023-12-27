@@ -7,7 +7,8 @@ type Res = CommentResponse | ServerError;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
   try {
-    if (req.method === "POST") {
+    if (req.method === "OPTIONS") return res.status(200).end();
+    else if (req.method === "POST") {
       const { emojiId, userName, userEmail, body, rate } =
         req.body as CommentReqBody;
       const newComment = await addComment({
