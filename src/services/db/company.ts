@@ -1,6 +1,7 @@
 import { Op, type WhereOptions } from "sequelize";
-import { Company } from "@/src/db/models";
+import { Company, CompanyComment } from "@/src/db/models";
 import type {
+  CommentReqBody,
   CompaniesFilters,
   CompanyFilters,
   CompanyResponse,
@@ -42,4 +43,20 @@ export async function getIndustries() {
     DISTINCT: string;
   };
   return industries as Industry[];
+}
+export async function addComment({
+  companyId,
+  userName,
+  userEmail,
+  body,
+  rate,
+}: CommentReqBody) {
+  const newComment = await CompanyComment.create({
+    companyId,
+    userName,
+    userEmail,
+    body,
+    rate,
+  });
+  return newComment;
 }

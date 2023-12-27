@@ -18,7 +18,11 @@ const createCompaniesModel = () => {
   }
   Companies.init(
     {
-      id: { type: DataTypes.BIGINT, allowNull: false, primaryKey: true },
+      id: {
+        type: DataTypes.BIGINT.UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+      },
       name: { type: DataTypes.STRING, allowNull: false },
       overview: { type: DataTypes.TEXT, allowNull: true },
       country: { type: DataTypes.STRING, allowNull: false },

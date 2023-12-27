@@ -1,16 +1,16 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
 
-const createEmojiCommentsModel = () => {
-  class EmojiComments extends Model {
+const createCompanyCommentsModel = () => {
+  class CompanyComments extends Model {
     declare id: number;
     declare userName: string;
     declare userEmail: string;
     declare body: string;
     declare rate: number;
-    declare emojiId: number;
+    declare companyId: number;
   }
-  EmojiComments.init(
+  CompanyComments.init(
     {
       id: {
         type: DataTypes.BIGINT,
@@ -22,22 +22,22 @@ const createEmojiCommentsModel = () => {
       userEmail: { type: DataTypes.STRING, allowNull: false },
       body: { type: DataTypes.TEXT, allowNull: false },
       rate: { type: DataTypes.INTEGER, allowNull: true },
-      emojiId: {
-        type: DataTypes.BIGINT, //this should match the type of data.emojis.url
+      companyId: {
+        type: DataTypes.BIGINT.UNSIGNED,
         allowNull: false,
         references: {
-          model: "emojis", // table name
-          key: "id", // column name
-        }, //references is used to set foreign keys
+          model: "companies",
+          key: "id",
+        },
       },
     },
     {
       sequelize: connection,
-      modelName: "emojiComments",
+      modelName: "companyComments",
       timestamps: false,
     }
   );
-  return EmojiComments;
+  return CompanyComments;
 };
 
-export default createEmojiCommentsModel();
+export default createCompanyCommentsModel();

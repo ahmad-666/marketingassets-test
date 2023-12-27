@@ -27,6 +27,13 @@ export type CompaniesFilters = {
   page?: number;
   pageSize?: number;
 };
+export type Comment = {
+  id: number;
+  userName: string;
+  userEmail: string;
+  comment: string;
+  rate: number;
+};
 //server-side types
 export type CompanyResponse = {
   id: number;
@@ -55,4 +62,19 @@ export type IndustryResponse = {
 };
 export type GetIndustriesResponse = {
   items: IndustryResponse[];
+};
+export type CommentReqBody = {
+  companyId: number;
+  userName: string;
+  userEmail: string;
+  body: string;
+  rate: number;
+};
+export type CommentResponse = {
+  id: number; //commentId
+  companyId: number;
+  userName: string;
+  userEmail: string;
+  body: string;
+  rate: number;
 };

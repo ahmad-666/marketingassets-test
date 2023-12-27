@@ -1,10 +1,13 @@
 import axios from "@/src/utils/axios";
+import { type AxiosResponse } from "axios";
 import type {
   GetCompaniesResponse,
   GetCompanyResponse,
   GetIndustriesResponse,
   CompanyFilters,
   CompaniesFilters,
+  CommentReqBody,
+  CommentResponse,
 } from "@/src/types/Company";
 
 export const getCompanies = async ({
@@ -31,5 +34,25 @@ export const getIndustries = async () => {
   const { data } = await axios.get<GetIndustriesResponse>(
     "/companies/industries"
   );
+  return data;
+};
+export const addComment = async ({
+  companyId,
+  userName,
+  userEmail,
+  body,
+  rate,
+}: CommentReqBody) => {
+  const { data } = await axios.post<
+    CommentResponse,
+    AxiosResponse<CommentResponse>,
+    CommentReqBody
+  >("/companies/comments", {
+    companyId,
+    userName,
+    userEmail,
+    body,
+    rate,
+  });
   return data;
 };
