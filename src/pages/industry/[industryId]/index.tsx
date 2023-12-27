@@ -30,7 +30,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     return {
       props: {
         companies: companies.map((company) => ({
-          id: company.domain,
+          id: company.id,
+          domain: company.domain,
           category: company.industry,
           name: company.name,
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,

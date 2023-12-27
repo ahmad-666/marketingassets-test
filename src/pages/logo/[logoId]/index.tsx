@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 ) => {
   try {
     const { logoId } = context.params;
-    const company = await getCompany({ companyId: logoId as string });
+    const company = await getCompany({ domain: logoId as string });
     const { items: relatedCompanies } = await getCompanies({
       page: 1,
       pageSize: relatedPageSize,
@@ -41,7 +41,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     return {
       props: {
         company: {
-          id: company.domain,
+          id: company.id,
+          domain: company.domain,
           name: company.name,
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
           category: company.industry,
@@ -57,7 +58,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
         relatedCompanies: relatedCompanies
           .filter((company) => company.domain !== logoId)
           .map((company) => ({
-            id: company.domain,
+            id: company.id,
+            domain: company.domain,
             name: company.name,
             category: company.industry,
             imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
@@ -82,18 +84,18 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
       },
       {
         text: company.name,
-        link: `/logo/${company.id}`,
+        link: `/logo/${company.domain}`,
       },
     ];
-  }, [company.category, company.id, company.name]);
+  }, [company.category, company.domain, company.name]);
 
   const contactItems = useMemo<ContactItem[]>(() => {
     return [
       {
         icon: "mdi:web",
         title: "Website",
-        value: company.id,
-        link: `https://${company.id}`,
+        value: company.domain,
+        link: `https://${company.domain}`,
         type: "link",
       },
       {
@@ -140,7 +142,7 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
     company.facebook,
     company.followers,
     company.founded,
-    company.id,
+    company.domain,
     company.linkedin,
     company.size,
     company.twitter,
@@ -195,7 +197,11 @@ const Page = ({ company, relatedCompanies = [] }: PageProps) => {
                 title="Description"
                 desc={company.overview}
               />
-              <ReviewSection type="logo" targetId={1} className="mt30" />
+              <ReviewSection
+                type="logo"
+                targetId={company.id}
+                className="mt30"
+              />
             </div>
             <div className="col-lg-4 col-xl-4">
               <DownloadSection

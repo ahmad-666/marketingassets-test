@@ -23,10 +23,8 @@ export const getCompanies = async ({
   });
   return data;
 };
-export const getCompany = async ({ companyId }: CompanyFilters) => {
-  const { data } = await axios.get<GetCompanyResponse>(
-    `/companies/${companyId}`
-  );
+export const getCompany = async ({ domain }: CompanyFilters) => {
+  const { data } = await axios.get<GetCompanyResponse>(`/companies/${domain}`);
   return data;
 };
 export const getIndustries = async () => {

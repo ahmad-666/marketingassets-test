@@ -1,6 +1,7 @@
 //client-side types
 export type Company = {
-  id: string;
+  id: number;
+  domain: string;
   name: string;
   imgSrc: string;
   category: string;
@@ -18,7 +19,7 @@ export type Industry = {
   name: string;
 };
 export type CompanyFilters = {
-  companyId: string;
+  domain: string;
 };
 export type CompaniesFilters = {
   industry?: string;

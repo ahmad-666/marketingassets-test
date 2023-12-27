@@ -6,9 +6,9 @@ import type {
   CompanyResponse,
 } from "@/src/types/Company";
 
-export async function getCompany({ companyId }: CompanyFilters) {
+export async function getCompany({ domain }: CompanyFilters) {
   const where: WhereOptions<CompanyResponse> = {
-    domain: companyId,
+    domain,
   };
   const company = await Company.findOne({
     where,

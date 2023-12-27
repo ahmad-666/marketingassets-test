@@ -9,6 +9,7 @@ type CompanyCardProps = Company & {
 
 export default function CompanyCard({
   id,
+  domain,
   name,
   imgSrc,
   category,
@@ -30,7 +31,7 @@ export default function CompanyCard({
             <h3 className="title">{name}</h3>
           </div>
           <div className="listing_footer">
-            <Link href={`/logo/${id}`} className="submit-action">
+            <Link href={`/logo/${domain}`} className="submit-action">
               Download {name} logo
             </Link>
           </div>

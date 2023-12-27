@@ -91,7 +91,8 @@ export default function CompaniesList({
       const newCompanies: Company[] = [];
       items.forEach((company) => {
         newCompanies.push({
-          id: company.domain,
+          id: company.id,
+          domain: company.domain,
           category: company.industry,
           name: company.name,
           imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
@@ -124,6 +125,7 @@ export default function CompaniesList({
                 className="col-sm-6 col-xl-3 p10"
                 key={`${company.id}-${company.name}`}
                 id={company.id}
+                domain={company.domain}
                 name={company.name}
                 category={company.category}
                 imgSrc={company.imgSrc}
