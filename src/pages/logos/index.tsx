@@ -20,26 +20,19 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   try {
     const { page, search } = context.query;
     const finalPage = +page || 1;
-    const { items: companies, meta: companiesMeta } = await getCompanies({
-      page: finalPage,
-      pageSize,
-      search: search as string,
-    });
+    const { items: companies, totalCount: totalCompanies } = await getCompanies(
+      {
+        page: finalPage,
+        pageSize,
+        search: search as string,
+      }
+    );
     const { items: industries } = await getIndustries();
     return {
       props: {
-        companies: companies.map((company) => ({
-          id: company.id,
-          domain: company.domain,
-          category: company.industry,
-          name: company.name,
-          imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-        })),
-        totalCompanies: companiesMeta.totalCount,
-        industries: industries.map((industry) => ({
-          id: industry.industry,
-          name: industry.text,
-        })),
+        companies,
+        totalCompanies,
+        industries,
       },
     };
   } catch (err) {

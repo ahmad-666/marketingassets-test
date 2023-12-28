@@ -12,7 +12,7 @@ import ReviewSection from "@/src/components/details/ReviewSection";
 import MetaData from "@/src/components/common/MetaData";
 import SectionContainer from "@/src/components/common/SectionContainer";
 import getRand from "@/src/utils/random";
-import type { Company, Comment } from "@/src/types/Company";
+import type { Company, GetComments } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
   type Item as ContactItem,
@@ -25,10 +25,7 @@ import CommentsSection from "@/src/components/details/CommentsSection";
 type PageProps = {
   company: Company;
   relatedCompanies: Company[];
-  comments: {
-    items: Comment[];
-    total: number;
-  };
+  comments: GetComments;
 };
 
 const relatedPageSize = 12;
@@ -42,49 +39,20 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     const { items: relatedCompanies } = await getCompanies({
       page: 1,
       pageSize: relatedPageSize,
-      industry: company.industry,
+      industry: company.category,
     });
-    const { items: comments, meta: commentMeta } = await getComments({
+    const { items: comments, totalCount: totalComments } = await getComments({
       page: 1,
       pageSize: commentPageSize,
       companyId: company.id,
     });
     return {
       props: {
-        company: {
-          id: company.id,
-          domain: company.domain,
-          name: company.name,
-          imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-          category: company.industry,
-          country: company.country,
-          facebook: company.facebook,
-          twitter: company.twitter,
-          linkedin: company.linkedin,
-          overview: company.overview,
-          size: company.size,
-          followers: company.followers_count,
-          founded: company.founded,
-        },
-        relatedCompanies: relatedCompanies
-          .filter((company) => company.domain !== logoId)
-          .map((company) => ({
-            id: company.id,
-            domain: company.domain,
-            name: company.name,
-            category: company.industry,
-            imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-          })),
+        company,
+        relatedCompanies,
         comments: {
-          items: comments.map((comment) => ({
-            id: comment.id,
-            userName: comment.userName,
-            userEmail: comment.userEmail,
-            comment: comment.body,
-            rate: comment.rate,
-            date: "2020/10/10",
-          })),
-          total: commentMeta.totalCount,
+          items: comments,
+          totalCount: totalComments,
         },
       },
     };
@@ -229,7 +197,7 @@ const Page = ({ company, relatedCompanies = [], comments }: PageProps) => {
                   className="mt30"
                   type="company"
                   comments={comments.items}
-                  totalComments={comments.total}
+                  totalComments={comments.totalCount}
                   pageSize={commentPageSize}
                 />
               )}

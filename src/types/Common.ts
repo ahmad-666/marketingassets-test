@@ -28,3 +28,8 @@ export type Social = {
   label: string;
   color: string;
 };
+export type ServerMeta = {
+  meta: {
+    totalCount: number;
+  };
+};

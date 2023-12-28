@@ -88,20 +88,10 @@ export default function CompaniesList({
           : undefined,
         search,
       });
-      const newCompanies: Company[] = [];
-      items.forEach((company) => {
-        newCompanies.push({
-          id: company.id,
-          domain: company.domain,
-          category: company.industry,
-          name: company.name,
-          imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/logos/${company.domain}.png`,
-        });
-      });
       setUrlQuery({ newPage: pageVal });
       scrollToContainer();
       filterUpdated.current = false;
-      return newCompanies;
+      return items;
     },
   });
   useMountedEffect(() => {

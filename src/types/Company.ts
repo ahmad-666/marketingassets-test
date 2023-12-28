@@ -1,4 +1,6 @@
-//client-side types
+import type { ServerMeta } from "./Common";
+
+//Company
 export type Company = {
   id: number;
   domain: string;
@@ -14,9 +16,16 @@ export type Company = {
   founded?: number;
   followers?: number;
 };
+export type GetCompanies = {
+  items: Company[];
+  totalCount: number;
+};
 export type Industry = {
   id: string;
   name: string;
+};
+export type GetIndustries = {
+  items: Industry[];
 };
 export type CompanyFilters = {
   domain: string;
@@ -27,20 +36,6 @@ export type CompaniesFilters = {
   page?: number;
   pageSize?: number;
 };
-export type Comment = {
-  id: number;
-  date: string;
-  userName: string;
-  userEmail: string;
-  comment: string;
-  rate: number;
-};
-export type CommentFilters = {
-  companyId: number;
-  page?: number;
-  pageSize?: number;
-};
-//server-side types
 export type CompanyResponse = {
   id: number;
   name: string;
@@ -58,16 +53,31 @@ export type CompanyResponse = {
 export type GetCompanyResponse = CompanyResponse;
 export type GetCompaniesResponse = {
   items: CompanyResponse[];
-  meta: {
-    totalCount: number;
-  };
-};
+} & ServerMeta;
 export type IndustryResponse = {
   industry: string;
   text: string;
 };
 export type GetIndustriesResponse = {
   items: IndustryResponse[];
+};
+//Company Comment
+export type Comment = {
+  id: number;
+  date: string;
+  userName: string;
+  userEmail: string;
+  comment: string;
+  rate: number;
+};
+export type GetComments = {
+  items: Comment[];
+  totalCount: number;
+};
+export type CommentFilters = {
+  companyId: number;
+  page?: number;
+  pageSize?: number;
 };
 export type CommentReqBody = {
   companyId: number;
@@ -88,7 +98,4 @@ export type CommentResponse = {
 };
 export type GetCommentsResponse = {
   items: CommentResponse[];
-  meta: {
-    totalCount: number;
-  };
-};
+} & ServerMeta;

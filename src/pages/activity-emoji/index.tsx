@@ -6,12 +6,9 @@ import SectionContainer from "@/src/components/common/SectionContainer";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import type { Emoji } from "@/src/types/Emoji";
+import type { GetEmojis } from "@/src/types/Emoji";
 
-type PageProps = {
-  emojis: Emoji[];
-  totalEmojis: number;
-};
+type PageProps = GetEmojis;
 const pageSize = 8;
 const emojiCategoryId = "activity-emoji";
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
@@ -20,31 +17,22 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   try {
     const { page } = context.query;
     const finalPage = +page || 1;
-    const { items: emojis, meta } = await getEmojis({
+    const { items, totalCount } = await getEmojis({
       category: emojiCategoryId as string,
       page: finalPage,
       pageSize,
     });
     return {
       props: {
-        emojis: emojis.map((emoji) => ({
-          id: emoji.id,
-          url: emoji.url,
-          categoryValue: emoji.parent,
-          categoryText: textNormalize(emoji.parent),
-          name: emoji.text,
-          emoji: emoji.emoji,
-          score: 4.9,
-          usersScore: emoji.score,
-        })),
-        totalEmojis: meta.totalCount,
+        items,
+        totalCount,
       },
     };
   } catch (err) {
     return { notFound: true };
   }
 };
-export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
+export default function Page({ items = [], totalCount = 0 }: PageProps) {
   const router = useRouter();
   const emojiCategoryText = useMemo(() => {
     return textNormalize(emojiCategoryId);
@@ -64,8 +52,8 @@ export default function Page({ emojis = [], totalEmojis = 0 }: PageProps) {
       <SectionContainer>
         <EmojisList
           title={`List of All ${emojiCategoryText}`}
-          items={emojis}
-          totalItems={totalEmojis}
+          items={items}
+          totalItems={totalCount}
           pageSize={pageSize}
           emojiCategoryId={emojiCategoryId}
           page={queries.page}

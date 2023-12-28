@@ -1,4 +1,6 @@
-//client-side types
+import type { ServerMeta } from "./Common";
+
+//Emoji
 export type Emoji = {
   id: number;
   url: string;
@@ -14,6 +16,10 @@ export type Emoji = {
   response?: string;
   relatedEmojis?: string[];
 };
+export type GetEmojis = {
+  items: Emoji[];
+  totalCount: number;
+};
 export type EmojiFilters = {
   url: string;
 };
@@ -24,20 +30,6 @@ export type EmojisFilters = {
   pageSize?: number;
   search?: string;
 };
-export type Comment = {
-  id: number;
-  date: string;
-  userName: string;
-  userEmail: string;
-  comment: string;
-  rate: number;
-};
-export type CommentFilters = {
-  emojiId: number;
-  page?: number;
-  pageSize?: number;
-};
-//server-side types
 export type EmojiResponse = {
   aliases: string[];
   description: string;
@@ -60,12 +52,27 @@ export type EmojiCategoryResponse = {
 export type GetEmojiResponse = EmojiResponse;
 export type GetEmojisResponse = {
   items: EmojiResponse[];
-  meta: {
-    totalCount: number;
-  };
-};
+} & ServerMeta;
 export type GetEmojiCategoriesResponse = {
   items: EmojiCategoryResponse[];
+};
+//Emoji Comment
+export type Comment = {
+  id: number;
+  date: string;
+  userName: string;
+  userEmail: string;
+  comment: string;
+  rate: number;
+};
+export type GetComments = {
+  items: Comment[];
+  totalCount: number;
+};
+export type CommentFilters = {
+  emojiId: number;
+  page?: number;
+  pageSize?: number;
 };
 export type CommentReqBody = {
   emojiId: number;
@@ -86,7 +93,4 @@ export type CommentResponse = {
 };
 export type GetCommentsResponse = {
   items: CommentResponse[];
-  meta: {
-    totalCount: number;
-  };
-};
+} & ServerMeta;

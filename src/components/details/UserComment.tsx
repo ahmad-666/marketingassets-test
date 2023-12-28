@@ -17,7 +17,7 @@ export default function UserComment(props: UserCommentProps) {
         <div className="d-flex justify-content-between align-items-start gap-2">
           <div>
             <p className="fz14 text-dark-color fw-bold">{userName}</p>
-            {/* <p className="mt-1 fz13 text-gray">{date}</p> */}
+            <p className="mt-1 fz13 text-gray">{date}</p>
           </div>
           <div>
             <Rating value={rate} readonly size={15} />

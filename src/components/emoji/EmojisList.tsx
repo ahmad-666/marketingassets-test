@@ -90,23 +90,10 @@ export default function EmojisList({
         pageSize,
         search,
       });
-      const newEmojis: Emoji[] = [];
-      items.forEach((emoji) => {
-        newEmojis.push({
-          id: emoji.id,
-          url: emoji.url,
-          categoryValue: emoji.parent,
-          categoryText: textNormalize(emoji.parent),
-          name: emoji.text,
-          emoji: emoji.emoji,
-          score: 4.9,
-          usersScore: emoji.score,
-        });
-      });
       setUrlQueries({ newPage: pageVal });
       scrollToContainer();
       filterUpdated.current = false;
-      return newEmojis;
+      return items;
     },
   });
   useMountedEffect(() => {
