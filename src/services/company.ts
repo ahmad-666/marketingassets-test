@@ -119,7 +119,7 @@ export const getComments = async ({
   const normalizeData: GetComments = {
     items: data.items.map((comment) => ({
       id: comment.id,
-      date: dayjs(comment.createdAt).format("YYYY/MM/DD HH:mm"),
+      date: dayjs(comment.createdAt).format("YYYY/MM/DD"),
       userName: comment.userName,
       userEmail: comment.userEmail,
       comment: comment.body,
