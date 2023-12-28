@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Tag } from "@/src/types/Common";
 import Link from "next/link";
+import ContentWrapper from "@/src/components/common/ContentWrapper";
 
 type SimilarTagsProps = {
   title: string;
@@ -14,9 +15,8 @@ export default function SimilarTags({
   className = "",
 }: SimilarTagsProps) {
   return (
-    <div className={`listing_single_description ${className}`}>
-      <h4 className="fs-6">{title}</h4>
-      <div className="mt30 text-body-color">
+    <ContentWrapper header="H4" title={title} className={`${className}`}>
+      <div className="text-body-color">
         {tags.map((tag, i) => (
           <Fragment key={tag.route}>
             <Link className="lh-lg" href={tag.route}>
@@ -26,6 +26,6 @@ export default function SimilarTags({
           </Fragment>
         ))}
       </div>
-    </div>
+    </ContentWrapper>
   );
 }

@@ -8,6 +8,7 @@ import TextField from "@/src/components/common/form/TextField";
 import Rating from "@/src/components/common/Rating";
 import Button from "@/src/components/common/Button";
 import Alert from "@/src/components/common/Alert";
+import ContentWrapper from "@/src/components/common/ContentWrapper";
 import { addComment as addEmojiComment } from "@/src/services/emoji";
 import { addComment as addCompanyComment } from "@/src/services/company";
 import type { CommentReqBody as EmojiCommentReqBody } from "@/src/types/Emoji";
@@ -105,57 +106,56 @@ export default function ReviewSection({
     },
   });
   return (
-    <div className={`${className}`}>
-      <div className={`listing_single_description`}>
-        <h4 className="fs-6">Write a Review</h4>
-        <div className="mt30">
-          <form onSubmit={reviewForm.handleSubmit}>
-            <div className="row g-3">
-              <div className="col-12 col-md-6">
-                <TextField
-                  {...reviewForm.getFieldProps("name")}
-                  error={reviewForm.touched.name && reviewForm.errors.name}
-                  label="Name"
-                />
-              </div>
-              <div className="col-12 col-md-6">
-                <TextField
-                  {...reviewForm.getFieldProps("email")}
-                  error={reviewForm.touched.email && reviewForm.errors.email}
-                  label="Email"
-                  type="email"
-                />
-              </div>
-              <div className="col-12">
-                <TextField
-                  as="textarea"
-                  {...reviewForm.getFieldProps("comment")}
-                  error={
-                    reviewForm.touched.comment && reviewForm.errors.comment
-                  }
-                  label="Review"
-                />
-              </div>
-              <div className="col-12">
-                <Rating
-                  value={reviewForm.values.rate}
-                  onChange={(newValue) =>
-                    reviewForm.setFieldValue("rate", newValue)
-                  }
-                  size={25}
-                />
-              </div>
+    <ContentWrapper
+      header="H5"
+      title="Write a Review"
+      className={`${className}`}
+    >
+      <div>
+        <form onSubmit={reviewForm.handleSubmit}>
+          <div className="row g-3">
+            <div className="col-12 col-md-6">
+              <TextField
+                {...reviewForm.getFieldProps("name")}
+                error={reviewForm.touched.name && reviewForm.errors.name}
+                label="Name"
+              />
             </div>
-            <Button
-              type="submit"
-              size="lg"
-              className="fw-semibold mt-4"
-              loading={emojiCommentIsLoading || companyCommentIsLoading}
-            >
-              Submit Your Review
-            </Button>
-          </form>
-        </div>
+            <div className="col-12 col-md-6">
+              <TextField
+                {...reviewForm.getFieldProps("email")}
+                error={reviewForm.touched.email && reviewForm.errors.email}
+                label="Email"
+                type="email"
+              />
+            </div>
+            <div className="col-12">
+              <TextField
+                as="textarea"
+                {...reviewForm.getFieldProps("comment")}
+                error={reviewForm.touched.comment && reviewForm.errors.comment}
+                label="Review"
+              />
+            </div>
+            <div className="col-12">
+              <Rating
+                value={reviewForm.values.rate}
+                onChange={(newValue) =>
+                  reviewForm.setFieldValue("rate", newValue)
+                }
+                size={25}
+              />
+            </div>
+          </div>
+          <Button
+            type="submit"
+            size="lg"
+            className="fw-semibold mt-4"
+            loading={emojiCommentIsLoading || companyCommentIsLoading}
+          >
+            Submit Your Review
+          </Button>
+        </form>
         <Alert
           show={showAlert}
           onChange={(newValue) => setShowAlert(newValue)}
@@ -175,6 +175,6 @@ export default function ReviewSection({
           </p>
         </Alert>
       </div>
-    </div>
+    </ContentWrapper>
   );
 }
