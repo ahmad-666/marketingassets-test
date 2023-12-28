@@ -61,7 +61,7 @@ export type Comment = {
   id: number;
   date: string;
   userName: string;
-  userEmail: string;
+  userEmail?: string;
   comment: string;
   rate: number;
 };

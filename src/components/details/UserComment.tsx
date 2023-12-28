@@ -2,11 +2,8 @@ import Rating from "@/src/components/common/Rating";
 import type { Comment as EmojiCommentType } from "@/src/types/Emoji";
 import type { Comment as CompanyCommentType } from "@/src/types/Company";
 
-type EmojiComment = { type: "emoji" } & Omit<EmojiCommentType, "userEmail">;
-type CompanyComment = { type: "company" } & Omit<
-  CompanyCommentType,
-  "userEmail"
->;
+type EmojiComment = { type: "emoji" } & EmojiCommentType;
+type CompanyComment = { type: "company" } & CompanyCommentType;
 type GeneralCommentsProps = { className?: string };
 type UserCommentProps = (EmojiComment | CompanyComment) & GeneralCommentsProps;
 export default function UserComment(props: UserCommentProps) {
