@@ -3,12 +3,12 @@ import Link from "next/link";
 import CopyRight from "./footer/CopyRight";
 import FooterItems from "./footer/FooterItems";
 import Navigation from "./footer/Navigation";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 
 const Footer = () => {
   return (
     <footer className="footer_one pt50 pb25">
-      <SectionContainer>
+      <Container>
         <div className="row">
           <div className="col-12 col-md-5 col-lg-4 col-xl-3">
             <div className="footer_about_widget text-start">
@@ -38,14 +38,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </SectionContainer>
+      </Container>
       <hr />
-      <SectionContainer>
+      <Container>
         <div className="py-4">
           <FooterItems />
         </div>
         <CopyRight />
-      </SectionContainer>
+      </Container>
     </footer>
   );
 };

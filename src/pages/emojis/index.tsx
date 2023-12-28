@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import MetaData from "@/src/components/common/MetaData";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import { getEmojis } from "@/src/services/emoji";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { GetEmojis } from "@/src/types/Emoji";
@@ -45,7 +45,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
         title={`List of all ${queries.search} emojis | CUFinder`}
         description={`Explore a complete list of ${queries.search}, featuring faces, emotions, professions, and activities. Find the perfect emoji to express yourself. Browse now!`}
       />
-      <SectionContainer>
+      <Container>
         <EmojisList
           title={`List of All ${queries.search} Emojis`}
           items={items}
@@ -55,7 +55,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
           search={queries.search}
           showPagination
         />
-      </SectionContainer>
+      </Container>
     </div>
   );
 }

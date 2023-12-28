@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import MetaData from "@/src/components/common/MetaData";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import { getEmojis } from "@/src/services/emoji";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -49,7 +49,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
         title={`List of all ${emojiCategoryText} | CUFinder`}
         description={`Discover all the ${emojiCategoryText} you need to satisfy your hunger and thirst. From fast food to fine dining, browse our comprehensive list now!`}
       />
-      <SectionContainer>
+      <Container>
         <EmojisList
           title={`List of All ${emojiCategoryText}`}
           items={items}
@@ -59,7 +59,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
           page={queries.page}
           showPagination
         />
-      </SectionContainer>
+      </Container>
     </div>
   );
 }

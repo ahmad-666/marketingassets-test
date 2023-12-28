@@ -1,11 +1,11 @@
 import Image from "next/image";
 import AssetFilter from "./AssetFilter";
-import SectionContainer from "../common/SectionContainer";
+import Container from "../common/Container";
 
 const Hero = () => {
   return (
     <section className="home-one bg-home1">
-      <SectionContainer>
+      <Container>
         <div className="row posr">
           <div className="col-lg-10 m-auto">
             <div className="home_content home1_style">
@@ -36,7 +36,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </SectionContainer>
+      </Container>
     </section>
   );
 };

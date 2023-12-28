@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import MetaData from "@/src/components/common/MetaData";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import { getCompanies } from "@/src/services/company";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -55,7 +55,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
         title={title}
         description={`Discover & download high-quality company logos in industry ${industryText} or integrate seamlessly via API. Elevate your projects with our diverse logo collection.`}
       />
-      <SectionContainer>
+      <Container>
         <section className="pt-5">
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -78,7 +78,7 @@ export default function Page({ items = [], totalCount = 0 }: PageProps) {
             </div>
           </div>
         </section>
-      </SectionContainer>
+      </Container>
     </div>
   );
 }

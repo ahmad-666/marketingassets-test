@@ -9,7 +9,7 @@ import MobileMenu from "./MobileMenu";
 import Landing from "@/src/components/others/Landing";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollTop";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import type { MenuItems } from "@/src/types/Common";
 
 type LayoutProps = {
@@ -37,12 +37,12 @@ export default function Layout({
             >
               <HeaderSidebar />
             </div>
-            <SectionContainer>
+            <Container>
               <HeaderTop />
               <Header menuItems={menuItems} />
               <MobileMenu menuItems={menuItems} />
               <Landing />
-            </SectionContainer>
+            </Container>
             {/* <Hero /> */}
             <main className="pt-5">{children}</main>
             <Footer />

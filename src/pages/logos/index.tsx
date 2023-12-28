@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
 import MetaData from "@/src/components/common/MetaData";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import CompaniesList from "@/src/components/company/CompaniesList";
 import IndustriesList from "@/src/components/industry/IndustriesList";
 import { getCompanies, getIndustries } from "@/src/services/company";
@@ -59,7 +59,7 @@ export default function Page({
         title={title}
         description="Discover & download high-quality company logos or integrate seamlessly via API. Elevate your projects with our diverse logo collection."
       />
-      <SectionContainer>
+      <Container>
         <section className="pt-5">
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -90,7 +90,7 @@ export default function Page({
             </div>
           </div>
         </section>
-      </SectionContainer>
+      </Container>
     </div>
   );
 }

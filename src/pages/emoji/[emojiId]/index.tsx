@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getEmoji, getEmojis, getComments } from "@/src/services/emoji";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import DetailsSection from "@/src/components/details/DetailsSection";
 import EmojiGallery from "@/src/components/details/EmojiGallery";
 import DescSection from "@/src/components/details/DescSection";
@@ -162,7 +162,7 @@ export default function Page({
         }}
       />
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
-        <SectionContainer>
+        <Container>
           <div className="row">
             <div className="col">
               <BreadCrumb items={breadcrumbItems} />
@@ -228,7 +228,7 @@ export default function Page({
               showPagination={false}
             />
           </div>
-        </SectionContainer>
+        </Container>
       </section>
     </div>
   );

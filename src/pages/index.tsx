@@ -1,5 +1,5 @@
 import MetaData from "@/src/components/common/MetaData";
-import SectionContainer from "@/src/components/common/SectionContainer";
+import Container from "@/src/components/common/Container";
 import AssetsList from "@/src/components/asset/AssetsList";
 import EmojiCategoryList from "@/src/components/emoji/EmojiCategoriesList";
 import HubSection from "@/src/components/others/HubSection";
@@ -11,15 +11,15 @@ export default function Page() {
   return (
     <div>
       <MetaData />
-      <SectionContainer>
+      <Container>
         <AssetsList />
         <EmojiCategoryList className="mt-7" />
-      </SectionContainer>
+      </Container>
       <HubSection className="mt-7" />
-      <SectionContainer className="mt-7">
+      <Container className="mt-7">
         <FaqsList />
         <BrandsList className="mt-7" />
-      </SectionContainer>
+      </Container>
       <NewsLetters className="mt-5" />
     </div>
   );
