@@ -26,11 +26,11 @@ export type EmojisFilters = {
 };
 export type Comment = {
   id: number;
+  date: string;
   userName: string;
   userEmail: string;
   comment: string;
   rate: number;
-  date: string;
 };
 export type CommentFilters = {
   emojiId: number;
@@ -76,6 +76,8 @@ export type CommentReqBody = {
 };
 export type CommentResponse = {
   id: number; //commentId
+  createdAt: Date;
+  updatedAt: Date;
   emojiId: number;
   userName: string;
   userEmail: string;

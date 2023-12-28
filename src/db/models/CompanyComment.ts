@@ -4,6 +4,8 @@ import connection from "../connection";
 const createCompanyCommentsModel = () => {
   class CompanyComments extends Model {
     declare id: number;
+    declare createdAt: Date;
+    declare updatedAt: Date;
     declare userName: string;
     declare userEmail: string;
     declare body: string;
@@ -17,6 +19,14 @@ const createCompanyCommentsModel = () => {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
       },
       userName: { type: DataTypes.STRING, allowNull: false },
       userEmail: { type: DataTypes.STRING, allowNull: false },
@@ -34,7 +44,7 @@ const createCompanyCommentsModel = () => {
     {
       sequelize: connection,
       modelName: "companyComments",
-      timestamps: false,
+      timestamps: true,
     }
   );
   return CompanyComments;

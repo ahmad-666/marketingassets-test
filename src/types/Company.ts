@@ -29,11 +29,11 @@ export type CompaniesFilters = {
 };
 export type Comment = {
   id: number;
+  date: string;
   userName: string;
   userEmail: string;
   comment: string;
   rate: number;
-  date: string;
 };
 export type CommentFilters = {
   companyId: number;
@@ -78,6 +78,8 @@ export type CommentReqBody = {
 };
 export type CommentResponse = {
   id: number; //commentId
+  createdAt: Date;
+  updatedAt: Date;
   companyId: number;
   userName: string;
   userEmail: string;
