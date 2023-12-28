@@ -102,7 +102,6 @@ export const getComments = async ({
     `/emojis/${emojiId}/comments`,
     {
       params: {
-        emojiId,
         page,
         pageSize,
       },

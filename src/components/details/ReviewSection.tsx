@@ -112,7 +112,7 @@ export default function ReviewSection({
       className={`${className}`}
     >
       <div>
-        <form onSubmit={reviewForm.handleSubmit}>
+        <form noValidate onSubmit={reviewForm.handleSubmit}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
               <TextField

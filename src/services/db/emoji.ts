@@ -70,6 +70,7 @@ export async function getComments({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,
+    order: [["createdAt", "DESC"]],
   });
   return { count, rows };
 }

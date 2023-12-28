@@ -206,6 +206,7 @@ export default function Page({
                 <CommentsSection
                   className="mt30"
                   type="emoji"
+                  targetId={emoji.id}
                   comments={comments.items}
                   pageSize={commentPageSize}
                   totalComments={comments.totalCount}

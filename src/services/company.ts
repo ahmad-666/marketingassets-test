@@ -111,7 +111,6 @@ export const getComments = async ({
     `/companies/${companyId}/comments`,
     {
       params: {
-        companyId,
         page,
         pageSize,
       },

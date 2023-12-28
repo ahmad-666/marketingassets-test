@@ -196,6 +196,7 @@ const Page = ({ company, relatedCompanies = [], comments }: PageProps) => {
                 <CommentsSection
                   className="mt30"
                   type="company"
+                  targetId={company.id}
                   comments={comments.items}
                   totalComments={comments.totalCount}
                   pageSize={commentPageSize}

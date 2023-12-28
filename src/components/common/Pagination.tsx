@@ -26,7 +26,7 @@ export default function Pagination({
     return Math.ceil(totalItems / pageSize);
   }, [totalItems, pageSize]);
   const containerCssClass = useMemo(() => {
-    return "d-flex fs-6";
+    return "d-flex justify-content-center fs-6";
   }, []);
   const pageCssClass = useMemo(() => {
     return "d-flex justify-content-center align-items-center";
