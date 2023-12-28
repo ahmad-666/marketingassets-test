@@ -9,7 +9,7 @@ import {
 import Button from "@/src/components/common/Button";
 import Icon from "@/src/components/common/Icon";
 
-type Type = "success" | "danger" | "warning" | "info";
+type Type = "success" | "danger" | "warning" | "info" | null;
 
 type AlertProps = {
   show?: boolean;
@@ -34,11 +34,12 @@ export default function Alert({
 }: AlertProps) {
   const timerId = useRef<NodeJS.Timeout>(null!);
   const alertColorClass = useMemo(() => {
-    const cssClass = "";
-    if (type === "success") return "bg-success";
-    else if (type === "info") return "bg-info";
-    else if (type === "warning") return "bg-warning";
-    else if (type === "danger") return "bg-danger";
+    let cssClass = "";
+    if (type === "success") cssClass = "bg-success";
+    else if (type === "info") cssClass = "bg-info";
+    else if (type === "warning") cssClass = "bg-warning";
+    else if (type === "danger") cssClass = "bg-danger";
+    else cssClass = "bg-transparent";
     return cssClass;
   }, [type]);
   const clearTimer = useCallback(() => {

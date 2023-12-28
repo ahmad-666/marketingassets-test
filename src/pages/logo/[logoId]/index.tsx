@@ -203,7 +203,7 @@ const Page = ({ company, relatedCompanies = [], comments }: PageProps) => {
                 />
               )}
             </div>
-            <div className="col-lg-4 col-xl-4">
+            <div className="col-lg-4 col-xl-4 mt30 mt-lg-0">
               <DownloadSection
                 name={company.name}
                 src={company.imgSrc}

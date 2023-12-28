@@ -162,7 +162,9 @@ export default function ReviewSection({
           type={
             emojiCommentIsSuccess || companyCommentIsSuccess
               ? "success"
-              : "danger"
+              : emojiCommentIsError || companyCommentIsError
+              ? "danger"
+              : null
           }
           closeable={false}
           timeout={4000}
@@ -171,7 +173,9 @@ export default function ReviewSection({
           <p className="text-white">
             {emojiCommentIsSuccess || companyCommentIsSuccess
               ? "Your Comment Added successfully"
-              : "Error happens when adding comment!"}
+              : emojiCommentIsError || companyCommentIsError
+              ? "Error happens when adding comment!"
+              : ""}
           </p>
         </Alert>
       </div>

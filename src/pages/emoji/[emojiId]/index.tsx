@@ -214,7 +214,7 @@ export default function Page({
               )}
             </div>
             <div className="col-lg-4 col-xl-4">
-              <CopySection value={emoji.emoji} />
+              <CopySection value={emoji.emoji} className="mt30 mt-lg-0" />
               <EmbedCompanyLogo className="mt30" />
               <UsefulLinks className="mt30" />
             </div>
