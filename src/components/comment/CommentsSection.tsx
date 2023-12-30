@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ContentWrapper from "@/src/components/common/ContentWrapper";
-import UserComment from "@/src/components/details/UserComment";
+import UserComment from "@/src/components/comment/UserComment";
 import Pagination from "@/src/components/common/Pagination";
 import SpinnerLoader from "@/src/components/common/SpinnerLoader";
 import { getComments as getEmojiComments } from "@/src/services/emoji";

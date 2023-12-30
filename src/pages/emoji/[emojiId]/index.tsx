@@ -2,16 +2,16 @@ import { useMemo } from "react";
 import { getEmoji, getEmojis, getComments } from "@/src/services/emoji";
 import Container from "@/src/components/common/Container";
 import DetailsSection from "@/src/components/details/DetailsSection";
-import EmojiGallery from "@/src/components/details/EmojiGallery";
+import EmojiGallery from "@/src/components/emoji/EmojiGallery";
 import DescSection from "@/src/components/details/DescSection";
 import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
-import CopySection from "@/src/components/details/CopySection";
+import CopySection from "@/src/components/emoji/CopySection";
 import EmojiDevices, {
   type Item as DeviceItem,
-} from "@/src/components/details/EmojiDevices";
-import SimilarTags from "@/src/components/details/SimilarTags";
-import ReviewSection from "@/src/components/details/ReviewSection";
+} from "@/src/components/emoji/EmojiDevices";
+import SimilarTags from "@/src/components/emoji/SimilarTags";
+import ReviewSection from "@/src/components/comment/ReviewSection";
 import EmojisList from "@/src/components/emoji/EmojisList";
 import { textNormalize } from "@/src/utils/textTransform";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
@@ -21,7 +21,7 @@ import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
 import MetaData from "@/src/components/common/MetaData";
-import CommentsSection from "@/src/components/details/CommentsSection";
+import CommentsSection from "@/src/components/comment/CommentsSection";
 
 type PageProps = {
   emoji: Emoji;
