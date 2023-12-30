@@ -72,21 +72,21 @@ export type Social = {
 //University
 export type University = {
   id: number;
-  orgCode: string;
+  orgCode?: string;
   name: string;
   imgSrc: string;
-  overview: string;
-  memberships: string[];
-  type: Type;
-  rank: Rank;
-  count: Count;
-  pricing: Pricing;
-  fields: Field[];
-  restriction: Restriction;
-  features: Features;
+  overview?: string;
+  memberships?: string[];
+  type?: Type;
+  rank?: Rank;
+  count?: Count;
+  pricing?: Pricing;
+  fields?: Field[];
+  restriction?: Restriction;
+  features?: Features;
   location: Location;
-  contact: Contact;
-  social: Social;
+  contact?: Contact;
+  social?: Social;
 };
 export type GetUniversities = {
   items: University[];
