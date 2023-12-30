@@ -1,8 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteRule   ^(.*)  http://localhost:3050/$1 [P]
+    RewriteRule   ^(.*)  http://localhost:3054/$1 [P]
     
-    RewriteRule ^(.*)$ http://test.companyurlfinder.com/$1 [R=301,L]
+    RewriteRule ^(.*)$ http://test.cufinder.io/$1 [R=301,L]
 
 </IfModule>
 
