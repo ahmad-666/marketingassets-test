@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "./emojiCard.module.scss";
 import type { Emoji } from "@/src/types/Emoji";
 
 type EmojiCardProps = Emoji & {
@@ -22,7 +21,7 @@ export default function EmojiCard({
       <div className="car-listing h-100">
         <div className="thumb">
           <div className="tag blue">{categoryText}</div>
-          <div className={`emoji-container ${styles["emoji-container"]}`}>
+          <div className="text-center" style={{ fontSize: "80px" }}>
             {emoji}
           </div>
         </div>
