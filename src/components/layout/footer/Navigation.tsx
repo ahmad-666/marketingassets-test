@@ -5,10 +5,10 @@ const Navigation = () => {
     { label: "Home", path: "/" },
     { label: "Emoji", path: "/emojis" },
     { label: "Logo", path: "/logos" },
-    { label: "CUFinder", path: "https://companyurlfinder.com/" },
-    { label: "Blog", path: "https://companyurlfinder.com/blog/" },
-    { label: "Dashboard", path: "https://dashboard.companyurlfinder.com/" },
-    { label: "Our Data", path: "https://companyurlfinder.com/our-data/" },
+    { label: "CUFinder", path: "https://cufinder.io/" },
+    { label: "Blog", path: "https://cufinder.io/blog/" },
+    { label: "Dashboard", path: "https://dashboard.cufinder.io/" },
+    { label: "Our Data", path: "https://cufinder.io/our-data/" },
   ];
 
   return (

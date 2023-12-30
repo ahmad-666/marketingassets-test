@@ -40,7 +40,7 @@ const Header = ({ menuItems }: HeaderProps) => {
                 color="primary-darken1"
                 dark
                 size="lg"
-                href="https://dashboard.companyurlfinder.com/"
+                href="https://dashboard.cufinder.io/"
                 className="mx-0"
               >
                 Dashboard

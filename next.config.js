@@ -9,13 +9,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "companyurlfinder.com",
+        hostname: "cufinder.io",
         pathname: "**",
         port: "",
       },
       {
         protocol: "https",
-        hostname: "api.companyurlfinder.com",
+        hostname: "api.cufinder.io",
         pathname: "**",
         port: "",
       },

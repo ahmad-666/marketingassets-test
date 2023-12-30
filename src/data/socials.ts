@@ -38,4 +38,4 @@ export const socials: Social[] = [
     color: "#D32F2F",
   },
 ];
-export const email = "marketing@companyurlfinder.com";
+export const email = "marketing@cufinder.io";
