@@ -3,14 +3,14 @@ import { University, UniversityComment } from "@/src/db/models";
 import type {
   UniversityFilter,
   UniversitiesFilters,
-  UniversityResponse,
+  UniversityTableAttribute,
   CommentReqBody,
   CommentFilters,
   CommentResponse,
 } from "@/src/types/University";
 
 export async function getUniversity({ name }: UniversityFilter) {
-  const where: WhereOptions<UniversityResponse> = {
+  const where: WhereOptions<UniversityTableAttribute> = {
     name,
   };
   const university = await University.findOne({
@@ -23,7 +23,7 @@ export async function getUniversities({
   pageSize = null,
   search,
 }: UniversitiesFilters) {
-  let where: WhereOptions<UniversityResponse> = {};
+  let where: WhereOptions<UniversityTableAttribute> = {};
   if (search)
     where.name = {
       [Op.substring]: search,

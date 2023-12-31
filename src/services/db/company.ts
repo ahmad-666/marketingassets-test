@@ -4,13 +4,13 @@ import type {
   CommentReqBody,
   CompaniesFilters,
   CompanyFilters,
-  CompanyResponse,
+  CompanyTableAttribute,
   CommentFilters,
   CommentResponse,
 } from "@/src/types/Company";
 
 export async function getCompany({ domain }: CompanyFilters) {
-  const where: WhereOptions<CompanyResponse> = {
+  const where: WhereOptions<CompanyTableAttribute> = {
     domain,
   };
   const company = await Company.findOne({
@@ -24,7 +24,7 @@ export async function getCompanies({
   industry,
   search,
 }: CompaniesFilters) {
-  let where: WhereOptions<CompanyResponse> = {};
+  let where: WhereOptions<CompanyTableAttribute> = {};
   if (industry) where.industry = industry;
   if (search)
     where.name = {

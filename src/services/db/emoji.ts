@@ -3,14 +3,14 @@ import { Emoji, EmojiComment } from "@/src/db/models";
 import type {
   EmojiFilters,
   EmojisFilters,
-  EmojiResponse,
+  EmojiTableAttribute,
   CommentReqBody,
   CommentResponse,
   CommentFilters,
 } from "@/src/types/Emoji";
 
 export async function getEmoji({ url }: EmojiFilters) {
-  const where: WhereOptions<EmojiResponse> = { url };
+  const where: WhereOptions<EmojiTableAttribute> = { url };
   const emoji = await Emoji.findOne({
     where,
   });
@@ -23,7 +23,7 @@ export async function getEmojis({
   pageSize = null,
   search,
 }: EmojisFilters) {
-  let where: WhereOptions<EmojiResponse> = {};
+  let where: WhereOptions<EmojiTableAttribute> = {};
   if (urls?.length) where.url = urls;
   if (category) where.parent = category;
   if (search)
