@@ -6,8 +6,10 @@ import Pagination from "@/src/components/common/Pagination";
 import SpinnerLoader from "@/src/components/common/SpinnerLoader";
 import { getComments as getEmojiComments } from "@/src/services/emoji";
 import { getComments as getCompanyComments } from "@/src/services/company";
+import { getComments as getUniversityComments } from "@/src/services/university";
 import type { Comment as EmojiCommentType } from "@/src/types/Emoji";
 import type { Comment as CompanyCommentType } from "@/src/types/Company";
+import type { Comment as UniversityCommentType } from "@/src/types/University";
 
 type EmojiComment = { type: "emoji" } & {
   comments: EmojiCommentType[];
@@ -15,13 +17,16 @@ type EmojiComment = { type: "emoji" } & {
 type CompanyComment = { type: "company" } & {
   comments: CompanyCommentType[];
 };
+type UniversityComment = { type: "university" } & {
+  comments: UniversityCommentType[];
+};
 type GeneralProps = {
   targetId: number;
   totalComments?: number;
   pageSize?: number;
   className?: string;
 };
-type CommentsSectionProps = (EmojiComment | CompanyComment) & GeneralProps;
+type CommentsSectionProps = (EmojiComment | CompanyComment | UniversityComment) & GeneralProps;
 export default function CommentsSection(props: CommentsSectionProps) {
   const {
     type,
@@ -70,6 +75,23 @@ export default function CommentsSection(props: CommentsSectionProps) {
         return [];
       },
     });
+  const { isFetching: universityCommentLoading, data: universityComments } =
+    useQuery<UniversityCommentType[]>({
+      refetchOnMount: false,
+      queryKey: ["get-university-comments", type, targetId, page, pageSize],
+      initialData: comments as UniversityCommentType[],
+      queryFn: async () => {
+        if (type === "university") {
+          const { items } = await getUniversityComments({
+            page,
+            pageSize,
+            universityId: targetId,
+          });
+          return items;
+        }
+        return [];
+      },
+    });
   return (
     <ContentWrapper
       header="H5"
@@ -104,8 +126,21 @@ export default function CommentsSection(props: CommentsSectionProps) {
                 rate={comment.rate}
               />
             ))}
+          {type === "university" &&
+            universityComments.map((comment) => (
+              <UserComment
+                key={comment.id}
+                className="py-3 divider-y divider-y-lightgray2"
+                type={type}
+                id={comment.id}
+                userName={comment.userName}
+                date={comment.date}
+                comment={comment.comment}
+                rate={comment.rate}
+              />
+            ))}
         </div>
-        {(emojiCommentsLoading || companyCommentsLoading) && (
+        {(emojiCommentsLoading || companyCommentsLoading || universityCommentLoading) && (
           <SpinnerLoader className="mt20" size={40} />
         )}
         <Pagination

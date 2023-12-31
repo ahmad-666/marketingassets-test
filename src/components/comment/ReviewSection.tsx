@@ -1,4 +1,4 @@
-//this component can be used for Submit comment for both Emoji,Company
+//this component can be used for Submit comment for both Emoji,Company,...
 
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -11,10 +11,12 @@ import Alert from "@/src/components/common/Alert";
 import ContentWrapper from "@/src/components/common/ContentWrapper";
 import { addComment as addEmojiComment } from "@/src/services/emoji";
 import { addComment as addCompanyComment } from "@/src/services/company";
+import { addComment as addUniversityComment } from "@/src/services/university";
 import type { CommentReqBody as EmojiCommentReqBody } from "@/src/types/Emoji";
 import type { CommentReqBody as CompanyCommentReqBody } from "@/src/types/Company";
+import type { CommentReqBody as UniversityCommentReqBody } from "@/src/types/University";
 
-type Type = "emoji" | "logo";
+type Type = "emoji" | "company" | "university";
 type ReviewSectionProps = {
   targetId: number;
   type: Type;
@@ -64,9 +66,17 @@ export default function ReviewSection({
           body: comment,
           rate,
         });
-      } else if (type === "logo") {
+      } else if (type === "company") {
         await companyCommentMutate({
           companyId: targetId,
+          userName: name,
+          userEmail: email,
+          body: comment,
+          rate,
+        });
+      } else if (type === "university") {
+        await universityCommentMutate({
+          universityId: targetId,
           userName: name,
           userEmail: email,
           body: comment,
@@ -100,6 +110,26 @@ export default function ReviewSection({
     mutationKey: ["add-company-comment"],
     mutationFn: async ({ companyId, userName, userEmail, body, rate }) => {
       await addCompanyComment({ companyId, userName, userEmail, body, rate });
+    },
+    onSettled: () => {
+      setShowAlert(true);
+    },
+  });
+  const {
+    mutateAsync: universityCommentMutate,
+    isPending: universityCommentIsLoading,
+    isSuccess: universityCommentIsSuccess,
+    isError: universityCommentIsError,
+  } = useMutation<any, any, UniversityCommentReqBody>({
+    mutationKey: ["add-university-comment"],
+    mutationFn: async ({ universityId, userName, userEmail, body, rate }) => {
+      await addUniversityComment({
+        universityId,
+        userName,
+        userEmail,
+        body,
+        rate,
+      });
     },
     onSettled: () => {
       setShowAlert(true);
@@ -151,7 +181,11 @@ export default function ReviewSection({
             type="submit"
             size="lg"
             className="fw-semibold mt-4"
-            loading={emojiCommentIsLoading || companyCommentIsLoading}
+            loading={
+              emojiCommentIsLoading ||
+              companyCommentIsLoading ||
+              universityCommentIsLoading
+            }
           >
             Submit Your Review
           </Button>
@@ -160,9 +194,13 @@ export default function ReviewSection({
           show={showAlert}
           onChange={(newValue) => setShowAlert(newValue)}
           type={
-            emojiCommentIsSuccess || companyCommentIsSuccess
+            emojiCommentIsSuccess ||
+            companyCommentIsSuccess ||
+            universityCommentIsSuccess
               ? "success"
-              : emojiCommentIsError || companyCommentIsError
+              : emojiCommentIsError ||
+                companyCommentIsError ||
+                universityCommentIsError
               ? "danger"
               : null
           }
@@ -171,9 +209,13 @@ export default function ReviewSection({
           className="mt-4"
         >
           <p className="text-white">
-            {emojiCommentIsSuccess || companyCommentIsSuccess
+            {emojiCommentIsSuccess ||
+            companyCommentIsSuccess ||
+            universityCommentIsSuccess
               ? "Your Comment Added successfully"
-              : emojiCommentIsError || companyCommentIsError
+              : emojiCommentIsError ||
+                companyCommentIsError ||
+                universityCommentIsError
               ? "Error happens when adding comment!"
               : ""}
           </p>

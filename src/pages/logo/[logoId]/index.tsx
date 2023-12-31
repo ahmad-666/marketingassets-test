@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { getCompanies, getCompany, getComments } from "@/src/services/company";
 import DetailsSection from "@/src/components/details/DetailsSection";
-import ImageGallery from "@/src/components/company/ImageGallery";
+import ImageGallery from "@/src/components/details/ImageGallery";
 import DescSection from "@/src/components/details/DescSection";
-import DownloadSection from "@/src/components/company/DownloadSection";
+import DownloadSection from "@/src/components/details/DownloadSection";
 import EmbedCompanyLogo from "@/src/components/details/EmbedCompanyLogo";
 import UsefulLinks from "@/src/components/details/UsefulLinks";
 import CompaniesList from "@/src/components/company/CompaniesList";
@@ -16,7 +16,7 @@ import type { Company, GetComments } from "@/src/types/Company";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import ContactInformation, {
   type Item as ContactItem,
-} from "@/src/components/company/ContactInformation";
+} from "@/src/components/details/ContactInformation";
 import BreadCrumb, {
   type Item as BreadcrumbItem,
 } from "@/src/components/common/BreadCrumb";
@@ -188,7 +188,7 @@ const Page = ({ company, relatedCompanies = [], comments }: PageProps) => {
                 desc={company.overview}
               />
               <ReviewSection
-                type="logo"
+                type="company"
                 targetId={company.id}
                 className="mt30"
               />
