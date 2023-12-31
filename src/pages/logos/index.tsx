@@ -6,7 +6,7 @@ import CompaniesList from "@/src/components/company/CompaniesList";
 import IndustriesList from "@/src/components/industry/IndustriesList";
 import { getCompanies, getIndustries } from "@/src/services/company";
 import type { Company, Industry } from "@/src/types/Company";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 const pageSize = 8;
 type PageProps = {
