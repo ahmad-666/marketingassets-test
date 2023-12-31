@@ -118,3 +118,17 @@ export type CommentResponse = {
 export type GetCommentsResponse = {
   items: CommentResponse[];
 } & ServerMeta;
+export type CommentTableAttribute = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  userName: string;
+  userEmail: string;
+  body: string;
+  rate: number;
+  companyId: number;
+};
+export type CommentTableCreationAttribute = Optional<
+  CommentTableAttribute,
+  "id" | "createdAt" | "updatedAt"
+>;

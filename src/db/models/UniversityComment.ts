@@ -1,8 +1,15 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
+import type {
+  CommentTableAttribute,
+  CommentTableCreationAttribute,
+} from "@/src/types/University";
 
 const createUniversityCommentsModel = () => {
-  class UniversityComments extends Model {
+  class UniversityComments extends Model<
+    CommentTableAttribute,
+    CommentTableCreationAttribute
+  > {
     declare id: number;
     declare createdAt: Date;
     declare updatedAt: Date;

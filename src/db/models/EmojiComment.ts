@@ -1,8 +1,15 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
+import type {
+  CommentTableAttribute,
+  CommentTableCreationAttribute,
+} from "@/src/types/Emoji";
 
 const createEmojiCommentsModel = () => {
-  class EmojiComments extends Model {
+  class EmojiComments extends Model<
+    CommentTableAttribute,
+    CommentTableCreationAttribute
+  > {
     declare id: number;
     declare createdAt: Date;
     declare updatedAt: Date;
