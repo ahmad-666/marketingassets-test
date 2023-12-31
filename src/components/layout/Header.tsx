@@ -40,7 +40,7 @@ const Header = ({ menuItems }: HeaderProps) => {
                 color="primary-darken1"
                 dark
                 size="lg"
-                href="https://dashboard.cufinder.io/"
+                href={process.env.NEXT_PUBLIC_EXTERNAL_DASHBOARD_BASE_URL}
                 className="mx-0"
               >
                 Dashboard

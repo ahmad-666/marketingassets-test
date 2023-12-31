@@ -41,8 +41,11 @@ jobs:
           echo DB_PORT=3306 >> .env.production
           echo DB_USERNAME=marketingasset >> .env.production
           echo DB_PASSWORD=HrDK94hB6Qzy1jnM >> .env.production
+          echo NEXT_PUBLIC_FRONT_BASE_URL=https://test.cufinder.io >> .env.production
+          echo NEXT_PUBLIC_API_BASE_URL=https://test.cufinder.io/api >> .env.production
+          echo NEXT_PUBLIC_EXTERNAL_BASE_URL=https://cufinder.io >> .env.production
+          echo NEXT_PUBLIC_EXTERNAL_DASHBOARD_BASE_URL=https://dashboard.cufinder.io >> .env.production
           echo NEXT_PUBLIC_IMAGE_BASE_URL=https://cufinder.io/marketing/assets/img >> .env.production
-          echo NEXT_PUBLIC_BASE_URL=https://test.cufinder.io/api >> .env.production
 
       - name: Build app
         run: yarn build

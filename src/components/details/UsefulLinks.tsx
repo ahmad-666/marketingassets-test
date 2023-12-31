@@ -8,7 +8,7 @@ type UsefulLinksProps = {
   className?: string;
 };
 
-const domain = "https://cufinder.io";
+const domain = process.env.NEXT_PUBLIC_EXTERNAL_BASE_URL;
 const items: Item[] = [
   {
     text: "How to find someone's email on linkedin?",

@@ -21,7 +21,7 @@ export default function EmbedCompanyLogo({
         </p>
         <Link
           className="mt20 py10 lh-auto btn btn-thm btn-block ofr_btn2 h-auto"
-          href="https://cufinder.io/company-logo-finder/"
+          href={`${process.env.NEXT_PUBLIC_EXTERNAL_BASE_URL}/company-logo-finder/`}
           target="_blank"
         >
           Company Logo Finder

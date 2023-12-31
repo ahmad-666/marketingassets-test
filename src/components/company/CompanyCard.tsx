@@ -15,11 +15,11 @@ export default function CompanyCard({
   className = "",
 }: CompanyCardProps) {
   return (
-    <div className={`company-card ${className}`}>
+    <div className={`${className}`}>
       <div className="car-listing h-100">
         <div className="thumb">
           <div className="tag blue">{category}</div>
-          <div className="img-container d-flex justify-content-center align-items-center">
+          <div className="d-flex justify-content-center align-items-center">
             <Image
               src={imgSrc}
               alt={name}
@@ -32,12 +32,15 @@ export default function CompanyCard({
             />
           </div>
         </div>
-        <div className="details">
-          <div className="wrapper">
-            <h3 className="title">{name}</h3>
+        <div className="p-2 pt-3">
+          <div className="pb15">
+            <h3 className="fz13">{name}</h3>
           </div>
-          <div className="listing_footer">
-            <Link href={`/logo/${domain}`} className="submit-action">
+          <div className="d-flex justify-content-center pt20 border-top border-lightgray2">
+            <Link
+              href={`/logo/${domain}`}
+              className="p-2 text-white rounded-2 bg-primary-dark text-center"
+            >
               Download {name} logo
             </Link>
           </div>

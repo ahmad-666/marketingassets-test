@@ -1,3 +1,12 @@
+.bg-primary-dark {
+  background-color: var(--primary-dark-color);
+}
+.text-primary-dark {
+  color: var(--primary-dark-color);
+}
+.border-primary-dark {
+  border-color: var(--primary-dark-color);
+}
 .bg-primary-color {
   // we have .bg-primary bootstrap class too
   background-color: var(--primary-color);

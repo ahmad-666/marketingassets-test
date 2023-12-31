@@ -5,10 +5,19 @@ const Navigation = () => {
     { label: "Home", path: "/" },
     { label: "Emoji", path: "/emojis" },
     { label: "Logo", path: "/logos" },
-    { label: "CUFinder", path: "https://cufinder.io/" },
-    { label: "Blog", path: "https://cufinder.io/blog/" },
-    { label: "Dashboard", path: "https://dashboard.cufinder.io/" },
-    { label: "Our Data", path: "https://cufinder.io/our-data/" },
+    { label: "CUFinder", path: process.env.NEXT_PUBLIC_EXTERNAL_BASE_URL },
+    {
+      label: "Blog",
+      path: `${process.env.NEXT_PUBLIC_EXTERNAL_BASE_URL}/blog/`,
+    },
+    {
+      label: "Dashboard",
+      path: process.env.NEXT_PUBLIC_EXTERNAL_DASHBOARD_BASE_URL,
+    },
+    {
+      label: "Our Data",
+      path: `${process.env.NEXT_PUBLIC_EXTERNAL_BASE_URL}/our-data/`,
+    },
   ];
 
   return (

@@ -107,7 +107,7 @@ const MobileMenu = ({ menuItems = [] }: MobileMenuProps) => {
                     variant="filled"
                     color="primary-darken1"
                     dark
-                    href="https://dashboard.cufinder.io/"
+                    href={process.env.NEXT_PUBLIC_EXTERNAL_DASHBOARD_BASE_URL}
                     size="md"
                   >
                     Dashboard
