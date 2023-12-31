@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
       search: search as string,
     });
     return res.status(200).json({
-      items: rows.map((row) => ({ ...emojiDbToResponse(row) })),
+      items: rows.map((row) => ({ ...emojiDbToResponse(row.dataValues) })),
       meta: { totalCount: count },
     });
   } catch (err) {

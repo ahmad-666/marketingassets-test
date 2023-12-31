@@ -14,12 +14,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
       page: +page || 1,
       pageSize: +pageSize || null,
     });
-    return res
-      .status(200)
-      .json({
-        items: rows.map((row) => ({ ...commentDbToResponse(row) })),
-        meta: { totalCount: count },
-      });
+    return res.status(200).json({
+      items: rows.map((row) => ({ ...commentDbToResponse(row.dataValues) })),
+      meta: { totalCount: count },
+    });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

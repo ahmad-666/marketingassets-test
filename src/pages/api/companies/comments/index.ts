@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
         rate,
       });
       return res.status(201).json({
-        ...commentDbToResponse(newComment),
+        ...commentDbToResponse(newComment.dataValues),
       });
     }
   } catch (err) {

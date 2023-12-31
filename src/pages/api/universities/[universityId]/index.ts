@@ -12,7 +12,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const university = await getUniversity({ name: universityId as string });
     if (!university)
       return res.status(404).json({ message: "university not found" });
-    return res.status(200).json({ ...universityDbToResponse(university) });
+    return res
+      .status(200)
+      .json({ ...universityDbToResponse(university.dataValues) });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

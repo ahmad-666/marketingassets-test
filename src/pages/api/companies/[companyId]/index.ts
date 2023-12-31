@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const { companyId } = req.query;
     const company = await getCompany({ domain: companyId as string });
     if (!company) return res.status(404).json({ message: "company not found" });
-    return res.status(200).json({ ...companyDbToResponse(company) });
+    return res.status(200).json({ ...companyDbToResponse(company.dataValues) });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     });
     return res.status(200).json({
       items: rows.map((row) => ({
-        ...universityDbToResponse(row),
+        ...universityDbToResponse(row.dataValues),
       })),
       meta: { totalCount: count },
     });

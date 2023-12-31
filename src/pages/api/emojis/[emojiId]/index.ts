@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const emoji = await getEmoji({ url: emojiId as string });
     if (!emoji) return res.status(404).json({ message: "emoji not found" });
     return res.status(200).json({
-      ...emojiDbToResponse(emoji),
+      ...emojiDbToResponse(emoji.dataValues),
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });

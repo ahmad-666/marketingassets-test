@@ -5,7 +5,7 @@ import type {
   EmojisFilters,
   EmojiTableAttribute,
   CommentReqBody,
-  CommentResponse,
+  CommentTableAttribute,
   CommentFilters,
 } from "@/src/types/Emoji";
 
@@ -64,7 +64,7 @@ export async function getComments({
   page = 1,
   pageSize = null,
 }: CommentFilters) {
-  let where: WhereOptions<CommentResponse> = {};
+  let where: WhereOptions<CommentTableAttribute> = {};
   if (emojiId) where.emojiId = emojiId;
   const { count, rows } = await EmojiComment.findAndCountAll({
     offset: (page - 1) * pageSize,

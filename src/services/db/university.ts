@@ -6,7 +6,7 @@ import type {
   UniversityTableAttribute,
   CommentReqBody,
   CommentFilters,
-  CommentResponse,
+  CommentTableAttribute,
 } from "@/src/types/University";
 
 export async function getUniversity({ name }: UniversityFilter) {
@@ -56,7 +56,7 @@ export async function getComments({
   page = 1,
   pageSize = null,
 }: CommentFilters) {
-  let where: WhereOptions<CommentResponse> = {};
+  let where: WhereOptions<CommentTableAttribute> = {};
   if (universityId) where.universityId = universityId;
   const { count, rows } = await UniversityComment.findAndCountAll({
     offset: (page - 1) * pageSize,
