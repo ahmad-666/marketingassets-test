@@ -72,9 +72,9 @@ export type Social = {
 //University
 export type University = {
   id: number;
-  orgCode?: string;
   name: string;
   imgSrc: string;
+  orgCode?: string;
   overview?: string;
   memberships?: string[];
   type?: Type;
@@ -84,7 +84,7 @@ export type University = {
   fields?: Field[];
   restriction?: Restriction;
   features?: Features;
-  location: Location;
+  location?: Location;
   contact?: Contact;
   social?: Social;
 };
