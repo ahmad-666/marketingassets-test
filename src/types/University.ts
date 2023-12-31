@@ -1,3 +1,4 @@
+import { type Optional } from "sequelize";
 import type { ServerMeta } from "./Common";
 
 //Basic Types
@@ -23,9 +24,9 @@ export type Pricing = {
   internationalPostGraduate: string;
 };
 export type DegreeLevel = {
-  Diploma: boolean;
-  Bachelor: boolean;
-  Master: boolean;
+  diploma: boolean;
+  bachelor: boolean;
+  master: boolean;
   doctorate: boolean;
 };
 export type Field = {
@@ -135,17 +136,10 @@ export type UniversityResponse = {
   career_services: boolean;
   institutional_hospital: boolean;
   membership_list: string[];
-  study_degree_level: {
-    [key: string]: {
-      "Diploma Associate Foundation": boolean;
-      Bachelor: boolean;
-      Master: boolean;
-      Doctorate: boolean;
-    };
-  };
-  local_students_undergraduage: string;
+  study_degree_level: Field[];
+  local_students_undergraduate: string;
   local_students_postgraduate: string;
-  international_students_undergraduage: string;
+  international_students_undergraduate: string;
   international_students_postgraduate: string;
   wikipedia_page: string;
   instagram_page: string;
@@ -160,6 +154,59 @@ export type GetUniversityResponse = UniversityResponse;
 export type GetUniversitiesResponse = {
   items: UniversityResponse[];
 } & ServerMeta;
+export type UniversityTableAttribute = {
+  id: number;
+  name: string;
+  country: string;
+  continent: string;
+  logo_name: string;
+  country_ranking: number;
+  world_ranking: number;
+  overview: string;
+  country_code: string;
+  address: string;
+  tel: string;
+  fax: string;
+  website: string;
+  gender: string;
+  international_students: string;
+  selection_type: string;
+  admission_rate: string;
+  admission_office: string;
+  student_enrollment: string;
+  academic_staff: string;
+  entity_type: string;
+  academic_calendar: string;
+  campus_setting: string;
+  religious_affiliation: string;
+  library: string;
+  housing: string;
+  sport_facilities: string;
+  financial_aids: string;
+  study_abroad: string;
+  distance_learning: string;
+  academic_counseling: string;
+  career_services: string;
+  institutional_hospital: string;
+  membership_list: string;
+  study_degree_level: string;
+  local_students_undergraduage: string;
+  local_students_postgraduate: string;
+  international_students_undergraduage: string;
+  international_students_postgraduate: string;
+  wikipedia_page: string;
+  instagram_page: string;
+  youtube_page: string;
+  facebook_page: string;
+  twitter_page: string;
+  linkedin_page: string;
+  google_scholar_page: string;
+  org_code: string;
+};
+export type UniversityTableCreationAttribute = Optional<
+  UniversityTableAttribute,
+  "id"
+>;
 //University Comment
 export type Comment = {
   id: number;
