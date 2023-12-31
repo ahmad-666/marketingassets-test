@@ -1,18 +1,3 @@
-.emoji-card,
-.company-card,
-.industry-card {
-  .listing_footer {
-    display: flex;
-    justify-content: center;
-    .submit-action {
-      padding: 8px;
-      color: white;
-      border-radius: 0.5rem;
-      background-color: #1947e2;
-      text-align: center;
-    }
-  }
-}
 .filter1 {
   position: relative;
   &::before {
@@ -38,7 +23,15 @@
     }
   }
 }
-
+.industry-card {
+  transition: all 0.3s linear;
+  &:hover {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    .title {
+      color: var(--primary-dark-color) !important;
+    }
+  }
+}
 .pagination-size {
   padding: 8px 15px;
 }

@@ -11,16 +11,19 @@ export default function IndustryCard({
   className = "",
 }: IndustryCardProps) {
   return (
-    <div className={`industry-card ${className}`}>
-      <div className="car-listing h-100">
-        <div className="details">
-          <div className="wrapper">
-            <h3 className="title text-center fs-5 lh-base text-break">
+    <div className={`${className}`}>
+      <div className="industry-card bg-white overflow-hidden rounded-2 border border-lightgray2 position-relative p-3 h-100">
+        <div className="p-2 pt-3">
+          <div className="pb15">
+            <h3 className="title text-capitalize text-dark-color font-600 text-center fs-5 lh-base text-break">
               {name}
             </h3>
           </div>
-          <div className="listing_footer">
-            <Link href={`/industry/${id}`} className="submit-action">
+          <div className="d-flex justify-content-center pt20 border-top border-lightgray2">
+            <Link
+              href={`/industry/${id}`}
+              className="p-2 text-white rounded-2 bg-primary-dark text-center"
+            >
               View Collection
             </Link>
           </div>
