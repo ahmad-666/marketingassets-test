@@ -1,5 +1,5 @@
 import { getEmoji } from "@/src/services/db/emoji";
-import { jsonNormalize } from "@/src/utils/textTransform";
+import { emojiDbToResponse } from "@/src/utils/transforms/emoji";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { GetEmojiResponse } from "@/src/types/Emoji";
 import type { ServerError } from "@/src/types/Common";
@@ -12,9 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const emoji = await getEmoji({ url: emojiId as string });
     if (!emoji) return res.status(404).json({ message: "emoji not found" });
     return res.status(200).json({
-      ...emoji.dataValues,
-      aliases: JSON.parse(jsonNormalize(emoji.aliases)),
-      emoji_list: JSON.parse(jsonNormalize(emoji.emoji_list)),
+      ...emojiDbToResponse(emoji),
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });

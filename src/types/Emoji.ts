@@ -37,7 +37,7 @@ export type EmojiResponse = {
   emoji: string;
   emoji_list: string[];
   id: number;
-  internal_links: string[];
+  internal_links: string;
   marketing: string;
   mean: string;
   parent: string;

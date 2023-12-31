@@ -1,4 +1,5 @@
 import { addComment } from "@/src/services/db/company";
+import { commentDbToResponse } from "@/src/utils/transforms/company";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { CommentResponse, CommentReqBody } from "@/src/types/Company";
 import type { ServerError } from "@/src/types/Common";
@@ -19,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
         rate,
       });
       return res.status(201).json({
-        ...newComment.dataValues,
+        ...commentDbToResponse(newComment),
       });
     }
   } catch (err) {

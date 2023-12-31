@@ -1,4 +1,5 @@
 import { addComment } from "@/src/services/db/emoji";
+import { commentDbToResponse } from "@/src/utils/transforms/emoji";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { CommentResponse, CommentReqBody } from "@/src/types/Emoji";
 import type { ServerError } from "@/src/types/Common";
@@ -19,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
         rate,
       });
       return res.status(201).json({
-        ...newComment.dataValues,
+        ...commentDbToResponse(newComment),
       });
     }
   } catch (err) {

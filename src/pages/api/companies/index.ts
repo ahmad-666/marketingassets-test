@@ -1,4 +1,5 @@
 import { getCompanies } from "@/src/services/db/company";
+import { companyDbToResponse } from "@/src/utils/transforms/company";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { GetCompaniesResponse } from "@/src/types/Company";
 import type { ServerError } from "@/src/types/Common";
@@ -13,7 +14,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
       industry: industry as string,
       search: search as string,
     });
-    return res.status(200).json({ items: rows, meta: { totalCount: count } });
+    return res
+      .status(200)
+      .json({
+        items: rows.map((row) => ({ ...companyDbToResponse(row) })),
+        meta: { totalCount: count },
+      });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

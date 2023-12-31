@@ -1,5 +1,5 @@
 import { getEmojis } from "@/src/services/db/emoji";
-import { jsonNormalize } from "@/src/utils/textTransform";
+import { emojiDbToResponse } from "@/src/utils/transforms/emoji";
 import type { GetEmojisResponse } from "@/src/types/Emoji";
 import type { ServerError } from "@/src/types/Common";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -17,11 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Res>) => {
       search: search as string,
     });
     return res.status(200).json({
-      items: rows.map((emoji) => ({
-        ...emoji.dataValues,
-        aliases: JSON.parse(jsonNormalize(emoji.aliases)),
-        emoji_list: JSON.parse(jsonNormalize(emoji.emoji_list)),
-      })),
+      items: rows.map((row) => ({ ...emojiDbToResponse(row) })),
       meta: { totalCount: count },
     });
   } catch (err) {
