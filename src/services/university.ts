@@ -37,7 +37,11 @@ export const getUniversity = async ({ name }: UniversityFilter) => {
   const { data } = await axios.get<GetUniversityResponse>(
     `/universities/${name}`
   );
-  const normalizeData: University = {};
+  const normalizeData: University = {
+    id: 1,
+    imgSrc: "",
+    name: "",
+  };
   return normalizeData;
 };
 export const addComment = async ({

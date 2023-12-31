@@ -1,3 +1,4 @@
+import { type Optional } from "sequelize";
 import type { ServerMeta } from "./Common";
 
 //Company
@@ -61,6 +62,24 @@ export type IndustryResponse = {
 export type GetIndustriesResponse = {
   items: IndustryResponse[];
 };
+export type CompanyTableAttribute = {
+  id: number;
+  name: string;
+  overview: string;
+  country: string;
+  domain: string;
+  linkedin: string;
+  twitter: string;
+  facebook: string;
+  size: string;
+  founded: number;
+  industry: string;
+  followers_count: number;
+};
+export type CompanyTableCreationAttribute = Optional<
+  CompanyTableAttribute,
+  "id"
+>;
 //Company Comment
 export type Comment = {
   id: number;

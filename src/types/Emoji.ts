@@ -1,3 +1,4 @@
+import { type Optional } from "sequelize";
 import type { ServerMeta } from "./Common";
 
 //Emoji
@@ -56,6 +57,22 @@ export type GetEmojisResponse = {
 export type GetEmojiCategoriesResponse = {
   items: EmojiCategoryResponse[];
 };
+export type EmojiTableAttribute = {
+  id: number;
+  parent: string;
+  emoji: string;
+  text: string;
+  description: string;
+  response: string;
+  mean: string;
+  marketing: string;
+  url: string;
+  emoji_list: string;
+  aliases: string;
+  internal_links: string;
+  score: number;
+};
+export type EmojiTableCreationAttribute = Optional<EmojiTableAttribute, "id">;
 //Emoji Comment
 export type Comment = {
   id: number;

@@ -1,8 +1,15 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
+import type {
+  CompanyTableAttribute,
+  CompanyTableCreationAttribute,
+} from "@/src/types/Company";
 
 const createCompaniesModel = () => {
-  class Companies extends Model {
+  class Companies extends Model<
+    CompanyTableAttribute,
+    CompanyTableCreationAttribute
+  > {
     declare id: number;
     declare name: string;
     declare overview: string;

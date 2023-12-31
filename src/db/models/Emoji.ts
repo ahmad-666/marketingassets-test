@@ -1,8 +1,14 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
+import type {
+  EmojiTableAttribute,
+  EmojiTableCreationAttribute,
+} from "@/src/types/Emoji";
+//type of EmojiTableAttribute is exact replicate that type of extend Model but without 'declare'
+//type of EmojiTableCreationAttribute is for those fields that will be create by db automatically like id,createdAt,updatedAt,... (for EmojiTableAttribute we add id:number type and for EmojiTableCreationAttribute we say this id is optional for operations like insert record,...)
 
 const createEmojisModel = () => {
-  class Emojis extends Model {
+  class Emojis extends Model<EmojiTableAttribute, EmojiTableCreationAttribute> {
     declare id: number;
     declare parent: string;
     declare emoji: string;
