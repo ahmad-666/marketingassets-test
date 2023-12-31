@@ -1,6 +1,8 @@
 import axios from "@/src/utils/axios";
-import dayjs from "dayjs";
-import { textNormalize } from "@/src/utils/textTransform";
+import {
+  emojiResponseToClient,
+  commentResponseToClient,
+} from "@/src/utils/transforms/emoji";
 import type {
   EmojiFilters,
   EmojisFilters,
@@ -17,24 +19,9 @@ import type {
 } from "@/src/types/Emoji";
 import { type AxiosResponse } from "axios";
 
-export const getEmoji = async ({ url }: EmojiFilters) => {
+export const getEmoji = async ({ url }: EmojiFilters): Promise<Emoji> => {
   const { data } = await axios.get<GetEmojiResponse>(`/emojis/${url}`);
-  const normalizeData: Emoji = {
-    id: data.id,
-    url: data.url,
-    emoji: data.emoji,
-    name: data.text,
-    categoryText: textNormalize(data.parent),
-    categoryValue: data.parent,
-    score: 4.9,
-    usersScore: data.score,
-    description: data.description,
-    marketing: data.marketing,
-    mean: data.mean,
-    response: data.response,
-    relatedEmojis: data.emoji_list,
-  };
-  return normalizeData;
+  return emojiResponseToClient(data);
 };
 export const getEmojis = async ({
   urls,
@@ -42,7 +29,7 @@ export const getEmojis = async ({
   page = 1,
   pageSize,
   search,
-}: EmojisFilters) => {
+}: EmojisFilters): Promise<GetEmojis> => {
   const { data } = await axios.get<GetEmojisResponse>(`/emojis`, {
     params: {
       urls: urls?.join(",") || undefined,
@@ -52,20 +39,12 @@ export const getEmojis = async ({
       search,
     },
   });
-  const normalizeData: GetEmojis = {
+  return {
     items: data.items.map((emoji) => ({
-      id: emoji.id,
-      url: emoji.url,
-      categoryValue: emoji.parent,
-      categoryText: textNormalize(emoji.parent),
-      name: emoji.text,
-      emoji: emoji.emoji,
-      score: 4.9,
-      usersScore: emoji.score,
+      ...emojiResponseToClient(emoji),
     })),
     totalCount: data.meta.totalCount,
   };
-  return normalizeData;
 };
 export const getEmojiCategories = async () => {
   const { data } = await axios.get<GetEmojiCategoriesResponse>(
@@ -91,13 +70,13 @@ export const addComment = async ({
     body,
     rate,
   });
-  return data;
+  return commentResponseToClient(data);
 };
 export const getComments = async ({
   emojiId,
   page = 1,
   pageSize,
-}: CommentFilters) => {
+}: CommentFilters): Promise<GetComments> => {
   const { data } = await axios.get<GetCommentsResponse>(
     `/emojis/${emojiId}/comments`,
     {
@@ -107,16 +86,10 @@ export const getComments = async ({
       },
     }
   );
-  const normalizeData: GetComments = {
+  return {
     items: data.items.map((comment) => ({
-      id: comment.id,
-      date: dayjs(comment.createdAt).format("YYYY/MM/DD"),
-      userName: comment.userName,
-      userEmail: comment.userEmail,
-      comment: comment.body,
-      rate: comment.rate,
+      ...commentResponseToClient(comment),
     })),
     totalCount: data.meta.totalCount,
   };
-  return normalizeData;
 };
