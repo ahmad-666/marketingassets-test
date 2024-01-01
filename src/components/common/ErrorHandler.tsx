@@ -1,5 +1,7 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import Button from "@/src/components/common/Button";
 
 type ErrorHandlerProps = {
   message?: string;
@@ -9,9 +11,13 @@ export default function ErrorHandler({
   message = "Error Happens",
   code,
 }: ErrorHandlerProps) {
+  const router = useRouter();
   const statusCodeSplit = useMemo(() => {
     return `${code}`.split("");
   }, [code]);
+  const reloadHandler = useCallback(() => {
+    router.reload();
+  }, [router]);
   return (
     <div>
       <div className="wrapper">
@@ -29,9 +35,23 @@ export default function ErrorHandler({
                     </h2>
                   </div>
                 </div>
-                <Link className="btn_error btn-thm" href="/">
-                  Back to Home
-                </Link>
+                <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                  <Link
+                    className="bg-primary-color font-600 fs-6 py-3 px-4 rounded-3"
+                    href="/"
+                  >
+                    Back to Home
+                  </Link>
+                  <Button
+                    variant="filled"
+                    size="lg"
+                    color="primary"
+                    className="fs-6 font-600"
+                    onClick={reloadHandler}
+                  >
+                    Reload page
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

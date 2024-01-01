@@ -12,6 +12,7 @@ type PageProps = {
   universities: University[];
   totalUniversities: number;
 };
+
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context: GetServerSidePropsContext
 ) => {
