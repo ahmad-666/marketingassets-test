@@ -23,16 +23,21 @@ export const universityDbToResponse = (
     academic_counseling: university.academic_counseling === "yes",
     career_services: university.career_services === "yes",
     institutional_hospital: university.institutional_hospital === "yes",
-    membership_list: JSON.parse(university.membership_list),
+    membership_list: JSON.parse(JSON.stringify(university.membership_list)),
     study_degree_level: Object.entries(
-      JSON.parse(university.study_degree_level)
+      JSON.parse(
+        university.study_degree_level
+          .replace(/True/g, "true")
+          .replace(/False/g, "false")
+          .replace(/'/g, '"')
+      )
     ).map(([key, val]) => ({
       name: key,
       degreeLevel: {
-        diploma: val["Diploma Associate Foundation"] === "True",
-        bachelor: val["Bachelor"] === "True",
-        master: val["Master"] === "True",
-        doctorate: val["Doctorate"] === "True",
+        diploma: val["Diploma Associate Foundation"],
+        bachelor: val["Bachelor"],
+        master: val["Master"],
+        doctorate: val["Doctorate"],
       },
     })),
     local_students_undergraduate: university.local_students_undergraduage,
