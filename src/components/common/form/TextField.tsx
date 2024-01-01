@@ -86,11 +86,15 @@ const TextField = (
   const parsedColor = useColor(color);
   const parsedBgColor = useColor(bgColor);
   const parsedTextColor = useColor(textColor);
-  const generatedId = useId();
+  const uId = useId();
   const [isFocus, setIsFocus] = useState(false);
   const Component = useMemo(() => {
     return as === "textfield" ? "input" : "textarea";
   }, [as]);
+  const generatedId = useMemo(() => {
+    const uIdNormalize = uId.replace(/:/g, "_").toLowerCase();
+    return id || uIdNormalize;
+  }, [id, uId]);
   const sizingStyle = useMemo<CSSProperties>(() => {
     let height = "auto";
     let minHeightStyle = "auto";
@@ -155,7 +159,7 @@ const TextField = (
   return (
     <div className={`${disabled ? "opacity-50" : ""} ${className}`}>
       {label && (
-        <FormLabel label={label} inputId={id || generatedId} className="mb5" />
+        <FormLabel label={label} inputId={generatedId} className="mb5" />
       )}
       <Component
         ref={ref as any}
@@ -165,7 +169,7 @@ const TextField = (
         onFocus={focusHandler}
         onBlur={blurHandler}
         placeholder={placeholder}
-        id={id || generatedId}
+        id={generatedId}
         name={name}
         type={as === "textfield" ? type : undefined}
         disabled={disabled}

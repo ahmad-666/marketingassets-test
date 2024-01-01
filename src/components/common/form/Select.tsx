@@ -55,7 +55,19 @@ const Select = <Value, Option>(
   }: SelectProps<Value, Option>,
   ref: React.ForwardedRef<SelectInstance>
 ) => {
-  const generatedId = useId();
+  const uId = useId();
+  const uIdNormalize = useMemo(() => {
+    return uId.replace(/:/g, "_").toLowerCase();
+  }, [uId]);
+  const generatedId = useMemo(() => {
+    return id || uIdNormalize;
+  }, [id, uIdNormalize]);
+  const generatedInputId = useMemo(() => {
+    return inputId || `input-${uIdNormalize}`;
+  }, [inputId, uIdNormalize]);
+  const generatedInstanceId = useMemo(() => {
+    return instanceId || `instance-${uIdNormalize}`;
+  }, [instanceId, uIdNormalize]);
   //   const denseStyles = useMemo<StylesConfig>(() => {
   //     return {
   //       control: (baseStyle, state) => ({
@@ -116,16 +128,12 @@ const Select = <Value, Option>(
   return (
     <div className={`${className}`}>
       {label && (
-        <FormLabel
-          inputId={inputId || `input-${generatedId}`}
-          label={label}
-          className="mb5"
-        />
+        <FormLabel inputId={generatedInputId} label={label} className="mb5" />
       )}
       <ReactSelect
-        id={id || generatedId}
-        inputId={inputId || `input-${generatedId}`}
-        instanceId={instanceId || `instance-${generatedId}`}
+        id={generatedId}
+        inputId={generatedInputId}
+        instanceId={generatedInstanceId}
         ref={ref}
         value={value}
         options={options}
