@@ -15,7 +15,19 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "api.companyurlfinder.com",
+        pathname: "**",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "cufinder.io",
+        pathname: "**",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "api.cufinder.io",
         pathname: "**",
         port: "",
       },

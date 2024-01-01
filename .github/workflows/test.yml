@@ -46,6 +46,9 @@ jobs:
           echo NEXT_PUBLIC_EXTERNAL_BASE_URL=https://cufinder.io >> .env.production
           echo NEXT_PUBLIC_EXTERNAL_DASHBOARD_BASE_URL=https://dashboard.cufinder.io >> .env.production
           echo NEXT_PUBLIC_IMAGE_BASE_URL=https://cufinder.io/marketing/assets/img >> .env.production
+          echo NEXT_PUBLIC_IMAGE_BASE_URL2=https://api.cufinder.io
+
+ >> .env.production
 
       - name: Build app
         run: yarn build

@@ -48,7 +48,7 @@ export default function UniversityCard({
           </div>
           <div className="d-flex justify-content-center pt20 border-top border-lightgray2">
             <Link
-              href={`/logo/${name}`}
+              href={`/university/${name}`}
               className="p-2 text-white rounded-2 bg-primary-dark text-center"
             >
               {name}

@@ -48,10 +48,12 @@ export const universityDbToResponse = (
 export const universityResponseToClient = (
   university: UniversityResponse
 ): University => {
+  const websiteUrl = new URL(university.website);
+  const websiteDomain = websiteUrl.hostname.replace("www.", "");
   return {
     id: university.id,
     name: university.name,
-    imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${university.logo_name}`,
+    imgSrc: `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL2}/logo/${websiteDomain}`,
     location: {
       continent: university.continent,
       country: university.country,
