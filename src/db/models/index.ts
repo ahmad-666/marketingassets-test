@@ -1,6 +1,6 @@
-export { default as Emoji } from "./Emoji";
-export { default as EmojiComment } from "./EmojiComment";
-export { default as Company } from "./Company";
-export { default as CompanyComment } from "./CompanyComment";
-export { default as University } from "./University";
-export { default as UniversityComment } from "./UniversityComment";
+export { default as Emojis } from "./Emoji";
+export { default as EmojiComments } from "./EmojiComment";
+export { default as Companies } from "./Company";
+export { default as CompanyComments } from "./CompanyComment";
+export { default as Universities } from "./University";
+export { default as UniversityComments } from "./UniversityComment";

@@ -1,5 +1,5 @@
 import { Op, type WhereOptions } from "sequelize";
-import { University, UniversityComment } from "@/src/db/models";
+import { Universities, UniversityComments } from "@/src/db/models";
 import type {
   UniversityFilter,
   UniversitiesFilters,
@@ -13,7 +13,7 @@ export async function getUniversity({ name }: UniversityFilter) {
   const where: WhereOptions<UniversityTableAttribute> = {
     name,
   };
-  const university = await University.findOne({
+  const university = await Universities.findOne({
     where,
   });
   return university;
@@ -28,7 +28,7 @@ export async function getUniversities({
     where.name = {
       [Op.substring]: search,
     };
-  const { count, rows } = await University.findAndCountAll({
+  const { count, rows } = await Universities.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,
@@ -42,7 +42,7 @@ export async function addComment({
   body,
   rate,
 }: CommentReqBody) {
-  const newComment = await UniversityComment.create({
+  const newComment = await UniversityComments.create({
     universityId,
     userName,
     userEmail,
@@ -58,7 +58,7 @@ export async function getComments({
 }: CommentFilters) {
   let where: WhereOptions<CommentTableAttribute> = {};
   if (universityId) where.universityId = universityId;
-  const { count, rows } = await UniversityComment.findAndCountAll({
+  const { count, rows } = await UniversityComments.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,

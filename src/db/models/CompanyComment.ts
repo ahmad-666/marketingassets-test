@@ -5,8 +5,8 @@ import type {
   CommentTableCreationAttribute,
 } from "@/src/types/Company";
 
-const createCompanyCommentsModel = () => {
-  class CompanyComments extends Model<
+const createCompanyCommentModel = () => {
+  class CompanyComment extends Model<
     CommentTableAttribute,
     CommentTableCreationAttribute
   > {
@@ -19,7 +19,7 @@ const createCompanyCommentsModel = () => {
     declare rate: number;
     declare companyId: number;
   }
-  CompanyComments.init(
+  CompanyComment.init(
     {
       id: {
         type: DataTypes.BIGINT,
@@ -50,11 +50,11 @@ const createCompanyCommentsModel = () => {
     },
     {
       sequelize: connection,
-      modelName: "companyComments",
+      modelName: "company_comments",
       timestamps: true,
     }
   );
-  return CompanyComments;
+  return CompanyComment;
 };
 
-export default createCompanyCommentsModel();
+export default createCompanyCommentModel();

@@ -1,5 +1,5 @@
 import { Op, type WhereOptions } from "sequelize";
-import { Emoji, EmojiComment } from "@/src/db/models";
+import { Emojis, EmojiComments } from "@/src/db/models";
 import type {
   EmojiFilters,
   EmojisFilters,
@@ -11,7 +11,7 @@ import type {
 
 export async function getEmoji({ url }: EmojiFilters) {
   const where: WhereOptions<EmojiTableAttribute> = { url };
-  const emoji = await Emoji.findOne({
+  const emoji = await Emojis.findOne({
     where,
   });
   return emoji;
@@ -30,7 +30,7 @@ export async function getEmojis({
     where.text = {
       [Op.substring]: search,
     };
-  const { count, rows } = await Emoji.findAndCountAll({
+  const { count, rows } = await Emojis.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,
@@ -38,7 +38,7 @@ export async function getEmojis({
   return { count, rows };
 }
 export async function getCategories() {
-  const categories = await Emoji.aggregate("parent", "DISTINCT", {
+  const categories = await Emojis.aggregate("parent", "DISTINCT", {
     plain: false,
   });
   return categories as { DISTINCT: string }[];
@@ -50,7 +50,7 @@ export async function addComment({
   body,
   rate,
 }: CommentReqBody) {
-  const newComment = await EmojiComment.create({
+  const newComment = await EmojiComments.create({
     emojiId,
     userName,
     userEmail,
@@ -66,7 +66,7 @@ export async function getComments({
 }: CommentFilters) {
   let where: WhereOptions<CommentTableAttribute> = {};
   if (emojiId) where.emojiId = emojiId;
-  const { count, rows } = await EmojiComment.findAndCountAll({
+  const { count, rows } = await EmojiComments.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,

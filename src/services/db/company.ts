@@ -1,5 +1,5 @@
 import { Op, type WhereOptions } from "sequelize";
-import { Company, CompanyComment } from "@/src/db/models";
+import { Companies, CompanyComments } from "@/src/db/models";
 import type {
   CommentReqBody,
   CompaniesFilters,
@@ -13,7 +13,7 @@ export async function getCompany({ domain }: CompanyFilters) {
   const where: WhereOptions<CompanyTableAttribute> = {
     domain,
   };
-  const company = await Company.findOne({
+  const company = await Companies.findOne({
     where,
   });
   return company;
@@ -30,7 +30,7 @@ export async function getCompanies({
     where.name = {
       [Op.substring]: search,
     };
-  const { count, rows } = await Company.findAndCountAll({
+  const { count, rows } = await Companies.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,
@@ -38,7 +38,7 @@ export async function getCompanies({
   return { count, rows };
 }
 export async function getIndustries() {
-  const industries = await Company.aggregate("industry", "DISTINCT", {
+  const industries = await Companies.aggregate("industry", "DISTINCT", {
     plain: false,
   });
   type Industry = {
@@ -53,7 +53,7 @@ export async function addComment({
   body,
   rate,
 }: CommentReqBody) {
-  const newComment = await CompanyComment.create({
+  const newComment = await CompanyComments.create({
     companyId,
     userName,
     userEmail,
@@ -69,7 +69,7 @@ export async function getComments({
 }: CommentFilters) {
   let where: WhereOptions<CommentTableAttribute> = {};
   if (companyId) where.companyId = companyId;
-  const { count, rows } = await CompanyComment.findAndCountAll({
+  const { count, rows } = await CompanyComments.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     where,

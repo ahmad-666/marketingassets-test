@@ -5,8 +5,8 @@ import type {
   UniversityTableCreationAttribute,
 } from "@/src/types/University";
 
-const createUniversitiesModel = () => {
-  class Universities extends Model<
+const createUniversityModel = () => {
+  class University extends Model<
     UniversityTableAttribute,
     UniversityTableCreationAttribute
   > {
@@ -58,7 +58,7 @@ const createUniversitiesModel = () => {
     declare google_scholar_page: string;
     declare org_code: string;
   }
-  Universities.init(
+  University.init(
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
@@ -258,7 +258,7 @@ const createUniversitiesModel = () => {
     }
   );
 
-  return Universities;
+  return University;
 };
 
-export default createUniversitiesModel();
+export default createUniversityModel();

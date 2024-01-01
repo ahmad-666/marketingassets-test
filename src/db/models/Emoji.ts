@@ -7,8 +7,8 @@ import type {
 //type of EmojiTableAttribute is exact replicate that type of extend Model but without 'declare'
 //type of EmojiTableCreationAttribute is for those fields that will be create by db automatically like id,createdAt,updatedAt,... (for EmojiTableAttribute we add id:number type and for EmojiTableCreationAttribute we say this id is optional for operations like insert record,...)
 
-const createEmojisModel = () => {
-  class Emojis extends Model<EmojiTableAttribute, EmojiTableCreationAttribute> {
+const createEmojiModel = () => {
+  class Emoji extends Model<EmojiTableAttribute, EmojiTableCreationAttribute> {
     declare id: number;
     declare parent: string;
     declare emoji: string;
@@ -23,7 +23,7 @@ const createEmojisModel = () => {
     declare internal_links: string;
     declare score: number;
   } //Emojis will be data type , data types that we use here will be used for typescript and can be different from DataTypes that we set bellow e.g 'aliases' is string like '["a","b"]' in db so we use DataTypes.TEXT for it but we say its typescript type is string[] because we convert it to array of string when we return it from api route
-  Emojis.init(
+  Emoji.init(
     {
       //each column can have these data:
       //type,allowNull,primaryKey,autoIncrement,unique,references,defaultValue,field,onUpdate,onDelete
@@ -48,7 +48,7 @@ const createEmojisModel = () => {
     }
   );
 
-  return Emojis;
+  return Emoji;
 };
 
-export default createEmojisModel();
+export default createEmojiModel();

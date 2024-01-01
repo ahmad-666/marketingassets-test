@@ -5,8 +5,8 @@ import type {
   CommentTableCreationAttribute,
 } from "@/src/types/Emoji";
 
-const createEmojiCommentsModel = () => {
-  class EmojiComments extends Model<
+const createEmojiCommentModel = () => {
+  class EmojiComment extends Model<
     CommentTableAttribute,
     CommentTableCreationAttribute
   > {
@@ -19,7 +19,7 @@ const createEmojiCommentsModel = () => {
     declare rate: number;
     declare emojiId: number;
   }
-  EmojiComments.init(
+  EmojiComment.init(
     {
       id: {
         type: DataTypes.BIGINT,
@@ -50,11 +50,11 @@ const createEmojiCommentsModel = () => {
     },
     {
       sequelize: connection,
-      modelName: "emojiComments",
+      modelName: "emoji_comments",
       timestamps: true,
     }
   );
-  return EmojiComments;
+  return EmojiComment;
 };
 
-export default createEmojiCommentsModel();
+export default createEmojiCommentModel();

@@ -5,8 +5,8 @@ import type {
   CompanyTableCreationAttribute,
 } from "@/src/types/Company";
 
-const createCompaniesModel = () => {
-  class Companies extends Model<
+const createCompanyModel = () => {
+  class Company extends Model<
     CompanyTableAttribute,
     CompanyTableCreationAttribute
   > {
@@ -23,7 +23,7 @@ const createCompaniesModel = () => {
     declare industry: string;
     declare followers_count: number;
   }
-  Companies.init(
+  Company.init(
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
@@ -49,7 +49,7 @@ const createCompaniesModel = () => {
     }
   );
 
-  return Companies;
+  return Company;
 };
 
-export default createCompaniesModel();
+export default createCompanyModel();

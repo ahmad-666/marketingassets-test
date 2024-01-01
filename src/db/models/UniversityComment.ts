@@ -5,8 +5,8 @@ import type {
   CommentTableCreationAttribute,
 } from "@/src/types/University";
 
-const createUniversityCommentsModel = () => {
-  class UniversityComments extends Model<
+const createUniversityCommentModel = () => {
+  class UniversityComment extends Model<
     CommentTableAttribute,
     CommentTableCreationAttribute
   > {
@@ -19,7 +19,7 @@ const createUniversityCommentsModel = () => {
     declare rate: number;
     declare universityId: number;
   }
-  UniversityComments.init(
+  UniversityComment.init(
     {
       id: {
         type: DataTypes.BIGINT,
@@ -50,11 +50,11 @@ const createUniversityCommentsModel = () => {
     },
     {
       sequelize: connection,
-      modelName: "universityComments",
+      modelName: "university_comments",
       timestamps: true,
     }
   );
-  return UniversityComments;
+  return UniversityComment;
 };
 
-export default createUniversityCommentsModel();
+export default createUniversityCommentModel();
