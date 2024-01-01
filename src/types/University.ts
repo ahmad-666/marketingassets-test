@@ -75,7 +75,7 @@ export type University = {
   id: number;
   name: string;
   imgSrc: string;
-  orgCode?: string;
+  orgCode?: number | string;
   overview?: string;
   memberships?: string[];
   type?: Type;

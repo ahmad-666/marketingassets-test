@@ -1,5 +1,8 @@
 import axios from "@/src/utils/axios";
-import dayjs from "dayjs";
+import {
+  universityResponseToClient,
+  commentResponseToClient,
+} from "@/src/utils/transforms/university";
 import { type AxiosResponse } from "axios";
 import type {
   UniversitiesFilters,
@@ -13,13 +16,14 @@ import type {
   CommentFilters,
   GetCommentsResponse,
   GetComments,
+  Comment,
 } from "@/src/types/University";
 
 export const getUniversities = async ({
   page = 1,
   pageSize,
   search,
-}: UniversitiesFilters) => {
+}: UniversitiesFilters): Promise<GetUniversities> => {
   const { data } = await axios.get<GetUniversitiesResponse>("/universities", {
     params: {
       page,
@@ -27,22 +31,22 @@ export const getUniversities = async ({
       search,
     },
   });
-  const normalizeData: GetUniversities = {
-    items: [],
+  return {
+    items: data.items.map((university) => ({
+      ...universityResponseToClient(university),
+    })),
     totalCount: data.meta.totalCount,
   };
-  return normalizeData;
 };
-export const getUniversity = async ({ name }: UniversityFilter) => {
+export const getUniversity = async ({
+  name,
+}: UniversityFilter): Promise<University> => {
   const { data } = await axios.get<GetUniversityResponse>(
     `/universities/${name}`
   );
-  const normalizeData: University = {
-    id: 1,
-    imgSrc: "",
-    name: "",
+  return {
+    ...universityResponseToClient(data),
   };
-  return normalizeData;
 };
 export const addComment = async ({
   universityId,
@@ -50,7 +54,7 @@ export const addComment = async ({
   userEmail,
   body,
   rate,
-}: CommentReqBody) => {
+}: CommentReqBody): Promise<Comment> => {
   const { data } = await axios.post<
     CommentResponse,
     AxiosResponse<CommentResponse>,
@@ -62,13 +66,15 @@ export const addComment = async ({
     body,
     rate,
   });
-  return data;
+  return {
+    ...commentResponseToClient(data),
+  };
 };
 export const getComments = async ({
   universityId,
   page = 1,
   pageSize,
-}: CommentFilters) => {
+}: CommentFilters): Promise<GetComments> => {
   const { data } = await axios.get<GetCommentsResponse>(
     `/universities/${universityId}/comments`,
     {
@@ -78,16 +84,10 @@ export const getComments = async ({
       },
     }
   );
-  const normalizeData: GetComments = {
+  return {
     items: data.items.map((comment) => ({
-      id: comment.id,
-      date: dayjs(comment.createdAt).format("YYYY/MM/DD"),
-      userName: comment.userName,
-      userEmail: comment.userEmail,
-      comment: comment.body,
-      rate: comment.rate,
+      ...commentResponseToClient(comment),
     })),
     totalCount: data.meta.totalCount,
   };
-  return normalizeData;
 };
