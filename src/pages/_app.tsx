@@ -87,6 +87,10 @@ MyApp.getInitialProps = async (
           label: "Logos",
           path: "/logos",
         },
+        {
+          label: "Universities",
+          path: "/universities",
+        },
       ],
     };
   } catch (err) {

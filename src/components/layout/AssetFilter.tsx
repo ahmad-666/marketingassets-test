@@ -23,6 +23,11 @@ const typeOptions: Type[] = [
     label: "Logo",
     prefix: "logo",
   },
+  {
+    value: "university",
+    label: "University",
+    prefix: "university",
+  },
 ];
 export default function AssetFilter({ className = "" }: AssetFilterProps) {
   const router = useRouter();
@@ -31,15 +36,20 @@ export default function AssetFilter({ className = "" }: AssetFilterProps) {
   const readUrlQueries = useCallback(() => {
     const { pathname, query } = router;
     const { search } = query;
-    const typePrefix = pathname.includes("/logos") ? "logo" : "emoji";
     const searchQuery = search as string;
-    setType(typeOptions.find((o) => o.prefix === typePrefix) || typeOptions[0]);
+    let typePrefix = "emoji";
+    if (pathname.includes("/logos")) typePrefix = "logo";
+    else if (pathname.includes("/universities")) typePrefix = "university";
+    const targetOption =
+      typeOptions.find((o) => o.prefix === typePrefix) || typeOptions[0];
+    setType(targetOption);
     setSearch(searchQuery || "");
   }, [router]);
   const setUrlQueries = useCallback(() => {
     let url: null | string = null;
     if (type.value === "emoji") url = "/emojis";
     else if (type.value === "logo") url = "/logos";
+    else if (type.value === "university") url = "/universities";
     else throw new Error("Invalid type!!!");
     router.replace(
       {
